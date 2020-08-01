@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  
+  tasks:
+    - name: Install TMUX
+      dnf:
+        name: tmux
+        state: installed
+
+    - name: Install VIM
+      dnf:
+        name: vim
+        state: installed
+
+    - name: Install HTOP
+      dnf:
+        name: htop
+        state: installed

@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Patching Linux Servers
+      dnf:
+        name: "*"
+        state: latest

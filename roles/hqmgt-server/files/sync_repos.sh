@@ -8,8 +8,6 @@ for x in $CREATE; do
 	fi
 done
 
-exit
-
 echo "Downloading RPM GPG Key"
 wget -P /opt/repos/centos/8/ https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official
 

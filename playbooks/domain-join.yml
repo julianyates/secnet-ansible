@@ -1,0 +1,70 @@
+---
+
+- name: Install and Configure AD Authentication
+  hosts: all
+  gather_facts: yes
+  become: true
+  vars_prompt:
+    - name: "bind_password"
+      prompt: "Password for svc_autojoin@SECNETWORK.ORG"
+      private: yes
+
+  tasks:
+    - name: Installing Required AD Auth Packages
+      dnf:
+        name: python3-libselinux,realmd,sssd,oddjob,oddjob-mkhomedir,adcli,samba-common,samba-common-tools,python3-pip
+        state: installed
+
+    - name: Verify if SRV is Already Joined
+      command: /sbin/realm list | grep sssd
+      register: result
+      changed_when: false
+      ignore_errors: true
+
+    - name: Install pexpect using PIP
+      pip:
+       name: pexpect
+
+    - name: Join System to AD
+      expect:
+        command: /bin/bash -c "realm join --user=svc-autojoin@SECNETWORK.ORG --computer-ou=OU=Linux,OU=Servers,OU=Systems,OU=SECNET,DC=secnetwork,DC=org secnetwork.org"
+        responses:
+          Password for *: "{{ bind_password }}"
+      when: result.stdout == "" 
+
+    - name: Update use_fully_qualified_names to sssd.conf
+      lineinfile:
+        path: /etc/sssd/sssd.conf
+        regexp: '^use_fully_qualified_names ='
+        line: 'use_fully_qualified_names = False'
+      notify:
+        - restart_sssd
+      when: result.stdout == ""
+
+    - name: Update fallback_homedir to sssd.conf
+      lineinfile:
+        path: /etc/sssd/sssd.conf
+        regexp: '^fallback_homedir ='
+        line: 'fallback_homedir =  /home/%u'
+      notify:
+        - restart_sssd
+      when: result.stdout == ""
+
+    - name: Restrict System Access to Domain Admins
+      command: /bin/bash -c "realm permit -g 'domain admins'@SECNETWORK.ORG"
+      when: result.stdout == ""
+
+    - name: Add Domain Admins to sudoers file
+      lineinfile:
+        dest: /etc/sudoers
+        line: '%Domain\ Admins ALL=(ALL)        NOPASSWD: ALL'
+        insertafter: '^%wheel'
+        validate: '/usr/sbin/visudo -cf %s'
+      when: result.stdout == ""
+
+  handlers:
+    - name: restart_sssd
+      service:
+         name: sssd
+         state: restarted
+

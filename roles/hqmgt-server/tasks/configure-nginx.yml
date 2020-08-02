@@ -16,9 +16,9 @@
 
     - name: Permit HTTP on Firewall
       firewalld:
-        port: 80/tcp
+        service: http 
         permanent: yes
-        offline: no
+        immediate: yes
         state: enabled
 
     - name: Set SELinux HTTP permissions

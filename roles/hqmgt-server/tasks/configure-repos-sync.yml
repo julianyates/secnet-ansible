@@ -1,0 +1,20 @@
+---
+
+- hosts: hqmgt
+  become: true
+
+  tasks:
+    
+    - name: Copy rsync script
+      copy:
+        src: ../files/sync_repos.sh
+        dest: /opt/sync_repos.sh
+
+    - name: Configure Crontab
+      cron:
+        name: "sync repos"
+        special_time: monthly
+        job: "/opt/sync_repos.sh"
+
+    - name: Sync Repositories
+      command: /opt/sync_repos.sh

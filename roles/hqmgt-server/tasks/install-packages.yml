@@ -1,0 +1,25 @@
+---
+
+- hosts: hqmgt
+  become: true
+
+  tasks:
+    - name: Installing tmux
+      dnf:
+        name: tmux
+        state: installed
+
+    - name: Installing rsync
+      dnf:
+        name: rsync
+        state: installed
+
+    - name: Installing Policy Core Utils (semanage)
+      dnf:
+        name: policycoreutils-python-utils
+        state: installed 
+
+    - name: Installing NGINX
+      dnf:
+        name: nginx
+        state: installed

@@ -1,2 +1,5 @@
 ---
-# tasks file for hqmgt-server
+
+- include: install-packages.yml
+- include: configure-nginx.yml
+- include: configure-repos-sync.yml

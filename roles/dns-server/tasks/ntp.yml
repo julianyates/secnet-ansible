@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  become: true
+
+  tasks:
+
+    - name: Copy chrony.conf
+      copy:
+        src: ../files/chrony.conf
+        dest: /etc/chrony.conf
+        backup: yes
+
+    - name: Permit NTP on Firewall
+      firewalld:
+        service: ntp
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: systemd restart chronyd
+      systemd:
+        name: chronyd
+        state: restarted

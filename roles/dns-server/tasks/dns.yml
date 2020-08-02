@@ -1,0 +1,34 @@
+---
+
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Installing BIND
+      dnf:
+        name: bind
+        state: installed
+
+    - name: Copying named.conf
+      copy:
+        src: ../files/named.conf
+        dest: /etc/named.conf
+        backup: yes
+
+    - name: Permit DNS on Firewall
+      firewalld:
+        service: dns
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: systemd enable bind
+      systemd:
+        name: named
+        enabled: yes
+
+    - name: systemd start bind
+      systemd:
+        name: named
+        state: started
+

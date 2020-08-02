@@ -1,3 +1,6 @@
 
 [hqmgt]
 hqmgt.secnetwork.org ansible_connection=local
+
+[test]
+test.secnetwork.org ansible_host=10.0.51.250

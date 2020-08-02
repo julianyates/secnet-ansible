@@ -4,4 +4,3 @@ This project will contain automation files related to the Secured Enterprise Cor
 
 Please visit julianyates.com.
 
-:)

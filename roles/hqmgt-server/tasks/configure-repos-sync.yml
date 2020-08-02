@@ -9,6 +9,7 @@
       copy:
         src: ../files/sync_repos.sh
         dest: /opt/sync_repos.sh
+        mode: u=rwx,g=rwx,o=r
 
     - name: Configure Crontab
       cron:

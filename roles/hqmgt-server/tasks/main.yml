@@ -1,5 +1,5 @@
 ---
 
-- include: install-packages.yml
-- include: configure-nginx.yml
-- include: configure-repos-sync.yml
+- import_playbook: install-packages.yml
+- import_playbook: configure-nginx.yml
+- import_playbook: configure-repos-sync.yml

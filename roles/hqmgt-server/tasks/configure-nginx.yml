@@ -4,6 +4,11 @@
 
   tasks:
 
+    - name: Creating Repos Directory
+      file:
+        path: /opt/repos
+        state: directory
+
     - name: Copy NGINX Repos Config File
       copy:
         src: ../files/repos.conf

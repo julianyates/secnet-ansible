@@ -15,4 +15,4 @@
     - name: Restarting chronyd
       systemd:
         name: chronyd
-        state: chronyd
+        state: restarted

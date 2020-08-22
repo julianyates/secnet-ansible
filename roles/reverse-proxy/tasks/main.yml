@@ -1,0 +1,44 @@
+---
+
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Installing NGINX
+      dnf:
+        name: nginx
+        state: installed
+
+    - name: Installing Policy Core Utils (semanage)
+      dnf:
+        name: policycoreutils-python-utils
+        state: installed
+
+    - name: Copy NGINX Repos Config File
+      copy:
+        src: ../files/proxy.conf
+        dest: /etc/nginx/conf.d/proxy.conf
+
+    - name: Permit HTTP on Firewall
+      firewalld:
+        service: http 
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Set httpd_can_network_connect flag on and keep it persistent
+      seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
+
+    - name: systemd enable nginx
+      systemd:
+        name: nginx
+        enabled: yes
+
+    - name: systemd start nginx
+      systemd:
+        name: nginx
+        state: started
+

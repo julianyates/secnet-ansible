@@ -1,3 +1,5 @@
+[test]
+linux-tmp.secnetwork.org ansible_host=10.0.51.250
 
 [hqmgt]
 hqmgt.secnetwork.org ansible_connection=local
@@ -5,3 +7,6 @@ hqmgt.secnetwork.org ansible_connection=local
 [dns]
 hqdns1.secnetwork.org 
 hqdns2.secnetwork.org 
+
+[proxy]
+hqpkiproxy.secnetwork.org

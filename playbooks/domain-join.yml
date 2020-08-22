@@ -12,7 +12,7 @@
   tasks:
     - name: Installing Required AD Auth Packages
       dnf:
-        name: python3-libselinux,realmd,sssd,oddjob,oddjob-mkhomedir,adcli,samba-common,samba-common-tools,python3-pip
+        name: python3-libselinux,realmd,sssd,oddjob,oddjob-mkhomedir,adcli,samba-common,samba-common-tools,python3-pip,python3-pexpect
         state: installed
 
     - name: Verify if SRV is Already Joined
@@ -21,9 +21,8 @@
       changed_when: false
       ignore_errors: true
 
-    - name: Install pexpect using PIP
-      pip:
-       name: pexpect
+      #    - name: Install pexpect using PIP
+      #      command: pip3 install --user pexpect
 
     - name: Join System to AD
       expect:

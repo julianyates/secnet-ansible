@@ -1,0 +1,7 @@
+[nginx]
+name=nginx repo
+baseurl=http://repos.secnetwork.org/nginx.org/packages/mainline/centos/8/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=http://repos.secnetwork.org/nginx.org/nginx_signing.key
+module_hotfixes=true

@@ -29,7 +29,7 @@
         destination_zone: ['SECNET-AAA']
         destination_ip: ['Domain Controllers']
         application: ['active-directory']
-        service: ['application-defaults']
+        service: ['application-default']
         category: ['any']
         #log_setting: ''
         action: 'allow'
@@ -62,7 +62,7 @@
         destination_zone: ['SECNET-AAA']
         destination_ip: ['Domain Controllers']
         application: ['kerberos']
-        service: ['application-defaults']
+        service: ['application-default']
         category: ['any']
         #log_setting: ''
         action: 'allow'
@@ -95,7 +95,7 @@
         destination_zone: ['SECNET-AAA']
         destination_ip: ['Domain Controllers']
         application: ['ldap']
-        service: ['application-defaults']
+        service: ['application-default']
         category: ['any']
         #log_setting: ''
         action: 'allow'

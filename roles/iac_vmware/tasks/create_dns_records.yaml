@@ -1,0 +1,112 @@
+---
+
+- hosts: pdc
+  gather_facts: no
+
+  collections:
+    - community.windows
+
+  vars:
+    create_dns_record:
+      - win_dns_record_name: "hqvca.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.61.10"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "10.61"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvca.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+
+      - win_dns_record_name: "hqvh1.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.61.201"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "201.61"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh1.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+      - win_dns_record_name: "hqvh1-idrac.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.11.201"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "201.11"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh1-idrac.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+
+      - win_dns_record_name: "hqvh2.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.61.202"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "202.61"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh2.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+      - win_dns_record_name: "hqvh2-idrac.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.11.202"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "202.11"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh2-idrac.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+
+      - win_dns_record_name: "hqvh3.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.61.203"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "203.61"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh3.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+      - win_dns_record_name: "hqvh3-idrac.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.11.203"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "203.11"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh3-idrac.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+
+      - win_dns_record_name: "hqvh4.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.61.204"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "204.61"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh4.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+      - win_dns_record_name: "hqvh4-idrac.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.11.204"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "204.11"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh4-idrac.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+
+      - win_dns_record_name: "hqvh5.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.61.205"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "205.61"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh5.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+      - win_dns_record_name: "hqvh5-idrac.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.11.205"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "205.11"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqvh5-idrac.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+
+  tasks:
+    - name: Creating DNS Record
+      win_dns_record:
+        name: '{{ item.win_dns_record_name }}'
+        type: '{{ item.win_dns_record_type }}'
+        value: '{{ item.win_dns_record_value }}'
+        zone: '{{ item.win_dns_record_zone }}'
+      with_items: '{{ create_dns_record }}'

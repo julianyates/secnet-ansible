@@ -101,7 +101,7 @@
         #wildfire_analysis: ['']
         #hip_profiles: ['']
         location: 'after'
-        existing_rule: 'PA Network Services - SSL'
+        existing_rule: 'PA Network Services - WEB-SSL'
 
     - name: Default Deny Policy
       panos_security_rule:

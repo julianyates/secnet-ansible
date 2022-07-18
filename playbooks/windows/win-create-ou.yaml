@@ -1,0 +1,51 @@
+---
+
+- hosts: windows
+  gather_facts: no
+
+  vars:
+    ORG_NAME: SECNET-TEST
+    ROOT_AD_DN: DC=secnetwork,DC=org
+    organizational_units:
+      - name: _DISABLED
+        path: '{{ ROOT_AD_DN }}' 
+      - name: '{{ ORG_NAME }}'
+        path: '{{ ROOT_AD_DN }}' 
+      - name: Groups
+        path: "OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Accounts
+        path: "OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Systems
+        path: "OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Users
+        path: "OU=Accounts,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}"
+      - name: Admins
+        path: "OU=Accounts,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Services
+        path: "OU=Accounts,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Endpoints
+        path: "OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Servers
+        path: "OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Admin
+        path: "OU=Servers,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Linux
+        path: "OU=Servers,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Virtual
+        path: "OU=Endpoints,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Desktops
+        path: "OU=Endpoints,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Laptops
+        path: "OU=Endpoints,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+
+  tasks:
+    - name: "Create OU"
+      community.windows.win_domain_ou:
+        name: '{{ item.name }}'
+        path: '{{ item.path }}'
+        protected: no
+        state: absent
+        recursive: yes
+      with_items: '{{ organizational_units }}'
+      tags: organizational_units
+

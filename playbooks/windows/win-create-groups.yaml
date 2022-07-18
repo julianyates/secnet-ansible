@@ -1,0 +1,27 @@
+---
+
+- hosts: windows
+  gather_facts: no
+
+  vars:
+    ORG_NAME: SECNET
+    ROOT_AD_DN: DC=secnetwork,DC=org
+    ad_groups:
+      - name: Test
+        path: "OU=Groups,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}"
+        description: "This is a test OU"
+        scope: global
+        category: security
+        
+  tasks:
+    - name: Creating Default AD Groups
+      community.windows.win_domain_group:
+        name: '{{ item.name }}'
+        description: '{{ item.description }}'
+        scope: '{{ item.scope }}'
+        path: '{{ item.path }}' 
+        category: '{{ item.category }}'
+        protect: yes
+        state: present
+      with_items: '{{ ad_groups }}'
+

@@ -1,0 +1,10 @@
+--- 
+
+- hosts: windows
+  gather_facts: no
+
+
+  tasks:
+    - name: Test the PsExec connection to the local system (target node) with your user
+      community.windows.win_psexec:
+        command: whoami.exe

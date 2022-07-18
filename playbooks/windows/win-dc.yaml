@@ -1,0 +1,22 @@
+---
+
+- hosts: windows
+  gather_facts: no
+
+  tasks:
+    - name: Ensure the group Cow exists using sAMAccountName
+      community.windows.win_domain_group:
+        name: Cow
+        description: Testing Group Creation AD
+        scope: global
+        path: OU=Groups,OU=SECNET,DC=secnetwork,DC=org
+        protect: no
+
+    - name: Adding users to Cow Group
+      win_domain_group_membership:
+        name: Cow
+        members:
+          - p0001
+          - s0001
+          - ladmin
+        state: pure

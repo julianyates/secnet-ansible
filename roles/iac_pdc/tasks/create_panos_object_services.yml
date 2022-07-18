@@ -1,0 +1,36 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_service_object:
+      - create_service_object_name: 'service-ldap'
+        create_service_object_protocol: 'tcp'
+        create_service_object_dest_port: '389'
+        create_service_object_source_port: '1-65535'
+      - create_service_object_name: 'service-ldaps'
+        create_service_object_protocol: 'tcp'
+        create_service_object_dest_port: '636'
+        create_service_object_source_port: '1-65535'
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Creating Service Object
+      panos_tag_object:
+        provider: '{{ provider }}'
+        name: '{{ item.create_service_object_name }}'
+        protocol: '{{ item.create_service_object_protocol }}'
+        destination_port: '{{ item.create_service_object_dest_port }}'
+        source_port: '{{ create_service_object_source_port }}'
+      with_items: '{{ create_service_object }}'

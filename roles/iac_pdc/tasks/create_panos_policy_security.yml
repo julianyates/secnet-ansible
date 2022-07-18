@@ -16,6 +16,38 @@
       include_vars: '/home/p0001/ansible/fw'
       no_log: 'yes'
 
+    - name: SECNET Active Directory - PING
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - PING'
+        description: 'SECNET Active Directory - PING'
+        tag_name: ['Active Directory']
+        group_tag: 'Active Directory'
+        source_zone: ['SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['Domain Controllers']
+        application: ['ping']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'HQVAS to SECNET'
+
     - name: SECNET Active Directory - AD
       panos_security_rule:
         provider: '{{ provider }}'
@@ -46,8 +78,7 @@
         #wildfire_analysis: ['{{ item.wildfire_analysis }}']
         #hip_profiles: ['TEST1']
         location: 'after'
-        existing_rule: 'HQVAS to SECNET'
-      #with_items: '{{ inbound_security_policies }}'
+        existing_rule: 'SECNET Active Directory - PING'
 
     - name: SECNET Active Directory - Kerberos
       panos_security_rule:
@@ -80,7 +111,6 @@
         #hip_profiles: ['TEST1']
         location: 'after'
         existing_rule: 'SECNET Active Directory - AD'
-      #with_items: '{{ inbound_security_policies }}'
 
     - name: SECNET Active Directory - LDAP
       panos_security_rule:
@@ -113,4 +143,163 @@
         #hip_profiles: ['TEST1']
         location: 'after'
         existing_rule: 'SECNET Active Directory - Kerberos'
-      #with_items: '{{ inbound_security_policies }}'
+
+    - name: SECNET Active Directory - NTP
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - NTP'
+        description: 'SECNET Active Directory - NTP'
+        tag_name: ['Active Directory']
+        group_tag: 'Active Directory'
+        source_zone: ['SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['Domain Controllers']
+        application: ['ntp']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - LDAP'
+
+    - name: SECNET Active Directory - NETLOGON
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - NETLOGON'
+        description: 'SECNET Active Directory - NETLOGON'
+        tag_name: ['Active Directory']
+        group_tag: 'Active Directory'
+        source_zone: ['SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['Domain Controllers']
+        application: ['ms-netlogon']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - NTP'
+
+    - name: SECNET Active Directory - SMB
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - SMB'
+        description: 'SECNET Active Directory - SMB'
+        tag_name: ['Active Directory']
+        group_tag: 'Active Directory'
+        source_zone: ['SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['Domain Controllers']
+        application: ['ms-ds-smb-base','ms-ds-smbv2','ms-ds-smbv3']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - NETLOGON'
+
+    - name: SECNET Active Directory - NETBIOS
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - NETBIOS'
+        description: 'SECNET Active Directory - NETBIOS'
+        tag_name: ['Active Directory']
+        group_tag: 'Active Directory'
+        source_zone: ['SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['Domain Controllers']
+        application: ['netbios-dg','netbios-ns','netbios-ss']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - SMB'
+
+    - name: SECNET Active Directory - WEB-SSL
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - WEB-SSL'
+        description: 'SECNET Active Directory - WEB-SSL'
+        tag_name: ['Active Directory']
+        group_tag: 'Active Directory'
+        source_zone: ['SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['Domain Controllers']
+        application: ['ssl']
+        service: ['service-ldap','service-ldaps']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - NETBIOS'

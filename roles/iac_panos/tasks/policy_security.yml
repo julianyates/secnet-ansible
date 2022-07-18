@@ -37,12 +37,12 @@
         log_end: 'no'
         location: 'top'
 
-    - name: PA Network Services - WEB-SSL
+    - name: PANOS FW - WEB-SSL
       panos_security_rule:
         provider: '{{ provider }}'
-        rule_name: 'PA Network Services - WEB-SSL'
+        rule_name: 'PANOS FW - WEB-SSL'
         rule_type: intrazone
-        description: 'PA Network Services - WEB-SSL'
+        description: 'PANOS FW - WEB-SSL'
         tag_name: ['OUTBOUND']
         group_tag: 'Firewall Services'
         source_zone: ['WAN']
@@ -70,12 +70,12 @@
         location: 'after'
         existing_rule: 'Prevent RFC1918 to WAN'
 
-    - name: PA Network Services - PANOS
+    - name: PANOS FW - PANOS
       panos_security_rule:
         provider: '{{ provider }}'
-        rule_name: 'PA Network Services - PANOS'
+        rule_name: 'PANOS FW - PANOS'
         rule_type: intrazone
-        description: 'PA Network Services - PANOS'
+        description: 'PANOS FW - PANOS'
         tag_name: ['OUTBOUND']
         group_tag: 'Firewall Services'
         source_zone: ['WAN']
@@ -101,14 +101,14 @@
         #wildfire_analysis: ['']
         #hip_profiles: ['']
         location: 'after'
-        existing_rule: 'PA Network Services - WEB-SSL'
+        existing_rule: 'PANOS FW - WEB-SSL'
 
-    - name: PANOS to DNS
+    - name: PANOS FW to DNS Servers
       panos_security_rule:
         provider: '{{ provider }}'
-        rule_name: 'PANOS to DNS'
+        rule_name: 'PANOS FW to DNS Servers'
         rule_type: intrazone
-        description: 'PANOS to DNS'
+        description: 'PANOS FW to DNS Servers'
         tag_name: ['INTERNAL']
         group_tag: 'Firewall Services'
         source_zone: ['SECNET-SRV']
@@ -134,14 +134,14 @@
         #wildfire_analysis: ['']
         #hip_profiles: ['']
         location: 'after'
-        existing_rule: 'PA Network Services - PANOS'
+        existing_rule: 'PANOS FW - PANOS'
 
-    - name: PANOS to NTP
+    - name: PANOS FW to NTP Servers
       panos_security_rule:
         provider: '{{ provider }}'
-        rule_name: 'PANOS to NTP'
+        rule_name: 'PANOS FW to NTP Servers'
         rule_type: intrazone
-        description: 'PANOS to NTP'
+        description: 'PANOS FW to NTP Servers'
         tag_name: ['INTERNAL']
         group_tag: 'Firewall Services'
         source_zone: ['SECNET-SRV']
@@ -167,14 +167,14 @@
         #wildfire_analysis: ['']
         #hip_profiles: ['']
         location: 'after'
-        existing_rule: 'PANOS to DNS'
+        existing_rule: 'PANOS FW to DNS Servers'
 
-    - name: PANOS to PDC - MS-WMI
+    - name: PANOS FW to PDC - MS-WMI
       panos_security_rule:
         provider: '{{ provider }}'
-        rule_name: 'PANOS to PDC - MS-WMI'
+        rule_name: 'PANOS FW to PDC - MS-WMI'
         rule_type: intrazone
-        description: 'PANOS to PDC - MS-WMI'
+        description: 'PANOS FW to PDC - MS-WMI'
         tag_name: ['INTERNAL']
         group_tag: 'Firewall Services'
         source_zone: ['SECNET-AAA']
@@ -200,8 +200,41 @@
         #wildfire_analysis: ['']
         #hip_profiles: ['']
         location: 'after'
-        existing_rule: 'PANOS to NTP'
-  
+        existing_rule: 'PANOS FW to NTP Servers'
+
+    - name: PANOS FW to Syslog
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'PANOS FW to HQLOG Syslog'
+        rule_type: intrazone
+        description: 'PANOS FW to HQLOG Syslog'
+        tag_name: ['INTERNAL']
+        group_tag: 'Firewall Services'
+        source_zone: ['SECNET-SEC']
+        source_ip: ['10.0.41.1']
+        source_user: ['any']
+        destination_zone: ['SECNET-SEC']
+        destination_ip: ['hqlog.secnetwork.org']
+        application: ['syslog']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
+        location: 'after'
+        existing_rule: 'PANOS FW to PDC - MS-WMI' 
+
     - name: Default Deny Policy
       panos_security_rule:
         provider: '{{ provider }}'

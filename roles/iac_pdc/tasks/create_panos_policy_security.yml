@@ -285,7 +285,7 @@
         destination_zone: ['SECNET-AAA']
         destination_ip: ['Domain Controllers']
         application: ['ssl']
-        service: ['msrpc-base','ms-local-user-management','ms-local-security-management']
+        service: ['msrpc','ms-local-user-management','ms-local-security-management']
         category: ['any']
         #log_setting: ''
         action: 'allow'

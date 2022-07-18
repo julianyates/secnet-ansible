@@ -12,64 +12,53 @@
       api_key: '{{ api_key }}'
 
     create_zones:
-      - zone_name: WAN_TEST
+      - zone_name: WAN
         zone_mode: layer3
         zone_userid: no
-        #zone_interface: '{{ ae3.15 | default(omit, true) }}'
-      - zone_name: SECNET_MGT
+      - zone_name: SECNET-MGT
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.12 | default(omit) }}'
-      - zone_name: SECNET_DMZ
+      - zone_name: SECNET-DMZ
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.22 | default(omit) }}'
-      - zone_name: SECNET_AAA
+      - zone_name: SECNET-AAA
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.32 | default(omit) }}'
-      - zone_name: SECNET_SEC
+      - zone_name: SECNET-SEC
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.42 | default(omit, true) }}'
-      - zone_name: SECNET_SRV
+      - zone_name: SECNET-SRV
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.52 | default(omit, true) }}'
-      - zone_name: SECNET_VRT
+      - zone_name: SECNET-VRT
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.62 | default() }}'
-      - zone_name: SECNET_ADM
+      - zone_name: SECNET-ADM
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.72 | default(omit, true) }}'
-      - zone_name: SECNET_USR
+      - zone_name: SECNET-USR
         zone_mode: layer3
         zone_userid: yes
-        #zone_interface: '{{ ae3.102 | default(omit, true) }}'
    
   tasks:
     - name: Import Credentials from File
       include_vars: '/home/p0001/ansible/fw'
       no_log: 'yes'
 
-    - name: Get a list of all security rules
-      panos_zone_facts:
-        provider: '{{ provider }}'
+    #- name: Get a list of all security rules
+      #panos_zone_facts:
+        #provider: '{{ provider }}'
         #listing: true
-      register: sec_rules
+      #register: sec_rules
 
-    - debug:
-        msg: '{{ sec_rules }}'
+    #- debug:
+        #msg: '{{ sec_rules }}'
 
     - name: Create Zones
       panos_zone:
         provider: '{{ provider }}'
         zone: '{{ item.zone_name }}'
         mode: '{{ item.zone_mode }}'
-        #interface: '{{ item.zone_interface }}'
         #zone_profile: 'strict'
         enable_userid: '{{ item.zone_userid }}'
       with_items: '{{ create_zones }}'
-

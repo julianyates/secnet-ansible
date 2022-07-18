@@ -7,7 +7,7 @@
     - paloaltonetworks.panos
 
   vars:
-    aggregate_group_name: "ae3"
+    aggregate_group_name: "ae1"
     provider:
       ip_address: '{{ ip_address }}'
       api_key: '{{ api_key }}'
@@ -44,60 +44,58 @@
         create_mgt_profile_userid_syslog_listener_udp: no
 
     create_aggregate_interface:
-      - if_name: "ethernet1/5"
-      - if_name: "ethernet1/6"
-      - if_name: "ethernet1/7"
-      - if_name: "ethernet1/8"
+      - if_name: "ethernet1/11"
+      - if_name: "ethernet1/12"
 
     create_vlans:
-      - name: '{{ aggregate_group_name }}.12'
-        tag: "12"
+      - name: '{{ aggregate_group_name }}.11'
+        tag: "11"
         enable_dhcp: "false"
         management_profile: 'Management'
-        ip: ["10.0.12.1/24"]
-        zone_name: "SECNET_MGT"
-      - name: '{{ aggregate_group_name }}.22'
-        tag: "22"
+        ip: ["10.0.11.1/24"]
+        zone_name: "SECNET-MGT"
+      - name: '{{ aggregate_group_name }}.21'
+        tag: "21"
         enable_dhcp: "false"
         management_profile: 'Default'
-        ip: ["10.0.22.1/24"]
-        zone_name: "SECNET_DMZ"
-      - name: '{{ aggregate_group_name }}.32'
-        tag: "32"
+        ip: ["10.0.21.1/24"]
+        zone_name: "SECNET-DMZ"
+      - name: '{{ aggregate_group_name }}.31'
+        tag: "31"
         enable_dhcp: "false"
         management_profile: 'Default'
-        ip: ["10.0.32.1/24"]
-        zone_name: "SECNET_AAA"
-      - name: '{{ aggregate_group_name }}.42'
-        tag: "42"
+        ip: ["10.0.31.1/24"]
+        zone_name: "SECNET-AAA"
+      - name: '{{ aggregate_group_name }}.41'
+        tag: "41"
         enable_dhcp: "false"
         management_profile: 'Default'
-        ip: ["10.0.42.1/24"]
-        zone_name: "SECNET_SEC"
-      - name: '{{ aggregate_group_name }}.52'
-        tag: "52"
+        ip: ["10.0.41.1/24"]
+        zone_name: "SECNET-SEC"
+      - name: '{{ aggregate_group_name }}.51'
+        tag: "51"
         enable_dhcp: "false"
         management_profile: 'Default'
-        ip: ["10.0.52.1/24"]
-        zone_name: "SECNET_SRV"
-      - name: '{{ aggregate_group_name }}.62'
-        tag: "62"
+        ip: ["10.0.51.1/24"]
+        zone_name: "SECNET-SRV"
+      - name: '{{ aggregate_group_name }}.61'
+        tag: "61"
         enable_dhcp: "false"
         management_profile: 'Default'
-        ip: ["10.0.62.1/24"]
-        zone_name: "SECNET_VRT"
-      - name: '{{ aggregate_group_name }}.72'
-        tag: "72"
+        ip: ["10.0.61.1/24"]
+        zone_name: "SECNET-VRT"
+      - name: '{{ aggregate_group_name }}.71'
+        tag: "71"
         enable_dhcp: "false"
         management_profile: 'Management'
-        ip: ["10.0.72.1/24"]
-        zone_name: "SECNET_ADM"
-      - name: '{{ aggregate_group_name }}.102'
-        tag: "102"
+        ip: ["10.0.71.1/24"]
+        zone_name: "SECNET-ADM"
+      - name: '{{ aggregate_group_name }}.100'
+        tag: "101"
         enable_dhcp: "false"
         management_profile: 'Users'
-        ip: ["10.0.102.1/24"]
-        zone_name: "SECNET_USR"
+        ip: ["10.0.100.1/24"]
+        zone_name: "SECNET-USR"
 
   tasks:
     - name: Import Credentials from File

@@ -1,0 +1,68 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_tags:
+      - tag_name: "SECNET_MGT"
+        tag_color: "purple"
+        tag_comments: "SECNET_MGT"
+      - tag_name: "SECNET_DMZ"
+        tag_color: "purple"
+        tag_comments: "SECNET_DMZ"
+      - tag_name: "SECNET_AAA"
+        tag_color: "purple"
+        tag_comments: "SECNET_AAA"
+      - tag_name: "SECNET_SEC"
+        tag_color: "purple"
+        tag_comments: "SECNET_SEC"
+      - tag_name: "SECNET_SRV"
+        tag_color: "purple"
+        tag_comments: "SECNET_SRV"
+      - tag_name: "SECNET_VRT"
+        tag_color: "purple"
+        tag_comments: "SECNET_VRT"
+      - tag_name: "SECNET_ADM"
+        tag_color: "purple"
+        tag_comments: "SECNET_ADM"
+
+      - tag_name: "SECNET_USR"
+        tag_color: "purple"
+        tag_comments: "SECNET_USR"
+
+      - tag_name: "Unauthorized Traffic"
+        tag_color: "red"
+        tag_comments: "Unauthorized Traffic"
+      - tag_name: "OUTBOUND"
+        tag_color: "red"
+        tag_comments: "OUTBOUND"
+      - tag_name: "INBOUND"
+        tag_color: "red"
+        tag_comments: "INBOUND"
+      - tag_name: "INTERNAL"
+        tag_color: "blue"
+        tag_comments: "INTERNAL"
+      - tag_name: "WAN"
+        tag_color: "red"
+        tag_comments: "WAN"
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Creating Interface Tags
+      panos_tag_object:
+        provider: '{{ provider }}'
+        name: '{{ item.tag_name }}'
+        color: '{{ item.tag_color }}'
+        comments: '{{ item.tag_comments }}'
+      with_items: '{{ create_tags }}'

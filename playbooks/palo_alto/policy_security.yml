@@ -1,0 +1,152 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Prevent RFC1918 to WAN
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'Prevent RFC1918 to WAN'
+        description: 'Prevent RFC1918 to WAN'
+        tag_name: ['Unauthorized Traffic']
+        group_tag: 'Unauthorized Traffic'
+        source_zone: ['SECNET-AAA','SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['any']
+        #source_user: ['any']
+        destination_zone: ['WAN']
+        destination_ip: ['RFC1918']
+        application: ['any']
+        service: ['any']
+        category: ['any']
+        #log_setting: ''
+        action: 'deny'
+        log_start: 'yes'
+        log_end: 'no'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'top'
+        #existing_rule: ['{{ item.existing_rule }}']
+      #with_items: '{{ inbound_security_policies }}'
+
+    - name: PA Network Services - Web Browsing
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'PA Network Services - Web Browsing'
+        rule_type: intrazone
+        description: 'PA Network Services - Web Browsing'
+        tag_name: ['OUTBOUND']
+        group_tag: 'OUTBOUND'
+        source_zone: ['WAN']
+        source_ip: ['HQFW1 NAT IP']
+        #source_user: ['any']
+        destination_zone: ['WAN']
+        destination_ip: ['US']
+        application: ['web-browsing']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'Prevent RFC1918 to WAN'
+      #with_items: '{{ inbound_security_policies }}'
+
+    - name: PA Network Services - SSL
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'PA Network Services - SSL'
+        rule_type: intrazone
+        description: 'PA Network Services - SSL'
+        tag_name: ['OUTBOUND']
+        group_tag: 'OUTBOUND'
+        source_zone: ['WAN']
+        source_ip: ['HQFW1 NAT IP']
+        #source_user: ['any']
+        destination_zone: ['WAN']
+        destination_ip: ['US']
+        application: ['web-browsing','ssl']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'PA Network Services - Web Browsing'
+      #with_items: '{{ inbound_security_policies }}'
+
+    - name: PA Network Services - PANOS
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'PA Network Services - PANOS'
+        rule_type: intrazone
+        description: 'PA Network Services - PANOS'
+        tag_name: ['OUTBOUND']
+        group_tag: 'OUTBOUND'
+        source_zone: ['WAN']
+        source_ip: ['HQFW1 NAT IP']
+        #source_user: ['any']
+        destination_zone: ['WAN']
+        destination_ip: ['US']
+        application: ['paloalto-dns-security','paloalto-updates','paloalto-wildfire-cloud','pan-db-cloud']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'PA Network Services - SSL'
+      #with_items: '{{ inbound_security_policies }}'

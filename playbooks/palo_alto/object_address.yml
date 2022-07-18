@@ -1,0 +1,53 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_address_object:
+      - address_object_name: "RFC1918 - 10.0.0.0"
+        address_object_value: '10.0.0.0/8'
+        address_object_description: "RFC1918 - 10.0.0.0"
+        address_object_tag: 'Unauthorized Traffic'
+      - address_object_name: "RFC1918 - 172.16.0.0"
+        address_object_value: '172.16.0.0/12'
+        address_object_description: "RFC1918 - 172.16.0.0"
+        address_object_tag: 'Unauthorized Traffic'
+      - address_object_name: "RFC1918 - 192.168.0.0"
+        address_object_value: '192.168.0.0/16'
+        address_object_description: "RFC1918 - 192.168.0.0"
+        address_object_tag: 'Unauthorized Traffic'
+
+    create_address_group:
+      - address_group_name: 'RFC1918'
+        address_group_static_value: ['RFC1918 - 10.0.0.0','RFC1918 - 172.16.0.0','RFC1918 - 192.168.0.0']
+        address_group_tag: 'Unauthorized Traffic' 
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Creating Address Object
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: '{{ item.address_object_name }}'
+        value: '{{ item.address_object_value }}'
+        description: '{{ item.address_object_description }}'
+        tag: ['{{ item.address_object_tag }}']
+      with_items: '{{ create_address_object }}'
+
+    - name: Creating Address Group
+      panos_address_group:
+        provider: '{{ provider }}'
+        name: '{{ item.address_group_name }}'
+        static_value: '{{ item.address_group_static_value }}'
+        tag: ['{{ item.address_group_tag }}']
+      with_items: '{{ create_address_group }}'

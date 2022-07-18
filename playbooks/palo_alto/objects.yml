@@ -1,0 +1,125 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  vars:
+    device:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: 'Unauthorized Traffic'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'Unauthorized Traffic'
+        color: 'red'
+        comments: 'Unauthorized Traffic'
+
+    - name: 'OUTBOUND'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'OUTBOUND'
+        color: 'red'
+        comments: 'OUTBOUND'
+
+    - name: 'INBOUND'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'INBOUND'
+        color: 'red'
+        comments: 'INBOUND'
+
+    - name: 'INTERNAL'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'INTERNAL'
+        color: 'blue'
+        comments: 'INTERNAL'
+
+    - name: 'WAN'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'WAN'
+        color: 'red'
+        comments: 'WAN'
+
+    - name: 'SECNET-AAA'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'SECNET-AAA'
+        color: 'purple'
+        comments: 'SECNET-AAA'
+
+    - name: 'SECNET-DMZ'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'SECNET-DMZ'
+        color: 'purple'
+        comments: 'SECNET-DMZ'
+
+    - name: 'SECNET-MGT'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'SECNET-MGT'
+        color: 'purple'
+        comments: 'SECNET-MGT'
+
+    - name: 'SECNET-SEC'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'SECNET-SEC'
+        color: 'purple'
+        comments: 'SECNET-SEC'
+
+    - name: 'SECNET-SRV'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'SECNET-SRV'
+        color: 'purple'
+        comments: 'SECNET-SRV'
+
+    - name: 'SECNET-USR'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'SECNET-USR'
+        color: 'purple'
+        comments: 'SECNET-USR'
+
+    - name: 'SECNET-VRT'
+      paloaltonetworks.panos.panos_tag_object:
+        provider: '{{ device }}'
+        name: 'SECNET-VRT'
+        color: 'purple'
+        comments: 'SECNET-VRT'
+
+    - name: 'RFC1918 - 10.0.0.0'
+      paloaltonetworks.panos.panos_address_object:
+        provider: '{{ device }}'
+        name: 'RFC1918 - 10.0.0.0'
+        value: '10.0.0.0/8'
+        description: 'RFC1918'
+        tag: ['Unauthorized Traffic']
+
+    - name: 'RFC1918 - 172.16.0.0'
+      paloaltonetworks.panos.panos_address_object:
+        provider: '{{ device }}'
+        name: 'RFC1918 - 172.16.0.0'
+        value: '172.16.0.0/12'
+        description: 'RFC1918'
+        tag: ['Unauthorized Traffic']
+
+    - name: 'RFC1918 - 192.168.0.0'
+      paloaltonetworks.panos.panos_address_object:
+        provider: '{{ device }}'
+        name: 'RFC1918 - 192.168.0.0'
+        value: '192.168.0.0/16'
+        description: 'RFC1918'
+        tag: ['Unauthorized Traffic']
+
+    - name: 'RFC1918'
+      paloaltonetworks.panos.panos_address_group:
+        provider: '{{ device }}'
+        name: 'RFC1918'
+        static_value: ['RFC1918 - 10.0.0.0', 'RFC1918 - 172.16.0.0', 'RFC1918 - 192.168.0.0']
+        tag: ['Unauthorized Traffic']

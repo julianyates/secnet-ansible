@@ -1,0 +1,26 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Create Default Static Route
+      panos_static_route:
+        provider: '{{ provider }}'
+        name: Default Gateway
+        destination: '0.0.0.0/0'
+        nexthop: '96.231.240.1'
+        nexthop_type: ip-address
+        interface: ethernet1/1

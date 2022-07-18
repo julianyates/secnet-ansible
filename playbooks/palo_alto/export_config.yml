@@ -1,0 +1,16 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  vars:
+    device:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: Export configuration
+      paloaltonetworks.panos.panos_export:
+        provider: '{{ device }}'
+        category: 'configuration'
+        filename: 'running-config.xml'

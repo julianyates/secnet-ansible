@@ -3,6 +3,11 @@
   become: true
   
   tasks:
+    - name: Install EPEL
+      dnf:
+        name: epel-release
+        state: installed
+
     - name: Install TMUX
       dnf:
         name: tmux

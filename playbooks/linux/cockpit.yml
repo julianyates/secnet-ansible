@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Installing Cockpit
+      dnf:
+        name: cockpit
+        state: installed
+
+    - name: Enable Cockpit
+      command: systemctl enable --now cockpit.socket
+
+    - name: Allow Cockpit via Firewall
+      firewalld:
+        zone: public
+        service: cockpit
+        permanent: true
+        state: enabled

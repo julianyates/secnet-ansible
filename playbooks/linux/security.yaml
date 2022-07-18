@@ -1,0 +1,36 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks:
+    - name: Update SSHd Configuration File 
+      ansible.builtin.copy:
+        src: ../files/sshd_config
+        dest: /etc/ssh/sshd_config
+        owner: root
+        group: root
+        mode: '0600'
+      notify: restart_sshd
+
+    - name: Update SSHd Banner File
+      ansible.builtin.copy:
+        src: ../files/banner
+        dest: /etc/banner
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Enabling FIPS
+      ansible.builtin.command: fips-mode-setup --enable
+      when: "ansible_fips == false"
+      notify: restart_server
+
+  handlers:
+    - name: restart_sshd
+      service:
+         name: sshd
+         state: restarted
+    - name: restart_server
+      shell: shutdown -r now

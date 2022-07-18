@@ -1,0 +1,157 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    aggregate_group_name: "ae3"
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_management_profile:
+      - create_mgt_profile_name: 'Management'
+        create_mgt_profile_ping: yes
+        create_mgt_profile_https: yes
+        create_mgt_profile_ssh: yes
+        create_mgt_profile_snmp: yes
+        create_mgt_profile_response_pages: yes
+        create_mgt_profile_userid_service: no
+        create_mgt_profile_userid_syslog_listener_ssl: no 
+        create_mgt_profile_userid_syslog_listener_udp: no
+
+      - create_mgt_profile_name: 'Default'
+        create_mgt_profile_ping: yes
+        create_mgt_profile_https: no
+        create_mgt_profile_ssh: no
+        create_mgt_profile_snmp: no
+        create_mgt_profile_response_pages: yes
+        create_mgt_profile_userid_service: no
+        create_mgt_profile_userid_syslog_listener_ssl: no
+        create_mgt_profile_userid_syslog_listener_udp: no
+
+      - create_mgt_profile_name: 'Users'
+        create_mgt_profile_ping: yes
+        create_mgt_profile_https: no
+        create_mgt_profile_ssh: no
+        create_mgt_profile_snmp: no
+        create_mgt_profile_response_pages: yes
+        create_mgt_profile_userid_service: yes
+        create_mgt_profile_userid_syslog_listener_ssl: no
+        create_mgt_profile_userid_syslog_listener_udp: no
+
+    create_aggregate_interface:
+      - if_name: "ethernet1/5"
+      - if_name: "ethernet1/6"
+      - if_name: "ethernet1/7"
+      - if_name: "ethernet1/8"
+
+    create_vlans:
+      - name: '{{ aggregate_group_name }}.12'
+        tag: "12"
+        enable_dhcp: "false"
+        management_profile: 'Management'
+        ip: ["10.0.12.1/24"]
+        zone_name: "SECNET_MGT"
+      - name: '{{ aggregate_group_name }}.22'
+        tag: "22"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.22.1/24"]
+        zone_name: "SECNET_DMZ"
+      - name: '{{ aggregate_group_name }}.32'
+        tag: "32"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.32.1/24"]
+        zone_name: "SECNET_AAA"
+      - name: '{{ aggregate_group_name }}.42'
+        tag: "42"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.42.1/24"]
+        zone_name: "SECNET_SEC"
+      - name: '{{ aggregate_group_name }}.52'
+        tag: "52"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.52.1/24"]
+        zone_name: "SECNET_SRV"
+      - name: '{{ aggregate_group_name }}.62'
+        tag: "62"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.62.1/24"]
+        zone_name: "SECNET_VRT"
+      - name: '{{ aggregate_group_name }}.72'
+        tag: "72"
+        enable_dhcp: "false"
+        management_profile: 'Management'
+        ip: ["10.0.72.1/24"]
+        zone_name: "SECNET_ADM"
+      - name: '{{ aggregate_group_name }}.102'
+        tag: "102"
+        enable_dhcp: "false"
+        management_profile: 'Users'
+        ip: ["10.0.102.1/24"]
+        zone_name: "SECNET_USR"
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Create Interface Management Profile
+      panos_management_profile:
+        provider: '{{ provider }}'
+        name: '{{ item.create_mgt_profile_name }}'
+        ping: '{{ item.create_mgt_profile_ping }}'
+        https: '{{ item.create_mgt_profile_https }}'
+        ssh: '{{ item.create_mgt_profile_ssh }}'
+        snmp: '{{ item.create_mgt_profile_snmp }}'
+        response_pages: '{{ item.create_mgt_profile_response_pages }}'
+        userid_service: '{{ item.create_mgt_profile_userid_service}}'
+        #userid_syslog_listener_ssl: '{{ item.create_mgt_profile_userid_syslog_listener_ssl }}'
+        #userid_syslog_listener_udp: '{{ item.create_mgt_profile_userid_syslog_listener_udp }}'
+      with_items: '{{ create_management_profile }}'
+
+    - name: Creating Aggregate Interface
+      panos_aggregate_interface:
+        provider: '{{ provider }}'
+        if_name: '{{ aggregate_group_name }}'
+        mode: "layer3"
+        vr_name: "none"
+        lacp_enable: "true"
+        lacp_mode: "active"
+
+    - name: Configuring Aggregate Interfaces
+      panos_interface:
+        provider: '{{ provider }}'
+        if_name: '{{ item.if_name }}'
+        mode: "aggregate-group"
+        aggregate_group: '{{ aggregate_group_name }}'
+      with_items: '{{ create_aggregate_interface }}'
+
+    - name: Creating VLAN Subinterfaces
+      panos_l3_subinterface:
+        provider: '{{ provider }}'
+        name: '{{ item.name }}'
+        tag: '{{ item.tag }}'
+        enable_dhcp: '{{ item.enable_dhcp }}'
+        management_profile: '{{ item.management_profile }}'
+        ip: '{{ item.ip }}'
+        zone_name: '{{ item.zone_name }}'
+      with_items: '{{ create_vlans }}'
+
+
+    - name: Configuring WAN Interface
+      panos_interface:
+        provider: '{{ provider }}'
+        if_name: "ethernet1/1"
+        mode: "layer3"
+        ip: ["96.231.240.217/24"]
+        enable_dhcp: false
+        zone_name: "WAN"

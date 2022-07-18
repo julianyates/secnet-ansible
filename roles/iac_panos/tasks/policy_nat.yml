@@ -35,14 +35,14 @@
       include_vars: '/home/p0001/ansible/fw'
       no_log: 'yes'
 
-    - name: Get a list of all security rules
-      panos_nat_rule_facts:
-        provider: '{{ provider }}'
-        listing: true
-      register: sec_rules
+#    - name: Get a list of all security rules
+#      panos_nat_rule_facts:
+#        provider: '{{ provider }}'
+#        listing: true
+#      register: sec_rules
 
-    - debug:
-        msg: '{{ sec_rules.listing }}'
+#    - debug:
+#        msg: '{{ sec_rules.listing }}'
 
     - name: Creating SNAT Policy
       panos_nat_rule:

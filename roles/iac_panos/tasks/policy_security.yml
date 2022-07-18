@@ -150,3 +150,25 @@
         location: 'after'
         existing_rule: 'PA Network Services - SSL'
       #with_items: '{{ inbound_security_policies }}'
+
+    - name: Default Deny
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'Default Deny Policy'
+        rule_type: 'universal'
+        description: 'Default Deny Policy'
+        tag_name: ['Unauthorized Traffic']
+        group_tag: 'Unauthorized Traffic'
+        source_zone: ['any']
+        source_ip: ['any']
+        source_user: ['any']
+        destination_zone: ['any']
+        destination_ip: ['any']
+        application: ['any']
+        service: ['any']
+        category: ['any']
+        #log_setting: ''
+        action: 'deny'
+        log_start: 'yes'
+        log_end: 'no'
+        location: 'bottom'

@@ -35,16 +35,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'HQVAS to SECNET'
 
@@ -67,16 +67,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - PING'
 
@@ -99,16 +99,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - AD'
 
@@ -131,16 +131,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - Kerberos'
 
@@ -163,16 +163,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - LDAP'
 
@@ -195,16 +195,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - NTP'
 
@@ -227,16 +227,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - NETLOGON'
 
@@ -259,16 +259,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - SMB'
 
@@ -291,16 +291,16 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - SMB'
 
@@ -323,15 +323,15 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
-        #audit_comment: ['{{ item.audit_comment }}']
-        #group_profile: ['{{ item.group_profile }}']
-        #antivirus: ['{{ item.antivirus }}']
-        #vulnerability: ['{{ item.vulnerability }}']
-        #spyware: ['{{ item.spyware }}']
-        #url_filtering: ['{{ item.url_filtering }}']
-        #file_blocking: ['{{ item.file_blocking }}']
-        #data_filtering: ['{{ item.data_filtering }}']
-        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
-        #hip_profiles: ['TEST1']
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
         location: 'after'
         existing_rule: 'SECNET Active Directory - MSRPC'

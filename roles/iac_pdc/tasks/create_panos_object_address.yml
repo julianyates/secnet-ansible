@@ -1,0 +1,49 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_address_object:
+      - address_object_name: "hqpdc1.secnetwork.org"
+        address_object_value: '10.0.31.11'
+        address_object_description: "hqpdc1.secnetwork.org"
+        address_object_tag: 'SECNET-AAA'
+      - address_object_name: "hqpdc2.secnetwork.org"
+        address_object_value: '10.0.31.12'
+        address_object_description: "hqpdc2.secnetwork.org"
+        address_object_tag: 'SECNET-AAA'
+
+    create_address_group:
+      - address_group_name: 'Domain Controllers'
+        address_group_static_value: ['hqpdc1.secnetwork.org','hqpdc2.secnetwork.org']
+        address_group_tag: 'SECNET-AAA' 
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Creating Address Object
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: '{{ item.address_object_name }}'
+        value: '{{ item.address_object_value }}'
+        description: '{{ item.address_object_description }}'
+        tag: ['{{ item.address_object_tag }}']
+      with_items: '{{ create_address_object }}'
+
+    - name: Creating Address Group
+      panos_address_group:
+        provider: '{{ provider }}'
+        name: '{{ item.address_group_name }}'
+        static_value: '{{ item.address_group_static_value }}'
+        tag: ['{{ item.address_group_tag }}']
+      with_items: '{{ create_address_group }}'

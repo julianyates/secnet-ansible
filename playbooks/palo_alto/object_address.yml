@@ -12,6 +12,11 @@
       api_key: '{{ api_key }}'
 
     create_address_object:
+      - address_object_name: "SECNET HQ Network"
+        address_object_value: '10.0.0.0/16'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'INTERNAL'
+
       - address_object_name: "RFC1918 - 10.0.0.0"
         address_object_value: '10.0.0.0/8'
         address_object_description: "RFC1918 - 10.0.0.0"

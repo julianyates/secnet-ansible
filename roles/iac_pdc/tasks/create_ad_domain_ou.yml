@@ -1,12 +1,16 @@
 ---
 
-- hosts: windows
+- hosts: pdc
   gather_facts: no
 
+  collections:
+    - community.windows
+
   vars:
-    ORG_NAME: SECNET-TEST
+    ORG_NAME: SECNET
     ROOT_AD_DN: DC=secnetwork,DC=org
-    organizational_units:
+
+    create_domain_ou:
       - name: _DISABLED
         path: '{{ ROOT_AD_DN }}' 
       - name: '{{ ORG_NAME }}'
@@ -39,13 +43,11 @@
         path: "OU=Endpoints,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
 
   tasks:
-    - name: "Create OU"
-      community.windows.win_domain_ou:
-        name: '{{ item.name }}'
-        path: '{{ item.path }}'
-        protected: no
-        state: absent
+    - name: "Create Domain OU"
+      win_domain_ou:
+        name: '{{ item.create_domain_ou_name }}'
+        path: '{{ item.create_domain_ou_path }}'
+        protected: yes
+        state: present
         recursive: yes
-      with_items: '{{ organizational_units }}'
-      tags: organizational_units
-
+      with_items: '{{ create_domain_ou }}'

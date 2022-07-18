@@ -112,7 +112,7 @@
         tag_name: ['INTERNAL']
         group_tag: 'Firewall Services'
         source_zone: ['SECNET-SRV']
-        source_ip: ['10.0.31.1']
+        source_ip: ['10.0.51.1']
         source_user: ['any']
         destination_zone: ['SECNET-SRV']
         destination_ip: ['DNS Servers']
@@ -145,7 +145,7 @@
         tag_name: ['INTERNAL']
         group_tag: 'Firewall Services'
         source_zone: ['SECNET-SRV']
-        source_ip: ['10.0.31.1']
+        source_ip: ['10.0.51.1']
         source_user: ['any']
         destination_zone: ['SECNET-SRV']
         destination_ip: ['NTP Servers']

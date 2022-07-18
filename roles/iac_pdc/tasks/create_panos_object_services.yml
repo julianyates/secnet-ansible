@@ -27,7 +27,7 @@
       no_log: 'yes'
 
     - name: Creating Service Object
-      panos_tag_object:
+      panos_service_object:
         provider: '{{ provider }}'
         name: '{{ item.create_service_object_name }}'
         protocol: '{{ item.create_service_object_protocol }}'

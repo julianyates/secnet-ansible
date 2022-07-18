@@ -1,0 +1,31 @@
+---
+
+- hosts: pdc
+  gather_facts: no
+
+  collections:
+    - community.windows
+
+  vars:
+    ORG_NAME: SECNET
+    ROOT_AD_DN: DC=secnetwork,DC=org
+    
+    create_ad_group:
+      - create_ad_group_name: 'Virtual Admins'
+        create_ad_group_path: "OU=Groups,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}"
+        create_ad_group_description: "Virtrual Administrators have complete and unrestricted access to the virtual infrastructure"
+        create_ad_group_scope: global
+        create_ad_group_category: security
+
+  tasks:
+    - name: Creating AD Groups
+      win_domain_group:
+        name: '{{ item.create_ad_group_name }}'
+        description: '{{ item.create_ad_group_description }}'
+        scope: '{{ item.create_ad_group_scope }}'
+        path: '{{ item.create_ad_group_path }}' 
+        category: '{{ item.create_ad_group_category }}'
+        protect: yes
+        state: present
+      with_items: '{{ create_ad_group }}'
+

@@ -35,10 +35,38 @@
         address_object_description: "RFC1918 - 192.168.0.0"
         address_object_tag: 'Unauthorized Traffic'
 
+      - address_object_name: "hqdns1.secnetwork.org"
+        address_object_value: '10.0.51.11'
+        address_object_description: "hqdns1.secnetwork.org"
+        address_object_tag: 'SECNET-SRV'
+
+      - address_object_name: "hqdns2.secnetwork.org"
+        address_object_value: '10.0.51.12'
+        address_object_description: "hqdns2.secnetwork.org"
+        address_object_tag: 'SECNET-SRV'
+
+      - address_object_name: "hqntp1.secnetwork.org"
+        address_object_value: '10.0.51.21'
+        address_object_description: "hqdns1.secnetwork.org"
+        address_object_tag: 'SECNET-SRV'
+
+      - address_object_name: "hqntp2.secnetwork.org"
+        address_object_value: '10.0.51.22'
+        address_object_description: "hqdns2.secnetwork.org"
+        address_object_tag: 'SECNET-SRV'
+
     create_address_group:
       - address_group_name: 'RFC1918'
         address_group_static_value: ['RFC1918 - 10.0.0.0','RFC1918 - 172.16.0.0','RFC1918 - 192.168.0.0']
-        address_group_tag: 'Unauthorized Traffic' 
+        address_group_tag: 'Unauthorized Traffic'
+
+      - address_group_name: 'DNS Servers'
+        address_group_static_value: ['hqdns1.secnetwork.org','hqdns2.secnetwork.org']
+        address_group_tag: 'SECNET-SRV'
+
+      - address_group_name: 'NTP Servers'
+        address_group_static_value: ['hqntp1.secnetwork.org','hqntp2.secnetwork.org']
+        address_group_tag: 'SECNET-SRV'
 
   tasks:
     - name: Import Credentials from File

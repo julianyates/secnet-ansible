@@ -33,7 +33,6 @@
       - tag_name: "SECNET_ADM"
         tag_color: "purple"
         tag_comments: "SECNET_ADM"
-
       - tag_name: "SECNET_USR"
         tag_color: "purple"
         tag_comments: "SECNET_USR"
@@ -53,6 +52,10 @@
       - tag_name: "WAN"
         tag_color: "red"
         tag_comments: "WAN"
+
+      - tag_name: "Firewall"
+        tag_color: "green"
+        tag_comments: "Firewall"
 
   tasks:
     - name: Import Credentials from File

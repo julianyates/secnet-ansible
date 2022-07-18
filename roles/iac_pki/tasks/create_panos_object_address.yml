@@ -1,0 +1,40 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_address_object:
+      - address_object_name: "hqpkirca.secnetwork.org"
+        address_object_value: '10.0.31.21'
+        address_object_description: "hqpkirca.secnetwork.org"
+        address_object_tag: 'SECNET-AAA'
+      - address_object_name: "hqpkieca.secnetwork.org"
+        address_object_value: '10.0.31.22'
+        address_object_description: "hqpkieca.secnetwork.org"
+        address_object_tag: 'SECNET-AAA'
+      - address_object_name: "hqpkiweb.secnetwork.org"
+        address_object_value: '10.0.31.23'
+        address_object_description: "hqpkiweb.secnetwork.org"
+        address_object_tag: 'SECNET-AAA'
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: Creating Address Object
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: '{{ item.address_object_name }}'
+        value: '{{ item.address_object_value }}'
+        description: '{{ item.address_object_description }}'
+        tag: ['{{ item.address_object_tag }}']
+      with_items: '{{ create_address_object }}'

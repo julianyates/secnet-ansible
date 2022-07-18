@@ -1,0 +1,82 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/home/p0001/ansible/fw'
+      no_log: 'yes'
+
+    - name: SECNET HQPKIECA Enrollment
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET HQPKIECA Enrollment'
+        description: 'SECNET HQPKIECA Enrollment'
+        tag_name: ['INTERNAL']
+        group_tag: 'Public Key Infrastructure'
+        source_zone: ['SECNET-SEC','SECNET-SRV','SECNET-USR']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['hqpkieca.secnetwork.org']
+        application: ['ms-ds-smb-base','ms-ds-smbv2','ms-ds-smbv3','msrpc-base','netbios-ss']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
+        location: 'before'
+        existing_rule: 'Default Deny'
+
+    - name: SECNET HQPKIWEB CRL-OCSP
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET HQPKIWEB CRL-OCSP'
+        description: 'SECNET HQPKIWEB CRL-OCSP'
+        tag_name: ['INTERNAL']
+        group_tag: 'Public Key Infrastructure'
+        source_zone: ['SECNET-SEC','SECNET-SRV','SECNET-USR']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['hqpkieca.secnetwork.org']
+        application: ['ocsp','web-browsing']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['']
+        #group_profile: ['']
+        #antivirus: ['']
+        #vulnerability: ['']
+        #spyware: ['']
+        #url_filtering: ['']
+        #file_blocking: ['']
+        #data_filtering: ['']
+        #wildfire_analysis: ['']
+        #hip_profiles: ['']
+        location: 'after'
+        existing_rule: 'SECNET HQPKIECA Enrollment'
+

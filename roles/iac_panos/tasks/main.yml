@@ -1,0 +1,11 @@
+---
+
+- import_playbook: network_zones.yml
+- import_playbook: network_interfaces.yml
+- import_playbook: network_vr.yml
+
+- import_playbook: object_tags.yml
+- import_playbook: object_address.yml
+
+- import_playbook: policy_security.yml
+- import_playbook: policy_nat.yml

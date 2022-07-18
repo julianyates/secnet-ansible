@@ -146,7 +146,6 @@
         zone_name: '{{ item.zone_name }}'
       with_items: '{{ create_vlans }}'
 
-
     - name: Configuring WAN Interface
       panos_interface:
         provider: '{{ provider }}'

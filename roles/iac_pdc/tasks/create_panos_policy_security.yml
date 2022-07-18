@@ -156,7 +156,7 @@
         source_user: ['any']
         destination_zone: ['SECNET-AAA']
         destination_ip: ['Domain Controllers']
-        application: ['ntp']
+        application: ['ntp','ntp-base']
         service: ['application-default']
         category: ['any']
         #log_setting: ''
@@ -272,6 +272,38 @@
         location: 'after'
         existing_rule: 'SECNET Active Directory - SMB'
 
+    - name: SECNET Active Directory - MSRPC
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - MSRPC'
+        description: 'SECNET Active Directory - MSRPC'
+        tag_name: ['Active Directory']
+        group_tag: 'Active Directory'
+        source_zone: ['SECNET-DMZ','SECNET-MGT','SECNET-SEC','SECNET-SRV','SECNET-USR','SECNET-VRT']
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['SECNET-AAA']
+        destination_ip: ['Domain Controllers']
+        application: ['ssl']
+        service: ['msrpc-base','ms-local-user-management','ms-local-security-management']
+        category: ['any']
+        #log_setting: ''
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #audit_comment: ['{{ item.audit_comment }}']
+        #group_profile: ['{{ item.group_profile }}']
+        #antivirus: ['{{ item.antivirus }}']
+        #vulnerability: ['{{ item.vulnerability }}']
+        #spyware: ['{{ item.spyware }}']
+        #url_filtering: ['{{ item.url_filtering }}']
+        #file_blocking: ['{{ item.file_blocking }}']
+        #data_filtering: ['{{ item.data_filtering }}']
+        #wildfire_analysis: ['{{ item.wildfire_analysis }}']
+        #hip_profiles: ['TEST1']
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - SMB'
+
     - name: SECNET Active Directory - WEB-SSL
       panos_security_rule:
         provider: '{{ provider }}'
@@ -302,4 +334,4 @@
         #wildfire_analysis: ['{{ item.wildfire_analysis }}']
         #hip_profiles: ['TEST1']
         location: 'after'
-        existing_rule: 'SECNET Active Directory - NETBIOS'
+        existing_rule: 'SECNET Active Directory - MSRPC'

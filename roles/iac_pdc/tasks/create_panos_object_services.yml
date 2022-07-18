@@ -32,5 +32,5 @@
         name: '{{ item.create_service_object_name }}'
         protocol: '{{ item.create_service_object_protocol }}'
         destination_port: '{{ item.create_service_object_dest_port }}'
-        source_port: '{{ create_service_object_source_port }}'
+        source_port: '{{ item.create_service_object_source_port }}'
       with_items: '{{ create_service_object }}'

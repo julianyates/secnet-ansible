@@ -2,6 +2,6 @@
 
 - import_playbook: create_panos_object_tags.yml
 - import_playbook: create_panos_object_address.yml
-- import_playbook: create_panos_object_services.yml
+#- import_playbook: create_panos_object_services.yml
 
 - import_playbook: create_panos_policy_security.yml

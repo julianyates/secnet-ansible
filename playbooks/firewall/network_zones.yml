@@ -12,53 +12,83 @@
       api_key: '{{ api_key }}'
 
     create_zones:
-      - zone_name: WAN
+      - zone_name: "WAN"
         zone_mode: layer3
         zone_userid: no
-      - zone_name: SECNET-MGT
+
+      - zone_name: "Management"
         zone_mode: layer3
         zone_userid: yes
-      - zone_name: SECNET-DMZ
+
+      - zone_name: "VIRT-Management"
         zone_mode: layer3
         zone_userid: yes
-      - zone_name: SECNET-AAA
+
+      - zone_name: "IDAM-PDC"
         zone_mode: layer3
         zone_userid: yes
-      - zone_name: SECNET-SEC
+
+      - zone_name: "IDAM-PKI"
         zone_mode: layer3
         zone_userid: yes
-      - zone_name: SECNET-SRV
+
+      - zone_name: "IDAM-NAC"
         zone_mode: layer3
         zone_userid: yes
-      - zone_name: SECNET-VRT
+
+      - zone_name: "IDAM-SSO"
         zone_mode: layer3
         zone_userid: yes
-      - zone_name: SECNET-ADM
+
+      - zone_name: "Security-Logs"
         zone_mode: layer3
         zone_userid: yes
-      - zone_name: SECNET-USR
+
+      - zone_name: "Security-VAS"
         zone_mode: layer3
         zone_userid: yes
-   
+
+      - zone_name: "Security-MON"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "Security-NVR"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "DMZ"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "Endpoint-Users"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "Endpoint-Printers"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "Endpoint-Phones"
+        zone_mode: layer3
+        zone_userid: no
+
+      - zone_name: "Endpoint-IoT"
+        zone_mode: layer3
+        zone_userid: no
+
+      - zone_name: "Guests"
+        zone_mode: layer3
+        zone_userid: no
+
   tasks:
     - name: Import Credentials from File
       include_vars: '/home/p0001/ansible/fw'
       no_log: 'yes'
-
-    #- name: Get a list of all security rules
-      #panos_zone_facts:
-        #provider: '{{ provider }}'
-        #listing: true
-      #register: sec_rules
-
-    #- debug:
-        #msg: '{{ sec_rules }}'
 
     - name: Create Zones
       panos_zone:
         provider: '{{ provider }}'
         zone: '{{ item.zone_name }}'
         mode: '{{ item.zone_mode }}'
-        #zone_profile: 'strict'
         enable_userid: '{{ item.zone_userid }}'
       with_items: '{{ create_zones }}'

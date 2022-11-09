@@ -1,0 +1,23 @@
+Rename-Computer -NewName "hqpdc1"
+
+Install-WindowsFeature -name AD-Domain-Services -IncludeManagementTools
+
+
+Import-Module ADDSDeployment
+
+
+Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "C:\Windows\NTDS" -DomainMode "WinThreshold" -DomainName "secnetwork.org" -DomainNetbiosName "SECNET" -ForestMode "WinThreshold" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SysvolPath "C:\Windows\SYSVOL" -Force:$true
+
+
+
+
+
+
+
+
+set-executionpolicy -executionpolicy remotesigned
+winrm quickconfig -q
+winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="512"}'
+winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+winrm set winrm/config/service/auth '@{Basic="true"}'

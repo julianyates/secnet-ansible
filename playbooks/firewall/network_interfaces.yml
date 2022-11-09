@@ -7,7 +7,7 @@
     - paloaltonetworks.panos
 
   vars:
-    aggregate_group_name: "ae1"
+    aggregate_group_name: "ae2"
     provider:
       ip_address: '{{ ip_address }}'
       api_key: '{{ api_key }}'
@@ -44,8 +44,8 @@
         create_mgt_profile_userid_syslog_listener_udp: no
 
     create_aggregate_interface:
-      - if_name: "ethernet1/11"
-      - if_name: "ethernet1/12"
+      - if_name: "ethernet1/09"
+      - if_name: "ethernet1/10"
 
     create_vlans:
       - name: '{{ aggregate_group_name }}.11'
@@ -53,49 +53,119 @@
         enable_dhcp: "false"
         management_profile: 'Management'
         ip: ["10.0.11.1/24"]
-        zone_name: "SECNET-MGT"
+        zone_name: "Management"
+
       - name: '{{ aggregate_group_name }}.21'
         tag: "21"
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.21.1/24"]
-        zone_name: "SECNET-DMZ"
+        zone_name: "VIRT-Management"
+
       - name: '{{ aggregate_group_name }}.31'
         tag: "31"
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.31.1/24"]
-        zone_name: "SECNET-AAA"
+        zone_name: "IDAM-PDC"
+
+      - name: '{{ aggregate_group_name }}.32'
+        tag: "32"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.32.1/24"]
+        zone_name: "IDAM-PKI"
+
+      - name: '{{ aggregate_group_name }}.33'
+        tag: "33"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.33.1/24"]
+        zone_name: "IDAM-NAC"
+
+      - name: '{{ aggregate_group_name }}.34'
+        tag: "34"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.34.1/24"]
+        zone_name: "IDAM-SSO"                
+
       - name: '{{ aggregate_group_name }}.41'
         tag: "41"
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.41.1/24"]
-        zone_name: "SECNET-SEC"
+        zone_name: "Security-Logs"
+
+      - name: '{{ aggregate_group_name }}.42'
+        tag: "42"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.42.1/24"]
+        zone_name: "Security-VAS"
+
+      - name: '{{ aggregate_group_name }}.43'
+        tag: "43"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.43.1/24"]
+        zone_name: "Security-MON"
+
+      - name: '{{ aggregate_group_name }}.44'
+        tag: "44"
+        enable_dhcp: "false"
+        management_profile: 'Default'
+        ip: ["10.0.44.1/24"]
+        zone_name: "Security-NVR"
+
       - name: '{{ aggregate_group_name }}.51'
         tag: "51"
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.51.1/24"]
-        zone_name: "SECNET-SRV"
-      - name: '{{ aggregate_group_name }}.61'
-        tag: "61"
+        zone_name: "Servers"
+
+      - name: '{{ aggregate_group_name }}.91'
+        tag: "91"
         enable_dhcp: "false"
         management_profile: 'Default'
-        ip: ["10.0.61.1/24"]
-        zone_name: "SECNET-VRT"
-      - name: '{{ aggregate_group_name }}.71'
-        tag: "71"
-        enable_dhcp: "false"
-        management_profile: 'Management'
-        ip: ["10.0.71.1/24"]
-        zone_name: "SECNET-ADM"
-      - name: '{{ aggregate_group_name }}.100'
-        tag: "101"
+        ip: ["10.0.91.1/24"]
+        zone_name: "DMZ"
+
+      - name: '{{ aggregate_group_name }}.111'
+        tag: "111"
         enable_dhcp: "false"
         management_profile: 'Users'
-        ip: ["10.0.100.1/24"]
-        zone_name: "SECNET-USR"
+        ip: ["10.0.111.1/24"]
+        zone_name: "Endpoint-Users"
+
+      - name: '{{ aggregate_group_name }}.121'
+        tag: "121"
+        enable_dhcp: "false"
+        management_profile: 'Users'
+        ip: ["10.0.121.1/24"]
+        zone_name: "Endpoint-Printers"
+
+      - name: '{{ aggregate_group_name }}.131'
+        tag: "131"
+        enable_dhcp: "false"
+        management_profile: 'Users'
+        ip: ["10.0.131.1/24"]
+        zone_name: "Endpoint-Phones"
+
+      - name: '{{ aggregate_group_name }}.141'
+        tag: "141"
+        enable_dhcp: "false"
+        management_profile: 'Users'
+        ip: ["10.0.141.1/24"]
+        zone_name: "Endpoint-IoT"        
+
+      - name: '{{ aggregate_group_name }}.666'
+        tag: "666"
+        enable_dhcp: "false"
+        management_profile: 'Users'
+        ip: ["192.168.1.1/24"]
+        zone_name: "Guests"        
 
   tasks:
     - name: Import Credentials from File

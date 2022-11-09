@@ -169,7 +169,7 @@
 
   tasks:
     - name: Import Credentials from File
-      include_vars: '/home/p0001/ansible/fw'
+      include_vars: 'fw'
       no_log: 'yes'
 
     - name: Create Interface Management Profile

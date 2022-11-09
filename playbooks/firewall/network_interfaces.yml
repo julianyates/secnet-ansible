@@ -165,7 +165,7 @@
         enable_dhcp: "false"
         management_profile: 'Users'
         ip: ["192.168.1.1/24"]
-        zone_name: "Guests"        
+        zone_name: "Guests"   
 
   tasks:
     - name: Import Credentials from File
@@ -203,16 +203,27 @@
         aggregate_group: '{{ aggregate_group_name }}'
       with_items: '{{ create_aggregate_interface }}'
 
-    - name: Creating VLAN Subinterfaces
+    - name: Creating Subinterfaces
       panos_l3_subinterface:
         provider: '{{ provider }}'
         name: '{{ item.name }}'
         tag: '{{ item.tag }}'
-        #enable_dhcp: '{{ item.enable_dhcp }}'
-        management_profile: '{{ item.management_profile }}'
         ip: '{{ item.ip }}'
         zone_name: '{{ item.zone_name }}'
+        enable_dhcp: '{{ item.enable_dhcp }}'
+        management_profile: '{{ item.management_profile }}'
       with_items: '{{ create_vlans }}'
+
+    - name: Creating "PROJECT-R" Subinterface
+      panos_l3_subinterface:
+        provider: '{{ provider }}'
+        name: '{{ aggregate_group_name }}.1311'
+        tag: "1311"
+        ip: ["10.13.11.1/24"]
+        zone_name: "PROJECT-R"
+        enable_dhcp: "false"
+        management_profile: 'Users'
+        vr_name: "PROJECT-R"
 
     - name: Configuring WAN Interface
       panos_interface:

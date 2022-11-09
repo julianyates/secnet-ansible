@@ -80,6 +80,10 @@
         zone_mode: layer3
         zone_userid: no
 
+      - zone_name: "PROJECT-R"
+        zone_mode: layer3
+        zone_userid: no
+
   tasks:
     - name: Import Credentials from File
       include_vars: '/home/p0001/ansible/fw'

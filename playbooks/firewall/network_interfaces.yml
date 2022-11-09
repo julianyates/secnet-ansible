@@ -44,7 +44,7 @@
         create_mgt_profile_userid_syslog_listener_udp: no
 
     create_aggregate_interface:
-      - if_name: "ethernet1/09"
+      - if_name: "ethernet1/9"
       - if_name: "ethernet1/10"
 
     create_vlans:

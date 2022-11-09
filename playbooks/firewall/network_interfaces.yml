@@ -208,7 +208,7 @@
         provider: '{{ provider }}'
         name: '{{ item.name }}'
         tag: '{{ item.tag }}'
-        enable_dhcp: '{{ item.enable_dhcp }}'
+        #enable_dhcp: '{{ item.enable_dhcp }}'
         management_profile: '{{ item.management_profile }}'
         ip: '{{ item.ip }}'
         zone_name: '{{ item.zone_name }}'

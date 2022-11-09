@@ -169,7 +169,7 @@
 
   tasks:
     - name: Import Credentials from File
-      include_vars: 'fw'
+      include_vars: '/root/secnet-ansible/fw'
       no_log: 'yes'
 
     - name: Create Interface Management Profile

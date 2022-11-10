@@ -46,7 +46,7 @@
 
   tasks:
     - name: Import Credentials from File
-      include_vars: '/root/ansible/fw'
+      include_vars: '/root/secnet-ansible/fw'
       no_log: 'yes'
 
     - name: Create Zones

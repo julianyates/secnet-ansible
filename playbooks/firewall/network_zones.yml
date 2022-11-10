@@ -16,43 +16,15 @@
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "Management"
+      - zone_name: "MGT"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "VIRT-Management"
+      - zone_name: "IDAM"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "IDAM-PDC"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "IDAM-PKI"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "IDAM-NAC"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "IDAM-SSO"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Security-Logs"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Security-VAS"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Security-MON"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Security-NVR"
+      - zone_name: "SEC"
         zone_mode: layer3
         zone_userid: yes
 
@@ -60,23 +32,11 @@
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "Endpoint-Users"
+      - zone_name: "EPD"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "Endpoint-Printers"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Endpoint-Phones"
-        zone_mode: layer3
-        zone_userid: no
-
-      - zone_name: "Endpoint-IoT"
-        zone_mode: layer3
-        zone_userid: no
-
-      - zone_name: "Guests"
+      - zone_name: "GUESTS"
         zone_mode: layer3
         zone_userid: no
 
@@ -86,7 +46,7 @@
 
   tasks:
     - name: Import Credentials from File
-      include_vars: '/root/secnet-ansible/fw'
+      include_vars: '/root/ansible/fw'
       no_log: 'yes'
 
     - name: Create Zones

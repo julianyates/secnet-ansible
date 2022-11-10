@@ -20,6 +20,10 @@
         zone_mode: layer3
         zone_userid: yes
 
+      - zone_name: "VRT"
+        zone_mode: layer3
+        zone_userid: yes
+
       - zone_name: "IDAM"
         zone_mode: layer3
         zone_userid: yes

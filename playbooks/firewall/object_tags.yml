@@ -12,46 +12,58 @@
       api_key: '{{ api_key }}'
 
     create_tags:
-      - tag_name: "SECNET-MGT"
-        tag_color: "purple"
-        tag_comments: "SECNET-MGT"
-      - tag_name: "SECNET-DMZ"
-        tag_color: "purple"
-        tag_comments: "SECNET-DMZ"
-      - tag_name: "SECNET-AAA"
-        tag_color: "purple"
-        tag_comments: "SECNET-AAA"
-      - tag_name: "SECNET-SEC"
-        tag_color: "purple"
-        tag_comments: "SECNET-SEC"
-      - tag_name: "SECNET-SRV"
-        tag_color: "purple"
-        tag_comments: "SECNET-SRV"
-      - tag_name: "SECNET-VRT"
-        tag_color: "purple"
-        tag_comments: "SECNET-VRT"
-      - tag_name: "SECNET-ADM"
-        tag_color: "purple"
-        tag_comments: "SECNET-ADM"
-      - tag_name: "SECNET-USR"
-        tag_color: "purple"
-        tag_comments: "SECNET-USR"
-
       - tag_name: "Unauthorized Traffic"
         tag_color: "red"
         tag_comments: "Unauthorized Traffic"
+
+      - tag_name: "Authentication"
+        tag_color: "purple"
+        tag_comments: "Authentication"
+
+      - tag_name: "DMZ"
+        tag_color: "purple"
+        tag_comments: "DMZ"
+      
+      - tag_name: "Endpoints"
+        tag_color: "purple"
+        tag_comments: "Endpoints"
+      
+      - tag_name: "Guests"
+        tag_color: "purple"
+        tag_comments: "Guests"
+      
+      - tag_name: "Servers"
+        tag_color: "purple"
+        tag_comments: "Servers"
+      
+      - tag_name: "Virtualization"
+        tag_color: "purple"
+        tag_comments: "Virtualization"
+      
+      - tag_name: "Management"
+        tag_color: "purple"
+        tag_comments: "Management"
+      
+      - tag_name: "Security"
+        tag_color: "purple"
+        tag_comments: "Security"
+
       - tag_name: "OUTBOUND"
         tag_color: "red"
         tag_comments: "OUTBOUND"
+
       - tag_name: "INBOUND"
         tag_color: "red"
         tag_comments: "INBOUND"
+
       - tag_name: "EXTERNAL"
         tag_color: "red"
         tag_comments: "EXTERNAL"
+        
       - tag_name: "INTERNAL"
         tag_color: "blue"
         tag_comments: "INTERNAL"
+
       - tag_name: "WAN"
         tag_color: "red"
         tag_comments: "WAN"
@@ -62,7 +74,7 @@
 
   tasks:
     - name: Import Credentials from File
-      include_vars: '/home/p0001/ansible/fw'
+      include_vars: '/root/secnet-ansible/fw'
       no_log: 'yes'
 
     - name: Creating Interface Tags

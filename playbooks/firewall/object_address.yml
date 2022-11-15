@@ -1,0 +1,99 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_address_object:
+      - address_object_name: "RFC1918 - 10.0.0.0"
+        address_object_value: '10.0.0.0/8'
+        address_object_description: "RFC1918 - 10.0.0.0"
+        address_object_tag: 'Unauthorized Traffic'
+
+      - address_object_name: "RFC1918 - 172.16.0.0"
+        address_object_value: '172.16.0.0/12'
+        address_object_description: "RFC1918 - 172.16.0.0"
+        address_object_tag: 'Unauthorized Traffic'
+
+      - address_object_name: "RFC1918 - 192.168.0.0"
+        address_object_value: '192.168.0.0/16'
+        address_object_description: "RFC1918 - 192.168.0.0"
+        address_object_tag: 'Unauthorized Traffic'
+
+      - address_object_name: "HQ Network"
+        address_object_value: '10.0.0.0/16'
+        address_object_description: "HQ Network"
+        address_object_tag: 'INTERNAL'
+
+      - address_object_name: "hqfw1.secnetwork.org"
+        address_object_value: '10.0.11.11'
+        address_object_description: "hqfw1.secnetwork.org"
+        address_object_tag: 'Management'
+
+      - address_object_name: "hqups1.secnetwork.org"
+        address_object_value: '10.0.11.21'
+        address_object_description: "hqups1.secnetwork.org"
+        address_object_tag: 'Management'
+
+      - address_object_name: "hqups2.secnetwork.org"
+        address_object_value: '10.0.11.22'
+        address_object_description: "hqups2.secnetwork.org"
+        address_object_tag: 'Management'
+
+      - address_object_name: "hqups3.secnetwork.org"
+        address_object_value: '10.0.11.23'
+        address_object_description: "hqups3.secnetwork.org"
+        address_object_tag: 'Management' 
+
+      - address_object_name: "hqups4.secnetwork.org"
+        address_object_value: '10.0.11.24'
+        address_object_description: "hqups4.secnetwork.org"
+        address_object_tag: 'Management'
+
+      - address_object_name: "hqups5.secnetwork.org"
+        address_object_value: '10.0.11.25'
+        address_object_description: "hqups5.secnetwork.org"
+        address_object_tag: 'Management'
+
+      - address_object_name: "hqups6.secnetwork.org"
+        address_object_value: '10.0.11.26'
+        address_object_description: "hqups6.secnetwork.org"
+        address_object_tag: 'Management'        
+
+    create_address_group:
+      - address_group_name: 'RFC1918'
+        address_group_static_value: ['RFC1918 - 10.0.0.0','RFC1918 - 172.16.0.0','RFC1918 - 192.168.0.0']
+        address_group_tag: 'Unauthorized Traffic'
+
+      - address_group_name: 'UPS'
+        address_group_static_value: ['hqups1.secnetwork.org','hqups2.secnetwork.org','hqups3.secnetwork.org','hqups4.secnetwork.org','hqups5.secnetwork.org','hqups6.secnetwork.org']
+        address_group_tag: 'Management'
+
+  tasks:
+    - name: Import Credentials from File
+      include_vars: '/root/secnet-ansible/fw'
+      no_log: 'yes'
+
+    - name: Creating Address Object
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: '{{ item.address_object_name }}'
+        value: '{{ item.address_object_value }}'
+        description: '{{ item.address_object_description }}'
+        tag: ['{{ item.address_object_tag }}']
+      with_items: '{{ create_address_object }}'
+
+    - name: Creating Address Group
+      panos_address_group:
+        provider: '{{ provider }}'
+        name: '{{ item.address_group_name }}'
+        static_value: '{{ item.address_group_static_value }}'
+        tag: ['{{ item.address_group_tag }}']
+      with_items: '{{ create_address_group }}'

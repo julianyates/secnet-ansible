@@ -16,19 +16,19 @@
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "MGT"
+      - zone_name: "Management"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "VRT"
+      - zone_name: "Virtualization"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "IDAM"
+      - zone_name: "Authentication"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "SEC"
+      - zone_name: "Security"
         zone_mode: layer3
         zone_userid: yes
 
@@ -36,15 +36,19 @@
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "EPD"
+      - zone_name: "Endpoint"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "GUESTS"
+      - zone_name: "Guest"
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "PROJECT-R"
+      - zone_name: "Project-R"
+        zone_mode: layer3
+        zone_userid: no
+
+      - zone_name: "Project-Y"
         zone_mode: layer3
         zone_userid: no
 

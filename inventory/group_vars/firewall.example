@@ -1,0 +1,4 @@
+# rename this file to 'firewall' or whichever group is specified within inventory hosts file
+
+ip_address: '10.0.0.1'
+api_key: 'place_your_api_key_here'

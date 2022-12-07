@@ -12,9 +12,9 @@
       api_key: '{{ api_key }}'
 
   tasks:
-    - name: Import Credentials from File
-      include_vars: '/root/secnet-ansible/fw'
-      no_log: 'yes'
+#    - name: Import Credentials from File
+#      include_vars: '/root/secnet-ansible/fw'
+#      no_log: 'yes'
 
     - name: Create Virtual Router
       panos_virtual_router:

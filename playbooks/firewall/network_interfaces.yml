@@ -7,7 +7,7 @@
     - paloaltonetworks.panos
 
   vars:
-    aggregate_group_name: "ae2"
+    aggregate_group_name: "ae1"
     provider:
       ip_address: '{{ ip_address }}'
       api_key: '{{ api_key }}'
@@ -20,8 +20,6 @@
         create_mgt_profile_snmp: yes
         create_mgt_profile_response_pages: yes
         create_mgt_profile_userid_service: no
-        create_mgt_profile_userid_syslog_listener_ssl: no 
-        create_mgt_profile_userid_syslog_listener_udp: no
 
       - create_mgt_profile_name: 'Default'
         create_mgt_profile_ping: yes
@@ -30,8 +28,6 @@
         create_mgt_profile_snmp: no
         create_mgt_profile_response_pages: yes
         create_mgt_profile_userid_service: no
-        create_mgt_profile_userid_syslog_listener_ssl: no
-        create_mgt_profile_userid_syslog_listener_udp: no
 
       - create_mgt_profile_name: 'Users'
         create_mgt_profile_ping: yes
@@ -40,13 +36,21 @@
         create_mgt_profile_snmp: no
         create_mgt_profile_response_pages: yes
         create_mgt_profile_userid_service: yes
-        create_mgt_profile_userid_syslog_listener_ssl: no
-        create_mgt_profile_userid_syslog_listener_udp: no
+
+      - create_mgt_profile_name: 'Internet'
+        create_mgt_profile_ping: no
+        create_mgt_profile_https: no
+        create_mgt_profile_ssh: no
+        create_mgt_profile_snmp: no
+        create_mgt_profile_response_pages: no
+        create_mgt_profile_userid_service: no
 
     create_aggregate_interface:
       - if_name: "ethernet1/9"
       - if_name: "ethernet1/10"
-
+      - if_name: "ethernet1/11"
+      - if_name: "ethernet1/12"
+      
     create_vlans:
       - name: '{{ aggregate_group_name }}.11'
         tag: "11"
@@ -201,9 +205,9 @@
         comment: "Guests"
 
   tasks:
-    - name: Import Credentials from File
-      include_vars: '/root/secnet-ansible/fw'
-      no_log: 'yes'
+#    - name: Import Credentials from File
+#      include_vars: '/root/secnet-ansible/fw'
+#      no_log: 'yes'
 
     - name: Create Interface Management Profile
       panos_management_profile:
@@ -215,8 +219,6 @@
         snmp: '{{ item.create_mgt_profile_snmp }}'
         response_pages: '{{ item.create_mgt_profile_response_pages }}'
         userid_service: '{{ item.create_mgt_profile_userid_service}}'
-        #userid_syslog_listener_ssl: '{{ item.create_mgt_profile_userid_syslog_listener_ssl }}'
-        #userid_syslog_listener_udp: '{{ item.create_mgt_profile_userid_syslog_listener_udp }}'
       with_items: '{{ create_management_profile }}'
 
     - name: Creating Aggregate Interface
@@ -260,11 +262,44 @@
         vr_name: "Project-R"
         comment: "Project-R"
 
-    - name: Configuring WAN Interface
+    - name: Configure WAN VLAN Interface
+      panos_vlan_interface:
+        provider: '{{ provider }}'
+        name: "vlan.1000"
+        ip: ["96.231.240.210/24","96.231.240.211/32","96.231.240.212/32","96.231.240.213/32","96.231.240.214/32","96.231.240.215/32","96.231.240.216/32","96.231.240.217/32"]
+        management_profile: "Internet"
+        vlan_name: "WAN"
+        zone_name: "L2-LAN"
+        vr_name: "default"
+
+    - name: Configuring ISP Uplink Interface
       panos_interface:
         provider: '{{ provider }}'
         if_name: "ethernet1/1"
-        mode: "layer3"
-        ip: ["96.231.240.217/24"]
+        mode: "layer2"
         enable_dhcp: false
-        zone_name: "WAN"
+        zone_name: "L2-WAN"
+
+    - name: Configuring L2 LAN INT 2
+      panos_interface:
+        provider: '{{ provider }}'
+        if_name: "ethernet1/2"
+        mode: "layer2"
+        enable_dhcp: false
+        zone_name: "L2-LAN"
+
+    - name: Configuring L2 LAN INT 3
+      panos_interface:
+        provider: '{{ provider }}'
+        if_name: "ethernet1/3"
+        mode: "layer2"
+        enable_dhcp: false
+        zone_name: "L2-LAN"
+
+    - name: Configuring L2 LAN INT 4
+      panos_interface:
+        provider: '{{ provider }}'
+        if_name: "ethernet1/4"
+        mode: "layer2"
+        enable_dhcp: false
+        zone_name: "L2-LAN"

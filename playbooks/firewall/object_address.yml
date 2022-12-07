@@ -77,9 +77,9 @@
         address_group_tag: 'Management'
 
   tasks:
-    - name: Import Credentials from File
-      include_vars: '/root/secnet-ansible/fw'
-      no_log: 'yes'
+#    - name: Import Credentials from File
+#      include_vars: '/root/secnet-ansible/fw'
+#      no_log: 'yes'
 
     - name: Creating Address Object
       panos_address_object:

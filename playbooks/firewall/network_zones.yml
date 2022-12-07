@@ -12,8 +12,12 @@
       api_key: '{{ api_key }}'
 
     create_zones:
-      - zone_name: "WAN"
-        zone_mode: layer3
+      - zone_name: "L2-WAN"
+        zone_mode: layer2
+        zone_userid: no
+
+      - zone_name: "L2-LAN"
+        zone_mode: layer2
         zone_userid: no
 
       - zone_name: "Management"
@@ -53,9 +57,9 @@
         zone_userid: no
 
   tasks:
-    - name: Import Credentials from File
-      include_vars: '/root/secnet-ansible/fw'
-      no_log: 'yes'
+#    - name: Import Credentials from File
+#      include_vars: '/root/secnet-ansible/fw'
+#      no_log: 'yes'
 
     - name: Create Zones
       panos_zone:

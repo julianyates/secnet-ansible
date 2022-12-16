@@ -560,6 +560,19 @@
         state: present
       with_items: '{{ create_vlans }}'
 
+    - name: Create ISP Subnet
+      netbox_prefix:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          family: 4
+          prefix: '96.231.240.0/24'
+          site: 'SECNET HQ'
+          tenant: 'secnet'
+          status: 'active'
+          is_pool: false
+        state: present
+
     - name: Create Primary Subnet
       netbox_prefix:
         netbox_url: '{{ netbox_url }}'

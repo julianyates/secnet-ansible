@@ -613,4 +613,5 @@
           device_type: 	OR1000LCDRM1U
           name: Management
           type: 1000BASE-T (1GE)
+          mgmt_only: true
         state: present      

@@ -493,7 +493,7 @@
         create_prefixes_prefix_role: Endpoint
         create_prefixes_is_pool: false
 
-      - create_prefixes_prefix: 10.12.11.0/24
+      - create_prefixes_prefix: 10.13.11.0/24
         create_prefixes_site: SECNET HQ
         create_prefixes_tenant: secnet
         create_prefixes_vlan_name: Project-R
@@ -604,3 +604,13 @@
           is_pool: '{{ item.create_prefixes_is_pool }}'
         state: present
       with_items: '{{ create_prefixes }}'
+
+    - name: Create interface template within NetBox with only required information
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: 	OR1000LCDRM1U
+          name: Management
+          type: 1000BASE-T (1GE)
+        state: present      

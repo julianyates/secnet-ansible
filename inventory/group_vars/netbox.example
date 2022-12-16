@@ -1,0 +1,4 @@
+# rename this file to 'netbox' or whichever group is specified within inventory hosts file
+
+netbox_url: 'http://10.0.0.1:8000'
+netbox_token: '<netbox_token>'

@@ -19,6 +19,7 @@
       - create_manufacturers_name: "Palo Alto Networks"
       - create_manufacturers_name: "Synology"
       - create_manufacturers_name: "Ubiquiti"
+      - create_manufacturers_name: "Apple"
 
     create_device_types:
       - create_device_types_model: OR1000LCDRM1U

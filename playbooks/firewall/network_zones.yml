@@ -20,39 +20,43 @@
         zone_mode: layer2
         zone_userid: no
 
-      - zone_name: "Management"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Virtualization"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Authentication"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Security"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "DMZ"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Endpoint"
-        zone_mode: layer3
-        zone_userid: yes
-
-      - zone_name: "Guest"
+      - zone_name: "L3-WAN"
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "Project-R"
+      - zone_name: "L3-Management"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "L3-Virtualization"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "L3-Authentication"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "L3-Security"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "L3-DMZ"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "L3-Endpoint"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "L3-Guest"
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "Project-Y"
+      - zone_name: "L3-Project-R"
+        zone_mode: layer3
+        zone_userid: no
+
+      - zone_name: "L3-Project-Y"
         zone_mode: layer3
         zone_userid: no
 

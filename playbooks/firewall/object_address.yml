@@ -65,7 +65,7 @@
       - address_object_name: "hqups6.secnetwork.org"
         address_object_value: '10.0.11.26'
         address_object_description: "hqups6.secnetwork.org"
-        address_object_tag: 'Management'        
+        address_object_tag: 'Management'
 
     create_address_group:
       - address_group_name: 'RFC1918'

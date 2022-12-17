@@ -515,20 +515,20 @@
         create_prefixes_is_pool: false
 
     create_device_role:
-      - item.create_device_role_name: Firewall
-        item.create_device_role_color: Dark Red
+      - create_device_role_name: Firewall
+        create_device_role_color: Dark Red
 
-      - item.create_device_role_name: Aggregation Switch
-        item.create_device_role_color: Red
+      - create_device_role_name: Aggregation Switch
+        create_device_role_color: Red
 
-      - item.create_device_role_name: Access Switch
-        item.create_device_role_color: Dark Orange
+      - create_device_role_name: Access Switch
+        create_device_role_color: Dark Orange
 
-      - item.create_device_role_name: Access Point
-        item.create_device_role_color: Light Blue
+      - create_device_role_name: Access Point
+        create_device_role_color: Light Blue
 
-      - item.create_device_role_name: Uninterruptible Power Supply
-        item.create_device_role_color: green
+      - create_device_role_name: Uninterruptible Power Supply
+        create_device_role_color: green
 
   tasks:
     - name: Create SECNET Tenant
@@ -719,7 +719,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           device_type: PA 850
-          name: ethernet1/1
+          name: ethernet1/5
           type: SFP (1GE)
           mgmt_only: false
         state: present

@@ -22,6 +22,7 @@
       - create_manufacturers_name: "Apple"
       - create_manufacturers_name: "Microsoft"
       - create_manufacturers_name: "Rocky Linux"
+      - create_manufacturers_name: "VMware"
 
     create_device_types:
       - create_device_types_model: OR1000LCDRM1U
@@ -879,4 +880,31 @@
         data:
           name: PAN-OS 10.2.0
           manufacturer: Palo Alto Networks
+        state: present
+
+    - name: Create Platform VMware ESXi 7.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: ESXi 7.0
+          manufacturer: VMware
+        state: present
+
+    - name: Create Platform VMware ESXi 8.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: ESXi 8.0
+          manufacturer: VMware
+        state: present
+
+    - name: Create Platform VMware VCSA 8.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: VCSA 8.0
+          manufacturer: VMware
         state: present

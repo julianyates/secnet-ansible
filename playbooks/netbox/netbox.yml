@@ -9,8 +9,8 @@
     - netbox.netbox
 
   vars:
-    netbox_url: 'http://10.0.30.209:8000'
-    netbox_token: 'f08329f64b101387ef07fda3fa37aab9b0eb0e4e'
+    #netbox_url: 'http://10.0.30.209:8000'
+    #netbox_token: 'f08329f64b101387ef07fda3fa37aab9b0eb0e4e'
 
     create_manufacturers:
       - create_manufacturers_name: "CyberPower"

@@ -516,19 +516,19 @@
 
     create_device_role:
       - create_device_role_name: Firewall
-        create_device_role_color: Dark Red
+        create_device_role_color: 800000
 
       - create_device_role_name: Aggregation Switch
-        create_device_role_color: Red
+        create_device_role_color: ff0000
 
       - create_device_role_name: Access Switch
-        create_device_role_color: Dark Orange
+        create_device_role_color: ff6800
 
       - create_device_role_name: Access Point
-        create_device_role_color: Light Blue
+        create_device_role_color: 00beff
 
       - create_device_role_name: Uninterruptible Power Supply
-        create_device_role_color: green
+        create_device_role_color: 008400
 
   tasks:
     - name: Create SECNET Tenant

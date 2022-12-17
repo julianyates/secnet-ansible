@@ -226,13 +226,8 @@
           type: Link Aggregation Group (LAG)
           mtu: 1500
           mgmt_only: false
-          mode: trunk
+          mode: Tagged (All)
           untagged_vlan:
             - name: NATIVE
-              site: SECNET HQ          
-          tagged_vlans:
-            - name: Management
               site: SECNET HQ
-            - name: Admins
-              site: SECNET HQ          
         state: present

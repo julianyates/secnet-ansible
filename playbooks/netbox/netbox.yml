@@ -137,8 +137,16 @@
       - create_ipam_role_name: Servers      
       - create_ipam_role_name: Virtualization
       - create_ipam_role_name: Project-R
+      - create_ipam_role_name: Native
 
     create_vlans:
+      - create_vlans_name: Native
+        create_vlans_vid: 5
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Native
+
       - create_vlans_name: Management
         create_vlans_vid: 11
         create_vlans_site: SECNET HQ

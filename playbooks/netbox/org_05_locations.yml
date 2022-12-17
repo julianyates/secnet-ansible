@@ -15,7 +15,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: Server Room
-          site: secnet
+          site: SECNET HQ
         state: present
 
     - name: Create Location - Studio
@@ -24,7 +24,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: Studio
-          site: secnet
+          site: SECNET HQ
         state: present
 
     - name: Create Location - Office
@@ -33,7 +33,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: Office
-          site: secnet
+          site: SECNET HQ
         state: present
 
     - name: Create Location - Living Room
@@ -42,7 +42,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: Living Room
-          site: secnet
+          site: SECNET HQ
         state: present
 
     - name: Create Location - Basement
@@ -51,5 +51,5 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: Basement
-          site: secnet
+          site: SECNET HQ
         state: present

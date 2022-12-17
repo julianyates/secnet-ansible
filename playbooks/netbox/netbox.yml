@@ -514,7 +514,7 @@
         create_prefixes_prefix_role: Guest
         create_prefixes_is_pool: false
 
-    create_device_type:
+    create_device_role:
       - item.create_device_role_name: Firewall
         item.create_device_role_color: Dark Red
 

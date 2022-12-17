@@ -152,3 +152,4 @@
           type: '{{ item.create_interface_type }}'
           mgmt_only: '{{ item.create_mgmt_only }}'
         state: present
+      with_items: '{{ create_device_interface }}'

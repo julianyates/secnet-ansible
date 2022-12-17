@@ -522,7 +522,7 @@
         data:
           name: SECNET HQ
           status: active
-          region: DMV
+          #region: DMV
           site_group: Test Site Group
           tenant: secnet
           time_zone: America/New York

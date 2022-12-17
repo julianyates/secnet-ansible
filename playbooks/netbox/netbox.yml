@@ -833,8 +833,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: Windows 10
-          manufacturer: Microsoft
+          name: Microsoft Windows 10
+          #manufacturer: 
         state: present
 
     - name: Create Platform Microsoft Windows 11
@@ -842,8 +842,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: Windows 11
-          manufacturer: Microsoft
+          name: Microsoft Windows 11
+          #manufacturer:
         state: present
 
     - name: Create Platform Microsoft Windows Server 2022
@@ -851,8 +851,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: Windows Server 2022
-          manufacturer: Microsoft
+          name: Microsoft Windows Server 2022
+          #manufacturer: 
         state: present
 
     - name: Create Platform Rocky Linux 8.0
@@ -860,8 +860,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: 8.0
-          manufacturer: Rocky Linux
+          name: Rocky Linux 8.0
+          #manufacturer:
         state: present
 
     - name: Create Platform Rocky Linux 9.0
@@ -869,8 +869,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: 9.0
-          manufacturer: Rocky Linux
+          name: Rocky Linux 9.0
+          #manufacturer: 
         state: present
 
     - name: Create Platform PAN-OS 10.2.0
@@ -887,8 +887,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: ESXi 7.0
-          manufacturer: VMware
+          name: VMware ESXi 7.0
+          #manufacturer: 
         state: present
 
     - name: Create Platform VMware ESXi 8.0
@@ -896,8 +896,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: ESXi 8.0
-          manufacturer: VMware
+          name: VMware ESXi 8.0
+          #manufacturer: 
         state: present
 
     - name: Create Platform VMware VCSA 8.0
@@ -905,6 +905,6 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          name: VCSA 8.0
-          manufacturer: VMware
+          name: VMware VCSA 8.0
+          #manufacturer:
         state: present

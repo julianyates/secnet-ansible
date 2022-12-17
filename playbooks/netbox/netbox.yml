@@ -517,18 +517,28 @@
     create_device_role:
       - create_device_role_name: Firewall
         create_device_role_color: 800000
+        create_device_role_vm_role: false
 
       - create_device_role_name: Aggregation Switch
         create_device_role_color: ff0000
+        create_device_role_vm_role: false        
 
       - create_device_role_name: Access Switch
         create_device_role_color: ff6800
+        create_device_role_vm_role: false
 
       - create_device_role_name: Access Point
         create_device_role_color: 00beff
+        create_device_role_vm_role: false
 
       - create_device_role_name: Uninterruptible Power Supply
         create_device_role_color: 008400
+        create_device_role_vm_role: false
+
+      - create_device_role_name: Virtual Machine
+        create_device_role_color: 008400
+        create_device_role_vm_role: true
+
 
   tasks:
     - name: Create SECNET Tenant
@@ -808,5 +818,6 @@
         data:
           name: "{{ item.create_device_role_name }}"
           color: '{{ item.create_device_role_color }}'
+          vm_role: '{{ item.create_device_role_vm_role }}'
         state: present
       with_items: '{{ create_device_role }}'

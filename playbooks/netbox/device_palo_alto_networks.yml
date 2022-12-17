@@ -199,7 +199,7 @@
         state: present
       with_items: '{{ create_device_interface }}'
 
-    - name: Create device within NetBox with only required information
+    - name: Create Device HQCRFW1
       netbox_device:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
@@ -213,6 +213,26 @@
           position: 48
           rack: Primary Rack
           tenant: secnet
+          platform: PAN-OS 10.2.0
         state: present
 
-        
+    - name: Create Internal LAG Interface 
+      netbox_device_interface:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device: hqcrfw1.secnetwork.org
+          name: ae1
+          type: Link Aggregation Group (LAG)
+          mtu: 1500
+          mgmt_only: false
+          mode: trunk
+          untagged_vlan:
+            - name: NATIVE
+              site: SECNET HQ          
+          tagged_vlans:
+            - name: Management
+              site: SECNET HQ
+            - name: Admins
+              site: SECNET HQ          
+        state: present

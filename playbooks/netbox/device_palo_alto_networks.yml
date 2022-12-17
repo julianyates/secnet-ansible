@@ -32,10 +32,106 @@
         create_device_role_color: 800000
         create_device_role_vm_role: false
 
+    create_device_interface:
+      - create_interface_name: Management
+        create_device_type: PA 850
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: true
+
+      - create_interface_name: ethernet1/1
+        create_device_type: PA 850
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/2
+        create_device_type: PA 850
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/3
+        create_device_type: PA 850
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false        
+
+      - create_interface_name: ethernet1/4
+        create_device_type: PA 850
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false 
+
+      - create_interface_name: ethernet1/5
+        create_device_type: PA 850
+        create_interface_type: SFP (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/6
+        create_device_type: PA 850
+        create_interface_type: SFP (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/7
+        create_device_type: PA 850
+        create_interface_type: SFP (1GE)
+        create_mgmt_only: false        
+
+      - create_interface_name: ethernet1/8
+        create_device_type: PA 850
+        create_interface_type: SFP (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/9
+        create_device_type: PA 850
+        create_interface_type: SFP+ (10GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/10
+        create_device_type: PA 850
+        create_interface_type: SFP+ (10GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/11
+        create_device_type: PA 850
+        create_interface_type: SFP+ (10GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/12
+        create_device_type: PA 850
+        create_interface_type: SFP+ (10GE)
+        create_mgmt_only: false
+
   tasks:
-#    - include_playbook: device_manufacturers.yml
-#    - include_playbook: device_device_types.yml
-#    - include_playbook: device_device_roles.yml
+    - name: Creating Manufacturers
+      netbox_manufacturer:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: '{{ item.create_manufacturers_name }}'
+        state: present
+      with_items: '{{ create_manufacturers }}'
+
+    - name: Create Device Role
+      netbox_device_role:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: "{{ item.create_device_role_name }}"
+          color: '{{ item.create_device_role_color }}'
+          vm_role: '{{ item.create_device_role_vm_role }}'
+        state: present
+      with_items: '{{ create_device_role }}'
+
+    - name: Creating Device Types
+      netbox_device_type:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          model: '{{ item.create_device_types_model }}'
+          manufacturer: '{{ item.create_device_types_manufacturer }}'
+          part_number: '{{ item.create_device_types_part_number }}'
+          u_height: '{{ item.create_device_types_u_height }}'
+          is_full_depth: '{{ item.create_device_types_is_full_depth }}'
+          subdevice_role: '{{ item.create_device_types_subdevice_role }}'
+        state: present
+      with_items: '{{ create_device_types }}'
 
     - name: Create Platform PAN-OS 10.2.0
       netbox_platform:
@@ -51,143 +147,8 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          device_type: PA 850
-          name: Management
-          type: 1000BASE-T (1GE)
-          mgmt_only: true
+          device_type: '{{ item.create_device_type }}'
+          name: '{{ item.create_interface_name }}'
+          type: '{{ item.create_interface_type }}'
+          mgmt_only: '{{ item.create_mgmt_only }}'
         state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/1
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/1
-          type: 1000BASE-T (1GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/2
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/2
-          type: 1000BASE-T (1GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/3
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/3
-          type: 1000BASE-T (1GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/4
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/4
-          type: 1000BASE-T (1GE)
-          mgmt_only: false
-        state: present                
-
-    - name: Create PAN-PA-850 Interfaces E1/5
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/5
-          type: SFP (1GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/6
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/6
-          type: SFP (1GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/7
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/7
-          type: SFP (1GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/8
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/8
-          type: SFP (1GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/9
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/9
-          type: SFP+ (10GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/10
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/10
-          type: SFP+ (10GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/11
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/11
-          type: SFP+ (10GE)
-          mgmt_only: false
-        state: present
-
-    - name: Create PAN-PA-850 Interfaces E1/12
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: PA 850
-          name: ethernet1/12
-          type: SFP+ (10GE)
-          mgmt_only: false
-        state: present        
-
-
-

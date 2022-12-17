@@ -539,6 +539,9 @@
         create_device_role_color: 008400
         create_device_role_vm_role: true
 
+      - create_device_role_name: Server
+        create_device_role_color: ffffff
+        create_device_role_vm_role: true
 
   tasks:
     - name: Create SECNET Tenant

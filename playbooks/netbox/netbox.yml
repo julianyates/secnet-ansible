@@ -878,5 +878,5 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: PAN-OS 10.2.0
-          manufacturer: Palo Alto Network
+          manufacturer: Palo Alto Networks
         state: present

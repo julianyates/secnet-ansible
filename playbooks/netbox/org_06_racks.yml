@@ -1,0 +1,39 @@
+---
+
+- name: "Netbox Organization Racks"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  tasks:
+
+    - name: Create Rack - Primary Rack
+      netbox_rack:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Primary Rack
+          type: "4-post frame"
+          site: SECNET HQ
+          location: Server Room
+          tenant: secnet
+          u_height: 48
+          width: 23
+        state: present
+
+    - name: Create Rack - Wall Rack
+      netbox_rack:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Wall Rack
+          type: "Wall-mounted frame"
+          site: SECNET HQ
+          location: Server Room
+          tenant: secnet
+          u_height: 4
+          width: 23
+        state: present

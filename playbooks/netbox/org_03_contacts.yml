@@ -1,0 +1,35 @@
+---
+
+- name: "Netbox Organization Contacts"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  tasks:
+    - name: Create SECNET Tenant
+      netbox_tenant:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: 'Secured Enterprise Core Network'
+          slug: secnet
+        state: present
+
+    - name: Create SECNET HQ Site
+      netbox_site:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: SECNET HQ
+          status: active
+          region: DMV
+          tenant: secnet
+          time_zone: America/New York
+          physical_address: Woodbridge, VA, 22195
+          shipping_address: Woodbridge, VA, 22195
+          latitude: 38.650233
+          longitude: 77.312169
+        state: present

@@ -98,6 +98,51 @@
         create_interface_type: SFP+ (10GE)
         create_mgmt_only: false
 
+      - create_interface_name: Management
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: true
+
+      - create_interface_name: ethernet1/1
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/2
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/3
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/4
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false        
+
+      - create_interface_name: ethernet1/5
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/6
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/7
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false
+
+      - create_interface_name: ethernet1/8
+        create_device_type: PA 250
+        create_interface_type: 1000BASE-T (1GE)
+        create_mgmt_only: false   
+
   tasks:
     - name: Creating Manufacturers
       netbox_manufacturer:

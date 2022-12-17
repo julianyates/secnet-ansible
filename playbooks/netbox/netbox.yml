@@ -523,7 +523,6 @@
           name: SECNET HQ
           status: active
           #region: DMV
-          site_group: Test Site Group
           tenant: secnet
           time_zone: America/New York
           physical_address: Woodbridge, VA, 22195

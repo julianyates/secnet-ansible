@@ -869,7 +869,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: 9.0
-          manufacturer: Rockly Linux
+          manufacturer: Rocky Linux
         state: present
 
     - name: Create Platform PAN-OS 10.2.0

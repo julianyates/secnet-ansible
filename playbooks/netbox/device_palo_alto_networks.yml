@@ -1,0 +1,193 @@
+---
+
+- name: "Netbox Devices Manufacturers"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  vars:
+    create_manufacturers:
+      - create_manufacturers_name: "Palo Alto Networks"
+
+    create_device_types:
+      - create_device_types_model: PA 850
+        create_device_types_manufacturer: Palo Alto Networks
+        create_device_types_part_number: PA 850
+        create_device_types_u_height: 1
+        create_device_types_is_full_depth: False
+        create_device_types_subdevice_role: parent
+
+      - create_device_types_model: PA 250
+        create_device_types_manufacturer: Palo Alto Networks
+        create_device_types_part_number: PA 250
+        create_device_types_u_height: 1
+        create_device_types_is_full_depth: False
+        create_device_types_subdevice_role: parent
+
+    create_device_role:
+      - create_device_role_name: Firewall
+        create_device_role_color: 800000
+        create_device_role_vm_role: false
+
+  tasks:
+    - import_playbook: devices_manufacturers.yml
+    - import_playbook: device_device_types.yml
+    - import_playbook: device_device_roles.yml
+
+    - name: Create Platform PAN-OS 10.2.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: PAN-OS 10.2.0
+          manufacturer: Palo Alto Networks
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces MGT
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: Management
+          type: 1000BASE-T (1GE)
+          mgmt_only: true
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/1
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/1
+          type: 1000BASE-T (1GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/2
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/2
+          type: 1000BASE-T (1GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/3
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/3
+          type: 1000BASE-T (1GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/4
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/4
+          type: 1000BASE-T (1GE)
+          mgmt_only: false
+        state: present                
+
+    - name: Create PAN-PA-850 Interfaces E1/5
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/5
+          type: SFP (1GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/6
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/6
+          type: SFP (1GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/7
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/7
+          type: SFP (1GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/8
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/8
+          type: SFP (1GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/9
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/9
+          type: SFP+ (10GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/10
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/10
+          type: SFP+ (10GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/11
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/11
+          type: SFP+ (10GE)
+          mgmt_only: false
+        state: present
+
+    - name: Create PAN-PA-850 Interfaces E1/12
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: PA 850
+          name: ethernet1/12
+          type: SFP+ (10GE)
+          mgmt_only: false
+        state: present        
+
+
+

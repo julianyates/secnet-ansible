@@ -1,0 +1,24 @@
+---
+
+- name: "Netbox Devices Device Types"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  tasks:
+    - name: Creating Device Types
+      netbox_device_type:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          model: '{{ item.create_device_types_model }}'
+          manufacturer: '{{ item.create_device_types_manufacturer }}'
+          part_number: '{{ item.create_device_types_part_number }}'
+          u_height: '{{ item.create_device_types_u_height }}'
+          is_full_depth: '{{ item.create_device_types_is_full_depth }}'
+          subdevice_role: '{{ item.create_device_types_subdevice_role }}'
+        state: present
+      with_items: '{{ create_device_types }}'

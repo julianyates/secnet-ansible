@@ -33,9 +33,9 @@
         create_device_role_vm_role: false
 
   tasks:
-    - include_playbook: devices_manufacturers.yml
-    - include_playbook: device_device_types.yml
-    - include_playbook: device_device_roles.yml
+#    - include_playbook: device_manufacturers.yml
+#    - include_playbook: device_device_types.yml
+#    - include_playbook: device_device_roles.yml
 
     - name: Create Platform PAN-OS 10.2.0
       netbox_platform:

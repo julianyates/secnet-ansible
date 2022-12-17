@@ -860,7 +860,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           name: 8.0
-          manufacturer: Rockly Linux
+          manufacturer: Rocky Linux
         state: present
 
     - name: Create Platform Rocky Linux 9.0

@@ -20,6 +20,8 @@
       - create_manufacturers_name: "Synology"
       - create_manufacturers_name: "Ubiquiti"
       - create_manufacturers_name: "Apple"
+      - create_manufacturers_name: "Microsoft"
+      - create_manufacturers_name: "Rocky Linux"
 
     create_device_types:
       - create_device_types_model: OR1000LCDRM1U
@@ -541,7 +543,7 @@
 
       - create_device_role_name: Server
         create_device_role_color: ffffff
-        create_device_role_vm_role: true
+        create_device_role_vm_role: false
 
   tasks:
     - name: Create SECNET Tenant
@@ -824,3 +826,57 @@
           vm_role: '{{ item.create_device_role_vm_role }}'
         state: present
       with_items: '{{ create_device_role }}'
+
+    - name: Create Platform Microsoft Windows 10
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Windows 10
+          manufacturer: Microsoft
+        state: present
+
+    - name: Create Platform Microsoft Windows 11
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Windows 11
+          manufacturer: Microsoft
+        state: present
+
+    - name: Create Platform Microsoft Windows Server 2022
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Windows Server 2022
+          manufacturer: Microsoft
+        state: present
+
+    - name: Create Platform Rocky Linux 8.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: 8.0
+          manufacturer: Rockly Linux
+        state: present
+
+    - name: Create Platform Rocky Linux 9.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: 9.0
+          manufacturer: Rockly Linux
+        state: present
+
+    - name: Create Platform PAN-OS 10.2.X
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: PAN-OS 10.2.x
+          manufacturer: Palo Alto Network
+        state: present

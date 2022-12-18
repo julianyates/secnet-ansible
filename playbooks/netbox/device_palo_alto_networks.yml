@@ -32,7 +32,7 @@
         create_device_role_color: 800000
         create_device_role_vm_role: false
 
-    create_device_interface:
+    device_interface_template:
       - create_interface_name: Management
         create_device_type: PA 850
         create_interface_type: 1000BASE-T (1GE)
@@ -138,10 +138,45 @@
         create_interface_type: 1000BASE-T (1GE)
         create_mgmt_only: false
 
-      - create_interface_name: ethernet1/8
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false   
+    create_device_interface:
+      - create_interface_name: ae1.11
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Management
+
+      - create_interface_name: ae1.15
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Admins
+
+    device_interface:
+      - device_interface_name: ethernet1/9
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
+
+      - device_interface_name: ethernet1/10
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
+
+      - device_interface_name: ethernet1/11
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
+
+      - device_interface_name: ethernet1/12
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
 
   tasks:
     - name: Creating Manufacturers
@@ -187,7 +222,7 @@
           manufacturer: Palo Alto Networks
         state: present
 
-    - name: Create PAN-PA-850 Interfaces MGT
+    - name: Create PAN-PA-850 Interfaces
       netbox_device_interface_template:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
@@ -197,7 +232,7 @@
           type: '{{ item.create_interface_type }}'
           mgmt_only: '{{ item.create_mgmt_only }}'
         state: present
-      with_items: '{{ create_device_interface }}'
+      with_items: '{{ device_interface_template }}'
 
     - name: Create Device HQCRFW1
       netbox_device:
@@ -231,3 +266,31 @@
             name: Native
             site: SECNET HQ
         state: present
+
+    - name: Update PAN-PA-850 Interfaces
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device: '{{ item.device_interface_device }}'
+          name: '{{ item.device_interface_name }}'
+          mode: '{{ item.device_interface_mode }}'
+          untagged_vlan: '{{ item.device_interface_untagged_vlan }}'       
+          lag:
+            name: '{{ item.device_interface_lag }}'             
+        state: present
+      with_items: '{{ device_interface }}'
+
+    - name: Create PAN-PA-850 VLAN Interfaces
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device: '{{ item.create_device_interface_device }}'
+          name: '{{ item.create_device_interface_name }}'
+          type: '{{ item.create_device_interface_type }}'
+          parent_interface: '{{ item.create_device_interface_parent_interface }}'
+          mode: '{{ item.create_device_interface_mode }}'
+          untagged_vlan: '{{ item.create_device_interface_untagged_vlan }}'       
+        state: present
+      with_items: '{{ create_device_interface }}' 

@@ -1,31 +1,25 @@
 ---
 
-    - name: "Netbox Master Playbook"
-      connection: local
-      hosts: localhost
-      gather_facts: False
-       
-      tasks:
-        - include_playbook: org_01_regions.yml
-        - include_playbook: org_02_tenant.yml
-        - include_playbook: org_03_vlans.yml
-        - include_playbook: org_04_sites.yml
-        - include_playbook: org_05_locations.yml
-        - include_playbook: org_06_racks.yml
+- include_playbook: org_01_regions.yml
+- include_playbook: org_02_tenant.yml
+- include_playbook: org_03_vlans.yml
+- include_playbook: org_04_sites.yml
+- include_playbook: org_05_locations.yml
+- include_playbook: org_06_racks.yml
 
-        - include_playbook: ipam_01_roles.yml
-        - include_playbook: ipam_02_rirs.yml
-        - include_playbook: ipam_03_vlans.yml
-        - include_playbook: ipam_04_prefixes.yml
+- include_playbook: ipam_01_roles.yml
+- include_playbook: ipam_02_rirs.yml
+- include_playbook: ipam_03_vlans.yml
+- include_playbook: ipam_04_prefixes.yml
 
-        - include_playbook: device_00_template.yml
-        - include_playbook: device_01_platforms.yml
+- include_playbook: device_00_template.yml
+- include_playbook: device_01_platforms.yml
 
-        - include_playbook: device_template_palo_alto_networks.yml
-        - include_playbook: device_hqcrfw1.secnetwork.org.yml
+- include_playbook: device_template_palo_alto_networks.yml
+- include_playbook: device_hqcrfw1.secnetwork.org.yml
 
-        - include_playbook: device_template_cyberpower.yml
+- include_playbook: device_template_cyberpower.yml
 
-        - include_playbook: device_template_dell_emc.yml
+- include_playbook: device_template_dell_emc.yml
 
-        - include_playbook: device_template_ubiquiti.yml
+- include_playbook: device_template_ubiquiti.yml

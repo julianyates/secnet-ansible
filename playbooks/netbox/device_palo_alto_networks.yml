@@ -463,7 +463,7 @@
           tenant: secnet
           status: active
           assigned_object:
-            name: ae1.15
+            name: ae1.21
             device: hqcrfw1.secnetwork.org
           dns_name: hqcrfw1-admins.secnetwork.org                     
         state: present

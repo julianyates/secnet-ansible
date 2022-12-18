@@ -558,7 +558,7 @@
         netbox_token: '{{ netbox_token }}'
         data:
           address: '{{ item.create_ip_address_address }}'
-          tenant: '{{ item.create_ip_address }}'
+          tenant: '{{ item.create_ip_address_tenant }}'
           status: active
           assigned_object:
             name: '{{ item.create_ip_address_int_name }}'
@@ -566,59 +566,3 @@
           dns_name: '{{ item.create_ip_address_dns_name }}'
         state: present
       with_items: '{{ create_ip_address }}'
-
-    - name: Create PAN-PA-850 IP address MGT
-      netbox_ip_address:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          address: 10.0.11.11
-          tenant: secnet
-          status: active
-          assigned_object:
-            name: Management
-            device: hqcrfw1.secnetwork.org
-          dns_name: hqcrfw1.secnetwork.org
-        state: present
-
-    - name: Create PAN-PA-850 IP address MGT VLAN
-      netbox_ip_address:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          address: 10.0.11.1
-          tenant: secnet
-          status: active
-          assigned_object:
-            name: ae1.11
-            device: hqcrfw1.secnetwork.org
-          dns_name: hqcrfw1-mgt.secnetwork.org                     
-        state: present
-
-    - name: Create PAN-PA-850 IP address Admins VLAN
-      netbox_ip_address:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          address: 10.0.15.1
-          tenant: secnet
-          status: active
-          assigned_object:
-            name: ae1.15
-            device: hqcrfw1.secnetwork.org
-          dns_name: hqcrfw1-admins.secnetwork.org                     
-        state: present
-
-    - name: Create PAN-PA-850 IP address vManagement VLAN
-      netbox_ip_address:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          address: 10.0.21.1
-          tenant: secnet
-          status: active
-          assigned_object:
-            name: ae1.21
-            device: hqcrfw1.secnetwork.org
-          dns_name: hqcrfw1-vmanagement.secnetwork.org                     
-        state: present

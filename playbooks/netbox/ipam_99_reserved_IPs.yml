@@ -8,22 +8,14 @@
   collections:
     - netbox.netbox
   
-  vars:
-    ip_address:
-        -	address: 96.231.240.2
-        -	address: 96.231.240.3
-
   tasks:
-    - name: Configure Reserve Public IP
+    - name: Create IP address with several specified options
       netbox_ip_address:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          address: '96.231.240.2'
-          #address: '{{ item.ip_address }}'
-          site: 'SECNET HQ'
-          tenant: 'secnet'
-          status: 'reserved'
+          address: 96.231.240.2
+          tenant: secnet
+          status: Reserved
           role: Loopback
         state: present
-      #with_items: "{{ ip_address }}"

@@ -2,7 +2,7 @@
 
 - import_playbook: org_01_regions.yml
 - import_playbook: org_02_tenant.yml
-- import_playbook: org_03_vlans.yml
+#- import_playbook: org_03_contacts.yml
 - import_playbook: org_04_sites.yml
 - import_playbook: org_05_locations.yml
 - import_playbook: org_06_racks.yml

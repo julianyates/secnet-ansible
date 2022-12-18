@@ -307,7 +307,134 @@
         create_device_interface_parent_interface: ae1
         create_device_interface_mode: Access
         create_device_interface_untagged_vlan: Project-R
-        
+
+    create_ip_address:
+      - create_ip_address_address: 10.0.11.11
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: Management
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1.secnetwork.org
+
+      - create_ip_address_address: 10.0.11.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.11
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan11.secnetwork.org
+
+      - create_ip_address_address: 10.0.15.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.15
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan15.secnetwork.org
+
+      - create_ip_address_address: 10.0.21.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.21
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan21.secnetwork.org
+
+      - create_ip_address_address: 10.0.31.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.31
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan31.secnetwork.org
+
+      - create_ip_address_address: 10.0.32.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.32
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan32.secnetwork.org
+
+      - create_ip_address_address: 10.0.33.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.33
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan33.secnetwork.org
+
+      - create_ip_address_address: 10.0.34.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.34
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan34.secnetwork.org
+
+      - create_ip_address_address: 10.0.41.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.41
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan41.secnetwork.org
+
+      - create_ip_address_address: 10.0.42.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.42
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan42.secnetwork.org
+
+      - create_ip_address_address: 10.0.43.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.43
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan43.secnetwork.org
+
+      - create_ip_address_address: 10.0.44.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.44
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan44.secnetwork.org
+
+      - create_ip_address_address: 10.0.51.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.51
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan51.secnetwork.org
+
+      - create_ip_address_address: 10.0.91.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.91
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan91.secnetwork.org
+
+      - create_ip_address_address: 10.0.95.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.95
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan95.secnetwork.org
+
+      - create_ip_address_address: 10.0.111.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.111
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan111.secnetwork.org
+
+      - create_ip_address_address: 10.0.121.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.121
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan121.secnetwork.org
+
+      - create_ip_address_address: 10.0.131.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.131
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan131.secnetwork.org
+
+      - create_ip_address_address: 10.0.141.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.141
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan141.secnetwork.org
+
+      - create_ip_address_address: 192.168.1.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.666
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan666.secnetwork.org
+
+      - create_ip_address_address: 10.13.11.1
+        create_ip_address_tenant: secnet
+        create_ip_address_int_name: ae1.1311
+        create_ip_address_device: hqcrfw1.secnetwork.org
+        create_ip_address_dns_name: hqcrfw1-vlan1311.secnetwork.org
+
   tasks:
     - name: Creating Manufacturers
       netbox_manufacturer:
@@ -425,6 +552,21 @@
         state: present
       with_items: '{{ create_device_interface }}' 
 
+    - name: Create PAN-PA-850 IP Addresses
+      netbox_ip_address:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          address: '{{ item.create_ip_address_address }}'
+          tenant: '{{ item.create_ip_address }}'
+          status: active
+          assigned_object:
+            name: '{{ item.create_ip_address_int_name }}'
+            device: '{{ item.create_ip_address_device }}'
+          dns_name: '{{ item.create_ip_address_dns_name }}'
+        state: present
+      with_items: '{{ create_ip_address }}'
+
     - name: Create PAN-PA-850 IP address MGT
       netbox_ip_address:
         netbox_url: '{{ netbox_url }}'
@@ -480,12 +622,3 @@
             device: hqcrfw1.secnetwork.org
           dns_name: hqcrfw1-vmanagement.secnetwork.org                     
         state: present
-
-    - name: Update Device HQCRFW1
-      netbox_device:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          name: hqcrfw1.secnetwork.org
-          primary_ip4: 10.0.11.11
-        state: present        

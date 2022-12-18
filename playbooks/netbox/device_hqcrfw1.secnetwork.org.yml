@@ -1,6 +1,6 @@
 ---
 
-- name: "Netbox Devices Manufacturers"
+- name: "Create Device - HQCRFW1"
   connection: local
   hosts: localhost
   gather_facts: False
@@ -9,135 +9,6 @@
     - netbox.netbox
 
   vars:
-    create_manufacturers:
-      - create_manufacturers_name: "Palo Alto Networks"
-
-    create_device_types:
-      - create_device_types_model: PA 850
-        create_device_types_manufacturer: Palo Alto Networks
-        create_device_types_part_number: PA 850
-        create_device_types_u_height: 1
-        create_device_types_is_full_depth: False
-        create_device_types_subdevice_role: parent
-
-      - create_device_types_model: PA 250
-        create_device_types_manufacturer: Palo Alto Networks
-        create_device_types_part_number: PA 250
-        create_device_types_u_height: 1
-        create_device_types_is_full_depth: False
-        create_device_types_subdevice_role: parent
-
-    create_device_role:
-      - create_device_role_name: Firewall
-        create_device_role_color: 800000
-        create_device_role_vm_role: false
-
-    device_interface_template:
-      - create_interface_name: Management
-        create_device_type: PA 850
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: true
-
-      - create_interface_name: ethernet1/1
-        create_device_type: PA 850
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/2
-        create_device_type: PA 850
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/3
-        create_device_type: PA 850
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false        
-
-      - create_interface_name: ethernet1/4
-        create_device_type: PA 850
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false 
-
-      - create_interface_name: ethernet1/5
-        create_device_type: PA 850
-        create_interface_type: SFP (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/6
-        create_device_type: PA 850
-        create_interface_type: SFP (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/7
-        create_device_type: PA 850
-        create_interface_type: SFP (1GE)
-        create_mgmt_only: false        
-
-      - create_interface_name: ethernet1/8
-        create_device_type: PA 850
-        create_interface_type: SFP (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/9
-        create_device_type: PA 850
-        create_interface_type: SFP+ (10GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/10
-        create_device_type: PA 850
-        create_interface_type: SFP+ (10GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/11
-        create_device_type: PA 850
-        create_interface_type: SFP+ (10GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/12
-        create_device_type: PA 850
-        create_interface_type: SFP+ (10GE)
-        create_mgmt_only: false
-
-      - create_interface_name: Management
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: true
-
-      - create_interface_name: ethernet1/1
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/2
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/3
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/4
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false        
-
-      - create_interface_name: ethernet1/5
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/6
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
-      - create_interface_name: ethernet1/7
-        create_device_type: PA 250
-        create_interface_type: 1000BASE-T (1GE)
-        create_mgmt_only: false
-
     device_interface:
       - device_interface_name: ethernet1/9
         device_interface_device: hqcrfw1.secnetwork.org
@@ -436,61 +307,6 @@
         create_ip_address_dns_name: hqcrfw1-vlan1311.secnetwork.org
 
   tasks:
-    - name: Creating Manufacturers
-      netbox_manufacturer:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          name: '{{ item.create_manufacturers_name }}'
-        state: present
-      with_items: '{{ create_manufacturers }}'
-
-    - name: Create Device Role
-      netbox_device_role:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          name: "{{ item.create_device_role_name }}"
-          color: '{{ item.create_device_role_color }}'
-          vm_role: '{{ item.create_device_role_vm_role }}'
-        state: present
-      with_items: '{{ create_device_role }}'
-
-    - name: Creating Device Types
-      netbox_device_type:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          model: '{{ item.create_device_types_model }}'
-          manufacturer: '{{ item.create_device_types_manufacturer }}'
-          part_number: '{{ item.create_device_types_part_number }}'
-          u_height: '{{ item.create_device_types_u_height }}'
-          is_full_depth: '{{ item.create_device_types_is_full_depth }}'
-          subdevice_role: '{{ item.create_device_types_subdevice_role }}'
-        state: present
-      with_items: '{{ create_device_types }}'
-
-    - name: Create Platform PAN-OS 10.2.0
-      netbox_platform:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          name: PAN-OS 10.2.0
-          manufacturer: Palo Alto Networks
-        state: present
-
-    - name: Create PAN-PA-850 Interface Template
-      netbox_device_interface_template:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device_type: '{{ item.create_device_type }}'
-          name: '{{ item.create_interface_name }}'
-          type: '{{ item.create_interface_type }}'
-          mgmt_only: '{{ item.create_mgmt_only }}'
-        state: present
-      with_items: '{{ device_interface_template }}'
-
     - name: Create Device HQCRFW1
       netbox_device:
         netbox_url: '{{ netbox_url }}'
@@ -506,6 +322,21 @@
           rack: Primary Rack
           tenant: secnet
           platform: PAN-OS 10.2.0
+        state: present
+
+    - name: Configure PAN-PA-850 Management Interface
+      netbox_device_interface:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device: hqcrfw1.secnetwork.org
+          name: Management
+          type: 1000BASE-T (1GE)
+          mode: Access
+          untagged_vlan: 11
+          speed: 1000
+          mtu: 1500
+          duplex: auto          
         state: present
 
     - name: Create Internal LAG Interface 
@@ -526,22 +357,7 @@
             site: SECNET HQ
         state: present
 
-    - name: Configure PAN-PA-850 Management Interface
-      netbox_device_interface:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          device: hqcrfw1.secnetwork.org
-          name: Management
-          type: 1000BASE-T (1GE)
-          mode: Access
-          untagged_vlan: 11
-          speed: 1000
-          mtu: 1500
-          duplex: auto          
-        state: present
-
-    - name: Update PAN-PA-850 LAG Interfaces
+    - name: Update PAN-PA-850 4x 10GB LAG Interfaces
       netbox_device_interface:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'

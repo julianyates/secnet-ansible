@@ -1,0 +1,157 @@
+---
+
+- name: "Netbox Devices Manufacturers"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  vars:
+    create_manufacturers:
+      - create_manufacturers_name: "CyberPower"
+      - create_manufacturers_name: "Dell EMC"
+      - create_manufacturers_name: "Generic"
+      - create_manufacturers_name: "Palo Alto Networks"
+      - create_manufacturers_name: "Synology"
+      - create_manufacturers_name: "Ubiquiti"
+      - create_manufacturers_name: "Apple"
+      - create_manufacturers_name: "Microsoft"
+      - create_manufacturers_name: "Rocky Linux"
+      - create_manufacturers_name: "VMware"
+
+    create_device_role:
+      - create_device_role_name: Firewall
+        create_device_role_color: 800000
+        create_device_role_vm_role: false
+
+      - create_device_role_name: Aggregation Switch
+        create_device_role_color: ff0000
+        create_device_role_vm_role: false        
+
+      - create_device_role_name: Access Switch
+        create_device_role_color: ff6800
+        create_device_role_vm_role: false
+
+      - create_device_role_name: Access Point
+        create_device_role_color: 00beff
+        create_device_role_vm_role: false
+
+      - create_device_role_name: Uninterruptible Power Supply
+        create_device_role_color: 008400
+        create_device_role_vm_role: false
+
+      - create_device_role_name: Virtual Machine
+        create_device_role_color: 008400
+        create_device_role_vm_role: true
+
+      - create_device_role_name: Server
+        create_device_role_color: ffffff
+        create_device_role_vm_role: false
+
+      - create_device_role_name: Patch Panel
+        create_device_role_color: 808080
+        create_device_role_vm_role: false
+
+  tasks:
+    - name: Creating Manufacturers
+      netbox_manufacturer:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: '{{ item.create_manufacturers_name }}'
+        state: present
+      with_items: '{{ create_manufacturers }}'
+
+    - name: Create Device Role
+      netbox_device_role:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: "{{ item.create_device_role_name }}"
+          color: '{{ item.create_device_role_color }}'
+          vm_role: '{{ item.create_device_role_vm_role }}'
+        state: present
+      with_items: '{{ create_device_role }}'
+
+    - name: Create Platform Microsoft Windows 10
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Microsoft Windows 10
+          #manufacturer: 
+        state: present
+
+    - name: Create Platform Microsoft Windows 11
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Microsoft Windows 11
+          #manufacturer:
+        state: present
+
+    - name: Create Platform Microsoft Windows Server 2022
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Microsoft Windows Server 2022
+          #manufacturer: 
+        state: present
+
+    - name: Create Platform Rocky Linux 8.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Rocky Linux 8.0
+          #manufacturer:
+        state: present
+
+    - name: Create Platform Rocky Linux 9.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Rocky Linux 9.0
+          #manufacturer: 
+        state: present
+
+    - name: Create Platform PAN-OS 10.2.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: PAN-OS 10.2.0
+          manufacturer: Palo Alto Networks
+        state: present
+
+    - name: Create Platform VMware ESXi 7.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: VMware ESXi 7.0
+          #manufacturer: 
+        state: present
+
+    - name: Create Platform VMware ESXi 8.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: VMware ESXi 8.0
+          #manufacturer: 
+        state: present
+
+    - name: Create Platform VMware VCSA 8.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: VMware VCSA 8.0
+          #manufacturer:
+        state: present      

@@ -1,0 +1,37 @@
+---
+
+- name: "Netbox Device Platforms"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  tasks:
+    - name: Create Platforms
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: '{{ item }}'
+        state: present
+      loop:
+        - Microsoft Windows 10
+        - Microsoft Windows 11
+        - Microsoft Windows Server 2019
+        - Microsoft Windows Server 2022
+        - Rocky Linux 8.0
+        - Rocky Linux 9.0
+        - VMware ESXi 7.0
+        - VMware ESXi 8.0
+        - VMware VCSA 8.0
+
+    - name: Create Platform PAN-OS 10.2.0
+      netbox_platform:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: PAN-OS 10.2.0
+          manufacturer: Palo Alto Networks
+        state: present

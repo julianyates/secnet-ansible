@@ -1,0 +1,28 @@
+---
+
+- name: "Netbox Devices Manufacturers"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+  
+  tasks:
+    - name: Create RIR RFC1918
+      netbox_rir:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: RFC1918
+          is_private: true
+        state: present
+
+    - name: Create RIR Verizon
+      netbox_rir:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: Verizon
+          is_private: false
+        state: present

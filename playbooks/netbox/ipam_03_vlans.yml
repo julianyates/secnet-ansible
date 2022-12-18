@@ -1,0 +1,188 @@
+---
+
+- name: "Netbox Devices Manufacturers"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  vars:
+    create_vlans:
+      - create_vlans_name: Native
+        create_vlans_vid: 5
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Native
+
+      - create_vlans_name: Management
+        create_vlans_vid: 11
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Management
+
+      - create_vlans_name: Admins
+        create_vlans_vid: 15
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Management
+
+      - create_vlans_name: vManagement
+        create_vlans_vid: 21
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Virtualization
+
+      - create_vlans_name: vMotion
+        create_vlans_vid: 22
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Virtualization
+
+      - create_vlans_name: vSAN
+        create_vlans_vid: 23
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Virtualization
+
+      - create_vlans_name: PDC
+        create_vlans_vid: 31
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Authentication
+
+      - create_vlans_name: PKI
+        create_vlans_vid: 32
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Authentication
+
+      - create_vlans_name: NAC
+        create_vlans_vid: 33
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Authentication
+
+      - create_vlans_name: SSO
+        create_vlans_vid: 34
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Authentication
+
+      - create_vlans_name: LOG
+        create_vlans_vid: 41
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Security
+
+      - create_vlans_name: VAS
+        create_vlans_vid: 42
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Security
+
+      - create_vlans_name: MON
+        create_vlans_vid: 43
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Security
+
+      - create_vlans_name: NVR
+        create_vlans_vid: 44
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Security
+
+      - create_vlans_name: Servers
+        create_vlans_vid: 51
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Servers
+
+      - create_vlans_name: Frontend
+        create_vlans_vid: 91
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: DMZ        
+
+      - create_vlans_name: Backend
+        create_vlans_vid: 95
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: DMZ
+
+      - create_vlans_name: Users
+        create_vlans_vid: 111
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Endpoint
+
+      - create_vlans_name: Printers
+        create_vlans_vid: 121
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Endpoint
+
+      - create_vlans_name: Phones
+        create_vlans_vid: 131
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Endpoint
+
+      - create_vlans_name: IOT
+        create_vlans_vid: 141
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Endpoint
+
+      - create_vlans_name: Guest
+        create_vlans_vid: 666
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Guest
+
+      - create_vlans_name: Project-R
+        create_vlans_vid: 1113
+        create_vlans_site: SECNET HQ
+        create_vlans_tenant: secnet
+        create_vlans_status: active
+        create_vlans_role: Project-R
+
+  tasks:
+    - name: Create VLANs
+      netbox_vlan:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: '{{ item.create_vlans_name }}'
+          vid: '{{ item.create_vlans_vid }}'
+          site: '{{ item.create_vlans_site }}'
+          tenant: '{{ item.create_vlans_tenant }}'
+          status: '{{ item.create_vlans_status }}'
+          vlan_role: '{{ item.create_vlans_role }}'
+        state: present
+      with_items: '{{ create_vlans }}'
+

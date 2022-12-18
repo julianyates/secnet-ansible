@@ -1,0 +1,278 @@
+---
+
+- name: "Netbox IPAM Prefixes"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  vars:
+    create_prefixes:
+      - create_prefixes_prefix: 10.0.11.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Management
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Management
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.15.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Admins
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Management
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.21.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: vManagement
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Virtualization
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.22.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: vMotion
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Virtualization
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.23.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: vSAN
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Virtualization
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.31.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: PDC
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Authentication
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.32.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: PKI
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Authentication
+        create_prefixes_is_pool: false
+        
+      - create_prefixes_prefix: 10.0.33.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: NAC
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Authentication
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.34.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: SSO
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Authentication
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.41.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: LOG
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Security
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.42.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: VAS
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Security
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.43.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: MON
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Security
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.44.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: NVR
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Security
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.51.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Servers
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Servers
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.91.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Frontend
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: DMZ
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.95.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Backend
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: DMZ
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.111.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Users
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Endpoint
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.121.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Printers
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Endpoint
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.131.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Phones
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Endpoint
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.0.141.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: IOT
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Endpoint
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 10.13.11.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Project-R
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Project-R
+        create_prefixes_is_pool: false
+
+      - create_prefixes_prefix: 192.168.1.0/24
+        create_prefixes_site: SECNET HQ
+        create_prefixes_tenant: secnet
+        create_prefixes_vlan_name: Guest
+        create_prefixes_vlan_site: SECNET HQ
+        create_prefixes_vlan_tenant: secnet
+        create_prefixes_status: active
+        create_prefixes_prefix_role: Guest
+        create_prefixes_is_pool: false
+
+  tasks:
+    - name: Create ISP Subnet
+      netbox_prefix:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          family: 4
+          prefix: '96.231.240.0/24'
+          site: 'SECNET HQ'
+          tenant: 'secnet'
+          status: 'active'
+          is_pool: false
+          prefix_role: Internet
+        state: present
+
+    - name: Create Primary Subnet
+      netbox_prefix:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          family: 4
+          prefix: '10.0.0.0/16'
+          site: 'SECNET HQ'
+          tenant: 'secnet'
+          status: 'active'
+          is_pool: false
+        state: present
+
+    - name: Create Prefixes
+      netbox_prefix:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          family: 4
+          prefix: '{{ item.create_prefixes_prefix }}'
+          site: '{{ item.create_prefixes_site }}'
+          tenant: '{{ item.create_prefixes_tenant }}'
+          vlan:
+            name: '{{ item.create_prefixes_vlan_name }}'
+            site: '{{ item.create_prefixes_vlan_site }}'
+            tenant: '{{ item.create_prefixes_vlan_tenant }}'
+          status: '{{ item.create_prefixes_status }}'
+          prefix_role: '{{ item.create_prefixes_prefix_role }}'
+          is_pool: '{{ item.create_prefixes_is_pool }}'
+        state: present
+      with_items: '{{ create_prefixes }}'

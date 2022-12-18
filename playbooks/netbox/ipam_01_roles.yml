@@ -1,0 +1,33 @@
+---
+
+- name: "Netbox Devices Manufacturers"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  vars:
+    create_ipam_role:
+      - create_ipam_role_name: Authentication
+      - create_ipam_role_name: DMZ
+      - create_ipam_role_name: Endpoint
+      - create_ipam_role_name: Guest
+      - create_ipam_role_name: Management
+      - create_ipam_role_name: Security
+      - create_ipam_role_name: Servers      
+      - create_ipam_role_name: Virtualization
+      - create_ipam_role_name: Project-R
+      - create_ipam_role_name: Native
+      - create_ipam_role_name: Internet
+
+  tasks:
+    - name: Creating IPAM Roles
+      netbox_ipam_role:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          name: '{{ item.create_ipam_role_name }}'
+        state: present
+      with_items: '{{ create_ipam_role }}'

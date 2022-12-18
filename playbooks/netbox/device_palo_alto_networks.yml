@@ -438,7 +438,7 @@
             name: Management
             device: hqcrfw1.secnetwork.org
           dns_name: hqcrfw1.secnetwork.org
-        state: new
+        state: present
 
     - name: Create PAN-PA-850 IP address MGT VLAN
       netbox_ip_address:
@@ -452,7 +452,7 @@
             name: ae1.11
             device: hqcrfw1.secnetwork.org
           dns_name: hqcrfw1-mgt.secnetwork.org                     
-        state: new
+        state: present
 
     - name: Create PAN-PA-850 IP address Admins VLAN
       netbox_ip_address:
@@ -466,7 +466,7 @@
             name: ae1.15
             device: hqcrfw1.secnetwork.org
           dns_name: hqcrfw1-admins.secnetwork.org                     
-        state: new
+        state: present
 
     - name: Create PAN-PA-850 IP address vManagement VLAN
       netbox_ip_address:
@@ -480,4 +480,4 @@
             name: ae1.21
             device: hqcrfw1.secnetwork.org
           dns_name: hqcrfw1-vmanagement.secnetwork.org                     
-        state: new
+        state: present

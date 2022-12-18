@@ -19,10 +19,11 @@
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
-          address: '{{ item.ip_address }}'
+          address: '96.231.240.2'
+          #address: '{{ item.ip_address }}'
           site: 'SECNET HQ'
           tenant: 'secnet'
           status: 'reserved'
           role: Loopback
         state: present
-      with_items: "{{ ip_address }}"
+      #with_items: "{{ ip_address }}"

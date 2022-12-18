@@ -138,6 +138,35 @@
         create_interface_type: 1000BASE-T (1GE)
         create_mgmt_only: false
 
+    device_interface:
+      - device_interface_name: ethernet1/9
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_type: SFP+ (10GE)
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
+
+      - device_interface_name: ethernet1/10
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_type: SFP+ (10GE)
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
+
+      - device_interface_name: ethernet1/11
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_type: SFP+ (10GE)
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
+
+      - device_interface_name: ethernet1/12
+        device_interface_device: hqcrfw1.secnetwork.org
+        device_interface_type: SFP+ (10GE)        
+        device_interface_lag: ae1
+        device_interface_mode: Tagged (All)
+        device_interface_untagged_vlan: Native
+
     create_device_interface:
       - create_interface_name: ae1.11
         create_device_interface_device: hqcrfw1.secnetwork.org
@@ -152,31 +181,6 @@
         create_device_interface_parent_interface: ae1
         create_device_interface_mode: Access
         create_device_interface_untagged_vlan: Admins
-
-    device_interface:
-      - device_interface_name: ethernet1/9
-        device_interface_device: hqcrfw1.secnetwork.org
-        device_interface_lag: ae1
-        device_interface_mode: Tagged (All)
-        device_interface_untagged_vlan: Native
-
-      - device_interface_name: ethernet1/10
-        device_interface_device: hqcrfw1.secnetwork.org
-        device_interface_lag: ae1
-        device_interface_mode: Tagged (All)
-        device_interface_untagged_vlan: Native
-
-      - device_interface_name: ethernet1/11
-        device_interface_device: hqcrfw1.secnetwork.org
-        device_interface_lag: ae1
-        device_interface_mode: Tagged (All)
-        device_interface_untagged_vlan: Native
-
-      - device_interface_name: ethernet1/12
-        device_interface_device: hqcrfw1.secnetwork.org
-        device_interface_lag: ae1
-        device_interface_mode: Tagged (All)
-        device_interface_untagged_vlan: Native
 
   tasks:
     - name: Creating Manufacturers
@@ -274,6 +278,7 @@
         data:
           device: '{{ item.device_interface_device }}'
           name: '{{ item.device_interface_name }}'
+          type: '{{ item.device_interface_type }}'
           mode: '{{ item.device_interface_mode }}'
           untagged_vlan: '{{ item.device_interface_untagged_vlan }}'       
           lag:

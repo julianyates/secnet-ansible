@@ -228,6 +228,6 @@
           mgmt_only: false
           mode: Tagged (All)
           untagged_vlan:
-            - name: 5
-              site: SECNET HQ
+            name: Native
+            site: SECNET HQ
         state: present

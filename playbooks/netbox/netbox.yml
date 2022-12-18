@@ -288,7 +288,7 @@
         create_vlans_role: Endpoint
 
       - create_vlans_name: Guest
-        create_vlans_vid: 141
+        create_vlans_vid: 666
         create_vlans_site: SECNET HQ
         create_vlans_tenant: secnet
         create_vlans_status: active

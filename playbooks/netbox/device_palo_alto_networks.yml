@@ -182,6 +182,13 @@
         create_device_interface_mode: Access
         create_device_interface_untagged_vlan: Admins
 
+      - create_device_interface_name: ae1.21
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: vManagement
+
   tasks:
     - name: Creating Manufacturers
       netbox_manufacturer:

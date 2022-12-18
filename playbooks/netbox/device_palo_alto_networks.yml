@@ -168,13 +168,6 @@
         device_interface_untagged_vlan: Native
 
     create_device_interface:
-      - create_device_interface_name: Managment
-        create_device_interface_device: hqcrfw1.secnetwork.org
-        create_device_interface_type: 1000BASE-T (1GE)
-        create_device_interface_parent_interface:
-        create_device_interface_mode: Access
-        create_device_interface_untagged_vlan: 11
-
       - create_device_interface_name: ae1.11
         create_device_interface_device: hqcrfw1.secnetwork.org
         create_device_interface_type: Virtual
@@ -523,13 +516,29 @@
           device: hqcrfw1.secnetwork.org
           name: ae1
           type: Link Aggregation Group (LAG)
-          mtu: 1500
+          mtu: 9000
+          speed: 40000
           mgmt_only: false
           mode: Tagged (All)
           untagged_vlan:
             name: Native
             site: SECNET HQ
         state: present
+
+    - name: Configure PAN-PA-850 Management Interface
+      netbox_device_interface:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device: hqcrfw1.secnetwork.org
+          name: Management
+          type: 1000BASE-T (1GE)
+          mode: Access
+          untagged_vlan: 11
+          speed: 1000
+          mtu: 1500
+        state: present
+      with_items: '{{ create_device_interface }}' 
 
     - name: Update PAN-PA-850 Interfaces
       netbox_device_interface:
@@ -541,7 +550,9 @@
           mode: '{{ item.device_interface_mode }}'
           untagged_vlan: '{{ item.device_interface_untagged_vlan }}'       
           lag:
-            name: '{{ item.device_interface_lag }}'             
+            name: '{{ item.device_interface_lag }}'
+          mtu: 9000
+          speed: 10000            
         state: present
       with_items: '{{ device_interface }}'
 
@@ -555,8 +566,10 @@
           type: '{{ item.create_device_interface_type }}'
           parent_interface: '{{ item.create_device_interface_parent_interface }}'
           mode: '{{ item.create_device_interface_mode }}'
-          untagged_vlan: '{{ item.create_device_interface_untagged_vlan }}'       
-        state: present
+          untagged_vlan: '{{ item.create_device_interface_untagged_vlan }}'
+          mtu: 9000
+          speed: 40000          
+        state: present       
       with_items: '{{ create_device_interface }}' 
 
     - name: Create PAN-PA-850 IP Addresses

@@ -10,7 +10,7 @@
 
   tasks:
     - name: Configure Reserve Public IP
-      netbox_prefix:
+      netbox_ip_address:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
@@ -18,6 +18,7 @@
           site: 'SECNET HQ'
           tenant: 'secnet'
           status: 'reserved'
+          role: Loopback
         state: present
       loop:
         -	96.231.240.2

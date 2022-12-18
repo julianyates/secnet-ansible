@@ -272,13 +272,12 @@
         state: present
 
     - name: Update PAN-PA-850 Interfaces
-      netbox_device_interface_template:
+      netbox_device_interface:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:
           device: '{{ item.device_interface_device }}'
           name: '{{ item.device_interface_name }}'
-          type: '{{ item.device_interface_type }}'
           mode: '{{ item.device_interface_mode }}'
           untagged_vlan: '{{ item.device_interface_untagged_vlan }}'       
           lag:
@@ -287,7 +286,7 @@
       with_items: '{{ device_interface }}'
 
     - name: Create PAN-PA-850 VLAN Interfaces
-      netbox_device_interface_template:
+      netbox_device_interface:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
         data:

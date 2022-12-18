@@ -295,7 +295,7 @@
         create_vlans_role: Guest
 
       - create_vlans_name: Project-R
-        create_vlans_vid: 141
+        create_vlans_vid: 1113
         create_vlans_site: SECNET HQ
         create_vlans_tenant: secnet
         create_vlans_status: active

@@ -189,6 +189,125 @@
         create_device_interface_mode: Access
         create_device_interface_untagged_vlan: vManagement
 
+      - create_device_interface_name: ae1.31
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: PDC
+
+      - create_device_interface_name: ae1.32
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: PKI
+
+      - create_device_interface_name: ae1.33
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: NAC
+
+      - create_device_interface_name: ae1.34
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: SSO
+
+      - create_device_interface_name: ae1.41
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: LOG        
+
+      - create_device_interface_name: ae1.42
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: VAS
+
+      - create_device_interface_name: ae1.43
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: MON
+
+      - create_device_interface_name: ae1.44
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: NVR
+
+      - create_device_interface_name: ae1.51
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Servers
+
+      - create_device_interface_name: ae1.91
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Frontend
+
+      - create_device_interface_name: ae1.95
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Backend
+
+      - create_device_interface_name: ae1.111
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Users
+
+      - create_device_interface_name: ae1.121
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Printers
+
+      - create_device_interface_name: ae1.131
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Phones
+
+      - create_device_interface_name: ae1.141
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: IOT
+
+      - create_device_interface_name: ae1.666
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Guest
+
+      - create_device_interface_name: ae1.1311
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: Virtual
+        create_device_interface_parent_interface: ae1
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: Project-R
+        
   tasks:
     - name: Creating Manufacturers
       netbox_manufacturer:

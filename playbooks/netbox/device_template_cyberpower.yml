@@ -1,0 +1,45 @@
+---
+
+- name: "Netbox Devices Manufacturers"
+  connection: local
+  hosts: localhost
+  gather_facts: False
+
+  collections:
+    - netbox.netbox
+
+  vars:
+    create_device_types:
+      - create_device_types_model: OR1000LCDRM1U
+        create_device_types_manufacturer: CyberPower
+        create_device_types_part_number: OR1000LCDRM1U
+        create_device_types_u_height: 1
+        create_device_types_is_full_depth: True
+        create_device_types_subdevice_role: parent
+
+  tasks:
+    - name: Creating Device Types
+      netbox_device_type:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          model: '{{ item.create_device_types_model }}'
+          manufacturer: '{{ item.create_device_types_manufacturer }}'
+          part_number: '{{ item.create_device_types_part_number }}'
+          u_height: '{{ item.create_device_types_u_height }}'
+          is_full_depth: '{{ item.create_device_types_is_full_depth }}'
+          subdevice_role: '{{ item.create_device_types_subdevice_role }}'
+        state: present
+      with_items: '{{ create_device_types }}'
+
+    - name: Creating CyberPower OR MGT Interface
+      netbox_device_interface_template:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          device_type: OR1000LCDRM1U
+          name: Management
+          type: 1000BASE-T (1GE)
+          mgmt_only: true
+        state: present      
+

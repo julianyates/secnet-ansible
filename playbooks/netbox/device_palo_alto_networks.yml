@@ -540,7 +540,6 @@
           mtu: 1500
           duplex: auto          
         state: present
-      with_items: '{{ create_device_interface }}' 
 
     - name: Update PAN-PA-850 LAG Interfaces
       netbox_device_interface:

@@ -237,13 +237,28 @@
         netbox_token: '{{ netbox_token }}'
         data:
           family: 4
-          prefix: '96.231.240.0/24'
+          prefix: '{{ item }}'
           site: 'SECNET HQ'
           tenant: 'secnet'
           status: 'active'
           is_pool: false
           prefix_role: Internet
         state: present
+      loop:
+        - "96.231.240.210/32"
+        - "96.231.240.211/32"
+        - "96.231.240.212/32"
+        - "96.231.240.213/32"
+        - "96.231.240.214/32"
+        - "96.231.240.215/32"
+        - "96.231.240.216/32"
+        - "96.231.240.217/32"
+        - "96.231.240.218/32"
+        - "96.231.240.219/32"
+        - "96.231.240.220/32"
+        - "96.231.240.221/32"
+        - "96.231.240.222/32"
+        - "96.231.240.223/32"      
 
     - name: Create Primary Subnet
       netbox_prefix:

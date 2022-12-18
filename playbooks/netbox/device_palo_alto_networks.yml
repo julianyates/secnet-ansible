@@ -447,7 +447,7 @@
         data:
           address: 10.0.11.1
           tenant: secnet
-          status: active
+          status: new
           assigned_object:
             name: ae1.11
             device: hqcrfw1.secnetwork.org
@@ -461,7 +461,7 @@
         data:
           address: 10.0.15.1
           tenant: secnet
-          status: active
+          status: new
           assigned_object:
             name: ae1.15
             device: hqcrfw1.secnetwork.org
@@ -475,7 +475,7 @@
         data:
           address: 10.0.21.1
           tenant: secnet
-          status: active
+          status: new
           assigned_object:
             name: ae1.21
             device: hqcrfw1.secnetwork.org

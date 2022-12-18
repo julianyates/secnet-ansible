@@ -364,6 +364,20 @@
         state: present
       with_items: '{{ device_interface_template }}'
 
+    - name: Create PAN-PA-850 IP address MGT
+      netbox_ip_address:
+        netbox_url: '{{ netbox_url }}'
+        netbox_token: '{{ netbox_token }}'
+        data:
+          address: 10.0.11.11
+          tenant: secnet
+          status: active
+          assigned_object:
+            name: Management
+            device: hqcrfw1.secnetwork.org
+          dns_name: hqcrfw1.secnetwork.org
+        state: present
+
     - name: Create Device HQCRFW1
       netbox_device:
         netbox_url: '{{ netbox_url }}'
@@ -425,20 +439,6 @@
           untagged_vlan: '{{ item.create_device_interface_untagged_vlan }}'       
         state: present
       with_items: '{{ create_device_interface }}' 
-
-    - name: Create PAN-PA-850 IP address MGT
-      netbox_ip_address:
-        netbox_url: '{{ netbox_url }}'
-        netbox_token: '{{ netbox_token }}'
-        data:
-          address: 10.0.11.11
-          tenant: secnet
-          status: active
-          assigned_object:
-            name: Management
-            device: hqcrfw1.secnetwork.org
-          dns_name: hqcrfw1.secnetwork.org
-        state: present
 
     - name: Create PAN-PA-850 IP address MGT VLAN
       netbox_ip_address:

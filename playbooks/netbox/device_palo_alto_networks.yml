@@ -168,6 +168,13 @@
         device_interface_untagged_vlan: Native
 
     create_device_interface:
+      - create_device_interface_name: Managment
+        create_device_interface_device: hqcrfw1.secnetwork.org
+        create_device_interface_type: 1000BASE-T (1GE)
+        create_device_interface_parent_interface:
+        create_device_interface_mode: Access
+        create_device_interface_untagged_vlan: 11
+
       - create_device_interface_name: ae1.11
         create_device_interface_device: hqcrfw1.secnetwork.org
         create_device_interface_type: Virtual

@@ -479,7 +479,7 @@
           manufacturer: Palo Alto Networks
         state: present
 
-    - name: Create PAN-PA-850 Interfaces
+    - name: Create PAN-PA-850 Interface Template
       netbox_device_interface_template:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
@@ -517,7 +517,8 @@
           name: ae1
           type: Link Aggregation Group (LAG)
           mtu: 9000
-          speed: 40000
+          speed: 40000000
+          duplex: auto          
           mgmt_only: false
           mode: Tagged (All)
           untagged_vlan:
@@ -537,10 +538,11 @@
           untagged_vlan: 11
           speed: 1000
           mtu: 1500
+          duplex: auto          
         state: present
       with_items: '{{ create_device_interface }}' 
 
-    - name: Update PAN-PA-850 Interfaces
+    - name: Update PAN-PA-850 LAG Interfaces
       netbox_device_interface:
         netbox_url: '{{ netbox_url }}'
         netbox_token: '{{ netbox_token }}'
@@ -552,7 +554,8 @@
           lag:
             name: '{{ item.device_interface_lag }}'
           mtu: 9000
-          speed: 10000            
+          speed: 10000000            
+          duplex: auto          
         state: present
       with_items: '{{ device_interface }}'
 
@@ -568,7 +571,8 @@
           mode: '{{ item.create_device_interface_mode }}'
           untagged_vlan: '{{ item.create_device_interface_untagged_vlan }}'
           mtu: 9000
-          speed: 40000          
+          speed: 40000000
+          duplex: auto
         state: present       
       with_items: '{{ create_device_interface }}' 
 

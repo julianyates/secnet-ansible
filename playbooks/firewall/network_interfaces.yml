@@ -279,7 +279,6 @@
         if_name: "ethernet1/1"
         mode: "layer2"
         vlan_name: "WAN"
-        enable_dhcp: false
         zone_name: "L2-WAN"
 
     - name: Configuring L2 LAN INT 2
@@ -287,8 +286,7 @@
         provider: '{{ provider }}'
         if_name: "ethernet1/2"
         mode: "layer2"
-        vlan_name: "WAN"        
-        enable_dhcp: false
+        vlan_name: "WAN"
         zone_name: "L2-LAN"
 
     - name: Configuring L2 LAN INT 3

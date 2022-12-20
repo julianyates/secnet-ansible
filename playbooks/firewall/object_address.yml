@@ -32,9 +32,9 @@
         address_object_description: "HQ Network"
         address_object_tag: 'INTERNAL'
 
-      - address_object_name: "hqfw1.secnetwork.org"
+      - address_object_name: "hqcrfw1.secnetwork.org"
         address_object_value: '10.0.11.11'
-        address_object_description: "hqfw1.secnetwork.org"
+        address_object_description: "hqcrfw1.secnetwork.org"
         address_object_tag: 'Management'
 
       - address_object_name: "hqups1.secnetwork.org"
@@ -77,10 +77,6 @@
         address_group_tag: 'Management'
 
   tasks:
-#    - name: Import Credentials from File
-#      include_vars: '/root/secnet-ansible/fw'
-#      no_log: 'yes'
-
     - name: Creating Address Object
       panos_address_object:
         provider: '{{ provider }}'

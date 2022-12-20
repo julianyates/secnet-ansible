@@ -73,10 +73,6 @@
         tag_comments: "Firewall Services"
 
   tasks:
-#    - name: Import Credentials from File
-#      include_vars: '/root/secnet-ansible/fw'
-#      no_log: 'yes'
-
     - name: Creating Interface Tags
       panos_tag_object:
         provider: '{{ provider }}'

@@ -74,7 +74,7 @@
         management_profile: 'Default'
         ip: ["10.0.21.1/24"]
         zone_name: "L3-Virtualization"
-        comment: "Management"
+        comment: "vManagement"
 
       - name: '{{ aggregate_group_name }}.31'
         tag: "31"
@@ -205,10 +205,6 @@
         comment: "Guests"
 
   tasks:
-#    - name: Import Credentials from File
-#      include_vars: '/root/secnet-ansible/fw'
-#      no_log: 'yes'
-
     - name: Create Interface Management Profile
       panos_management_profile:
         provider: '{{ provider }}'
@@ -270,7 +266,7 @@
     - name: Configure WAN VLAN Interface
       panos_vlan_interface:
         provider: '{{ provider }}'
-        name: "vlan.2000"
+        name: "vlan.9000"
         ip: ["96.231.240.210/24"]
         management_profile: "Internet"
         vlan_name: "WAN"

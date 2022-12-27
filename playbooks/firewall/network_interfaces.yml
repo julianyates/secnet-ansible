@@ -152,7 +152,7 @@
         tag: "91"
         enable_dhcp: "false"
         management_profile: 'Default'
-        ip: ["10.0.81.1/24"]
+        ip: ["10.0.91.1/24"]
         zone_name: "L3-DMZ"
         comment: "Frontend"
 

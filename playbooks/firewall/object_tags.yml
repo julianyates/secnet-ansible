@@ -21,31 +21,31 @@
         tag_comments: "Authentication"
 
       - tag_name: "DMZ"
-        tag_color: "purple"
+        tag_color: "yellow-orange"
         tag_comments: "DMZ"
       
       - tag_name: "Endpoints"
-        tag_color: "purple"
+        tag_color: "gold"
         tag_comments: "Endpoints"
       
       - tag_name: "Guests"
-        tag_color: "purple"
+        tag_color: "thistle"
         tag_comments: "Guests"
       
       - tag_name: "Servers"
-        tag_color: "purple"
+        tag_color: "light green"
         tag_comments: "Servers"
       
       - tag_name: "Virtualization"
-        tag_color: "purple"
+        tag_color: "blue gray"
         tag_comments: "Virtualization"
       
       - tag_name: "Management"
-        tag_color: "purple"
+        tag_color: "green"
         tag_comments: "Management"
       
       - tag_name: "Security"
-        tag_color: "purple"
+        tag_color: "midnight blue"
         tag_comments: "Security"
 
       - tag_name: "OUTBOUND"

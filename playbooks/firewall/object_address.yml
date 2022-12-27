@@ -27,9 +27,24 @@
         address_object_description: "RFC1918 - 192.168.0.0"
         address_object_tag: 'Unauthorized Traffic'
 
-      - address_object_name: "HQ Network"
+      - address_object_name: "SECNET HQ Network"
         address_object_value: '10.0.0.0/16'
-        address_object_description: "HQ Network"
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'INTERNAL'
+
+      - address_object_name: "VLAN-11_MGT"
+        address_object_value: '10.0.11.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'INTERNAL'
+
+      - address_object_name: "VLAN-15_Admins"
+        address_object_value: '10.0.15.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'INTERNAL'
+
+      - address_object_name: "VLAN-21_vManagement"
+        address_object_value: '10.0.21.0/24'
+        address_object_description: "SECNET HQ Network"
         address_object_tag: 'INTERNAL'
 
       - address_object_name: "hqcrfw1.secnetwork.org"
@@ -72,9 +87,17 @@
         address_group_static_value: ['RFC1918 - 10.0.0.0','RFC1918 - 172.16.0.0','RFC1918 - 192.168.0.0']
         address_group_tag: 'Unauthorized Traffic'
 
+      - address_group_name: 'ZONE_L3-Management'
+        address_group_static_value: ['VLAN-11_MGT','VLAN-15_Admins']
+        address_group_tag: 'Management'
+
       - address_group_name: 'UPS'
         address_group_static_value: ['hqups1.secnetwork.org','hqups2.secnetwork.org','hqups3.secnetwork.org','hqups4.secnetwork.org','hqups5.secnetwork.org','hqups6.secnetwork.org']
         address_group_tag: 'Management'
+
+      - address_group_name: 'ZONE_L3-Virtualization'
+        address_group_static_value: ['VLAN-21_vManagement']
+        address_group_tag: 'Virtualization'
 
   tasks:
     - name: Creating Address Object

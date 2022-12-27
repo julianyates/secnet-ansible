@@ -17,12 +17,13 @@
         provider: '{{ provider }}'
         name: 'Default NAT Policy - MGT'
         description: 'Default NAT Policy - MGT'
+        tags: ['Management']
         nat_type: 'ipv4'
         from_zones: ['L3-Management']
         to_zones: ['L3-WAN']
         to_interface: 'vlan.9999'
         service: 'any'
-        source_addresses: ['10.0.11.0/16']
+        source_addresses: ['ZONE_L3-Management']
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'

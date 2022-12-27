@@ -30,3 +30,22 @@
         source_translation_address_type: 'interface-address'
         source_translation_interface: 'vlan.9999'
         source_translation_ip_address: '96.231.240.210/24'
+
+    - name: Default NAT Policy - Virtualization
+      panos_nat_rule2:
+        provider: '{{ provider }}'
+        name: 'Default NAT Policy - Virtualization'
+        description: 'Default NAT Policy - Virtualization'
+        tags: ['Virtualization']
+        group_tag: 'Virtualization'
+        nat_type: 'ipv4'
+        from_zones: ['L3-Virtualization']
+        to_zones: ['L3-WAN']
+        to_interface: 'vlan.9999'
+        service: 'any'
+        source_addresses: ['ZONE_L3-Virtualization']
+        destination_addresses: ['any']
+        source_translation_type: 'dynamic-ip-and-port'
+        source_translation_address_type: 'interface-address'
+        source_translation_interface: 'vlan.9999'
+        source_translation_ip_address: '96.231.240.210/24'        

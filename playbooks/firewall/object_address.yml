@@ -87,7 +87,7 @@
         address_object_description: "SECNET HQ Network"
         address_object_tag: 'Authentication'
 
-      - address_object_name: "VLAN-31_PKI"
+      - address_object_name: "VLAN-32_PKI"
         address_object_value: '10.0.32.0/24'
         address_object_description: "SECNET HQ Network"
         address_object_tag: 'Authentication'

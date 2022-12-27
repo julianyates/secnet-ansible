@@ -18,6 +18,7 @@
         name: 'Default NAT Policy - MGT'
         description: 'Default NAT Policy - MGT'
         tags: ['Management']
+        group_tag: 'Management'
         nat_type: 'ipv4'
         from_zones: ['L3-Management']
         to_zones: ['L3-WAN']

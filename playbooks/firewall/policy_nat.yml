@@ -12,13 +12,13 @@
       api_key: '{{ api_key }}'
 
   tasks:
-    - name: Default NAT Policy - MGT
+    - name: TMP NAT Policy - MGT
       panos_nat_rule2:
         provider: '{{ provider }}'
-        name: 'Default NAT Policy - MGT'
-        description: 'Default NAT Policy - MGT'
+        name: 'TMP NAT Policy - MGT'
+        description: 'TMP NAT Policy - MGT'
         tags: ['Management']
-        group_tag: 'Management'
+        group_tag: 'OUTBOUND'
         nat_type: 'ipv4'
         from_zones: ['L3-Management']
         to_zones: ['L3-WAN']
@@ -31,13 +31,13 @@
         source_translation_interface: 'vlan.9999'
         source_translation_ip_address: '96.231.240.210/24'
 
-    - name: Default NAT Policy - Virtualization
+    - name: TMP NAT Policy - Virtualization
       panos_nat_rule2:
         provider: '{{ provider }}'
-        name: 'Default NAT Policy - Virtualization'
-        description: 'Default NAT Policy - Virtualization'
+        name: 'TMP NAT Policy - Virtualization'
+        description: 'TMP NAT Policy - Virtualization'
         tags: ['Virtualization']
-        group_tag: 'Virtualization'
+        group_tag: 'OUTBOUND'
         nat_type: 'ipv4'
         from_zones: ['L3-Virtualization']
         to_zones: ['L3-WAN']
@@ -48,4 +48,80 @@
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
         source_translation_interface: 'vlan.9999'
-        source_translation_ip_address: '96.231.240.210/24'        
+        source_translation_ip_address: '96.231.240.210/24' 
+
+    - name: TMP NAT Policy - Authentication
+      panos_nat_rule2:
+        provider: '{{ provider }}'
+        name: 'TMP NAT Policy - Authentication'
+        description: 'TMP NAT Policy - Authentication'
+        tags: ['Authentication']
+        group_tag: 'OUTBOUND'
+        nat_type: 'ipv4'
+        from_zones: ['L3-Authentication']
+        to_zones: ['L3-WAN']
+        to_interface: 'vlan.9999'
+        service: 'any'
+        source_addresses: ['ZONE_L3-Authentication']
+        destination_addresses: ['any']
+        source_translation_type: 'dynamic-ip-and-port'
+        source_translation_address_type: 'interface-address'
+        source_translation_interface: 'vlan.9999'
+        source_translation_ip_address: '96.231.240.210/24' 
+
+    - name: TMP NAT Policy - Security
+      panos_nat_rule2:
+        provider: '{{ provider }}'
+        name: 'TMP NAT Policy - Security'
+        description: 'TMP NAT Policy - Security'
+        tags: ['Security']
+        group_tag: 'OUTBOUND'
+        nat_type: 'ipv4'
+        from_zones: ['L3-Security']
+        to_zones: ['L3-WAN']
+        to_interface: 'vlan.9999'
+        service: 'any'
+        source_addresses: ['ZONE_L3-Security']
+        destination_addresses: ['any']
+        source_translation_type: 'dynamic-ip-and-port'
+        source_translation_address_type: 'interface-address'
+        source_translation_interface: 'vlan.9999'
+        source_translation_ip_address: '96.231.240.210/24'
+
+    - name: TMP NAT Policy - Servers
+      panos_nat_rule2:
+        provider: '{{ provider }}'
+        name: 'TMP NAT Policy - Servers'
+        description: 'TMP NAT Policy - Servers'
+        tags: ['Servers']
+        group_tag: 'OUTBOUND'
+        nat_type: 'ipv4'
+        from_zones: ['L3-Servers']
+        to_zones: ['L3-WAN']
+        to_interface: 'vlan.9999'
+        service: 'any'
+        source_addresses: ['ZONE_L3-Servers']
+        destination_addresses: ['any']
+        source_translation_type: 'dynamic-ip-and-port'
+        source_translation_address_type: 'interface-address'
+        source_translation_interface: 'vlan.9999'
+        source_translation_ip_address: '96.231.240.210/24'
+
+    - name: TMP NAT Policy - Endpoints
+      panos_nat_rule2:
+        provider: '{{ provider }}'
+        name: 'TMP NAT Policy - Endpoints'
+        description: 'TMP NAT Policy - Endpoints'
+        tags: ['Endpoints']
+        group_tag: 'OUTBOUND'
+        nat_type: 'ipv4'
+        from_zones: ['L3-Endpoints']
+        to_zones: ['L3-WAN']
+        to_interface: 'vlan.9999'
+        service: 'any'
+        source_addresses: ['ZONE_L3-Endpoints']
+        destination_addresses: ['any']
+        source_translation_type: 'dynamic-ip-and-port'
+        source_translation_address_type: 'interface-address'
+        source_translation_interface: 'vlan.9999'
+        source_translation_ip_address: '96.231.240.210/24'

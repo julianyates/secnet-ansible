@@ -35,17 +35,12 @@
       - address_object_name: "VLAN-11_MGT"
         address_object_value: '10.0.11.0/24'
         address_object_description: "SECNET HQ Network"
-        address_object_tag: 'INTERNAL'
+        address_object_tag: 'Management'
 
       - address_object_name: "VLAN-15_Admins"
         address_object_value: '10.0.15.0/24'
         address_object_description: "SECNET HQ Network"
-        address_object_tag: 'INTERNAL'
-
-      - address_object_name: "VLAN-21_vManagement"
-        address_object_value: '10.0.21.0/24'
-        address_object_description: "SECNET HQ Network"
-        address_object_tag: 'INTERNAL'
+        address_object_tag: 'Management'
 
       - address_object_name: "hqcrfw1.secnetwork.org"
         address_object_value: '10.0.11.11'
@@ -82,6 +77,91 @@
         address_object_description: "hqups6.secnetwork.org"
         address_object_tag: 'Management'
 
+      - address_object_name: "VLAN-21_vManagement"
+        address_object_value: '10.0.21.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Virtualization'
+
+      - address_object_name: "VLAN-31_PDC"
+        address_object_value: '10.0.31.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Authentication'
+
+      - address_object_name: "VLAN-31_PKI"
+        address_object_value: '10.0.32.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Authentication'
+
+      - address_object_name: "VLAN-33_NAC"
+        address_object_value: '10.0.33.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Authentication'        
+
+      - address_object_name: "VLAN-34_SSO"
+        address_object_value: '10.0.34.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Authentication'
+
+      - address_object_name: "VLAN-41_LOG"
+        address_object_value: '10.0.41.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Security'
+
+      - address_object_name: "VLAN-42_VAS"
+        address_object_value: '10.0.42.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Security'
+
+      - address_object_name: "VLAN-43_MON"
+        address_object_value: '10.0.43.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Security'
+
+      - address_object_name: "VLAN-44_NVR"
+        address_object_value: '10.0.44.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Security'
+
+      - address_object_name: "VLAN-51_Servers"
+        address_object_value: '10.0.51.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Servers'
+
+      - address_object_name: "VLAN-91_Frontend"
+        address_object_value: '10.0.91.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'DMZ'
+
+      - address_object_name: "VLAN-95_Backend"
+        address_object_value: '10.0.95.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'DMZ'
+
+      - address_object_name: "VLAN-111_Users"
+        address_object_value: '10.0.111.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Endpoints'
+
+      - address_object_name: "VLAN-121_Printers"
+        address_object_value: '10.0.121.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Endpoints'
+
+      - address_object_name: "VLAN-131_Phones"
+        address_object_value: '10.0.131.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Endpoints'
+
+      - address_object_name: "VLAN-141_IOT"
+        address_object_value: '10.0.141.0/24'
+        address_object_description: "SECNET HQ Network"
+        address_object_tag: 'Endpoints'
+
+      - address_object_name: "VLAN-666_Guests"
+        address_object_value: '192.168.1.0/24'
+        address_object_description: "Guest Network"
+        address_object_tag: 'Guests'
+
     create_address_group:
       - address_group_name: 'RFC1918'
         address_group_static_value: ['RFC1918 - 10.0.0.0','RFC1918 - 172.16.0.0','RFC1918 - 192.168.0.0']
@@ -98,6 +178,26 @@
       - address_group_name: 'ZONE_L3-Virtualization'
         address_group_static_value: ['VLAN-21_vManagement']
         address_group_tag: 'Virtualization'
+
+      - address_group_name: 'ZONE_L3-Authentication'
+        address_group_static_value: ['VLAN-31_PDC','VLAN-32_PKI','VLAN-33_NAC','VLAN-34_SSO']
+        address_group_tag: 'Authentication'
+
+      - address_group_name: 'ZONE_L3-Security'
+        address_group_static_value: ['VLAN-41_LOG','VLAN-42_VAS','VLAN-43_MON','VLAN-44_NVR']
+        address_group_tag: 'Security'
+
+      - address_group_name: 'ZONE_L3-Servers'
+        address_group_static_value: ['VLAN-51_Servers']
+        address_group_tag: 'Servers'
+
+      - address_group_name: 'ZONE_L3-DMZ'
+        address_group_static_value: ['VLAN-91_Frontend','VLAN-95_Backend']
+        address_group_tag: 'DMZ'
+
+      - address_group_name: 'ZONE_L3-Endpoints'
+        address_group_static_value: ['VLAN-111_Users','VLAN-121_Printers','VLAN-131_Phones','VLAN-141_IOT']
+        address_group_tag: 'Endpoints'
 
   tasks:
     - name: Creating Address Object

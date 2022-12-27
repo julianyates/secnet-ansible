@@ -24,4 +24,4 @@
         destination: '0.0.0.0/0'
         nexthop: '96.231.240.1'
         nexthop_type: ip-address
-        interface: ethernet1/1
+        interface: vlan.9000

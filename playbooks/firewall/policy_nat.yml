@@ -125,23 +125,4 @@
         source_translation_address_type: 'interface-address'
         source_translation_interface: '{{ wan_interface }}'
         source_translation_ip_address: '96.231.240.210/24'
-
-    - name: Default NAT Policy - Project-Y
-      panos_nat_rule2:
-        provider: '{{ provider }}'
-        name: 'Default NAT Policy - Project-Y'
-        description: 'Default NAT Policy - Project-Y'
-        tags: ['INTERNAL']
-        group_tag: 'OUTBOUND'
-        nat_type: 'ipv4'
-        from_zones: '{{ zone_prjy }}'
-        to_zones: ['L3-WAN']
-        to_interface: '{{ wan_interface }}'
-        service: 'any'
-        source_addresses: ['ZONE_{{ zone_prjy }}']
-        destination_addresses: ['any']
-        source_translation_type: 'dynamic-ip-and-port'
-        source_translation_address_type: 'interface-address'
-        source_translation_interface: '{{ wan_interface }}'
-        source_translation_ip_address: '96.231.240.210/24'
-
+ 

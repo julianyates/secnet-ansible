@@ -60,9 +60,9 @@
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "{{ zone_prjy }}"
-        zone_mode: layer3
-        zone_userid: no
+#      - zone_name: "{{ zone_prjy }}"
+#        zone_mode: layer3
+#        zone_userid: no
 
   tasks:
     - name: Create Zones

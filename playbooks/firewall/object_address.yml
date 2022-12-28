@@ -195,6 +195,10 @@
         address_group_static_value: ['VLAN-91_Frontend','VLAN-95_Backend']
         address_group_tag: 'DMZ'
 
+      - address_group_name: 'ZONE_{{ zone_gst }}'
+        address_group_static_value: ['VLAN-666_Guests']
+        address_group_tag: 'Guests'
+
       - address_group_name: 'ZONE_L3-Endpoints'
         address_group_static_value: ['VLAN-111_Users','VLAN-121_Printers','VLAN-131_Phones','VLAN-141_IOT']
         address_group_tag: 'Endpoints'

@@ -62,7 +62,7 @@
         to_zones: ['L3-WAN']
         to_interface: '{{ wan_interface }}'
         service: 'any'
-        source_addresses: ['ZONE_L3-Authentication']
+        source_addresses: ['ZONE_{{ zone_auth }}']
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
@@ -77,11 +77,11 @@
         tags: ['Security']
         group_tag: 'OUTBOUND'
         nat_type: 'ipv4'
-        from_zones: ['L3-Security']
+        from_zones: '{{ zone_sec }}'
         to_zones: ['L3-WAN']
         to_interface: '{{ wan_interface }}'
         service: 'any'
-        source_addresses: ['ZONE_L3-Security']
+        source_addresses: ['ZONE_{{ zone_sec }}']
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
@@ -96,11 +96,11 @@
         tags: ['Servers']
         group_tag: 'OUTBOUND'
         nat_type: 'ipv4'
-        from_zones: ['L3-Servers']
+        from_zones: '{{ zone_srv }}'
         to_zones: ['L3-WAN']
         to_interface: '{{ wan_interface }}'
         service: 'any'
-        source_addresses: ['ZONE_L3-Servers']
+        source_addresses: ['ZONE_{{ zone_srv }}']
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
@@ -115,11 +115,30 @@
         tags: ['Endpoints']
         group_tag: 'OUTBOUND'
         nat_type: 'ipv4'
-        from_zones: ['L3-Endpoints']
+        from_zones: '{{ zone_end }}'
         to_zones: ['L3-WAN']
         to_interface: '{{ wan_interface }}'
         service: 'any'
-        source_addresses: ['ZONE_L3-Endpoints']
+        source_addresses: ['ZONE_{{ zone_end }}']
+        destination_addresses: ['any']
+        source_translation_type: 'dynamic-ip-and-port'
+        source_translation_address_type: 'interface-address'
+        source_translation_interface: '{{ wan_interface }}'
+        source_translation_ip_address: '96.231.240.210/24'
+
+    - name: Default NAT Policy - Project-Y
+      panos_nat_rule2:
+        provider: '{{ provider }}'
+        name: 'Default NAT Policy - Project-Y'
+        description: 'Default NAT Policy - Project-Y'
+        tags: ['INTERNAL']
+        group_tag: 'OUTBOUND'
+        nat_type: 'ipv4'
+        from_zones: '{{ zone_prjy }}'
+        to_zones: ['L3-WAN']
+        to_interface: '{{ wan_interface }}'
+        service: 'any'
+        source_addresses: ['ZONE_{{ zone_prjy }}']
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'

@@ -22,13 +22,13 @@
         nat_type: 'ipv4'
         from_zones: ['L3-Management']
         to_zones: ['L3-WAN']
-        to_interface: 'vlan.9000'
+        to_interface: '{{ wan_interface }}'
         service: 'any'
         source_addresses: ['ZONE_L3-Management']
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
-        source_translation_interface: 'vlan.9000'
+        source_translation_interface: '{{ wan_interface }}'
         source_translation_ip_address: '96.231.240.210/24'
 
     - name: TMP NAT Policy - Virtualization

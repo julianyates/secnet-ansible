@@ -22,7 +22,7 @@
         nat_type: 'ipv4'
         from_zones: ['L3-Management']
         to_zones: ['L3-WAN']
-        to_interface: 'vlan.9999'
+        to_interface: 'vlan.9000'
         service: 'any'
         source_addresses: ['ZONE_L3-Management']
         destination_addresses: ['any']
@@ -41,7 +41,7 @@
         nat_type: 'ipv4'
         from_zones: ['L3-Virtualization']
         to_zones: ['L3-WAN']
-        to_interface: 'vlan.9999'
+        to_interface: 'vlan.9000'
         service: 'any'
         source_addresses: ['ZONE_L3-Virtualization']
         destination_addresses: ['any']
@@ -60,7 +60,7 @@
         nat_type: 'ipv4'
         from_zones: ['L3-Authentication']
         to_zones: ['L3-WAN']
-        to_interface: 'vlan.9999'
+        to_interface: 'vlan.9000'
         service: 'any'
         source_addresses: ['ZONE_L3-Authentication']
         destination_addresses: ['any']
@@ -79,7 +79,7 @@
         nat_type: 'ipv4'
         from_zones: ['L3-Security']
         to_zones: ['L3-WAN']
-        to_interface: 'vlan.9999'
+        to_interface: 'vlan.9000'
         service: 'any'
         source_addresses: ['ZONE_L3-Security']
         destination_addresses: ['any']
@@ -98,7 +98,7 @@
         nat_type: 'ipv4'
         from_zones: ['L3-Servers']
         to_zones: ['L3-WAN']
-        to_interface: 'vlan.9999'
+        to_interface: 'vlan.9000'
         service: 'any'
         source_addresses: ['ZONE_L3-Servers']
         destination_addresses: ['any']

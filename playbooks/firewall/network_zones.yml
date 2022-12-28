@@ -44,11 +44,11 @@
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-Endpoint"
+      - zone_name: "L3-Endpoints"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-Guest"
+      - zone_name: "L3-Guests"
         zone_mode: layer3
         zone_userid: no
 

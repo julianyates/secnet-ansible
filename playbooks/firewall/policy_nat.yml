@@ -28,7 +28,7 @@
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
-        source_translation_interface: 'vlan.9999'
+        source_translation_interface: 'vlan.9000'
         source_translation_ip_address: '96.231.240.210/24'
 
     - name: TMP NAT Policy - Virtualization
@@ -47,7 +47,7 @@
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
-        source_translation_interface: 'vlan.9999'
+        source_translation_interface: 'vlan.9000'
         source_translation_ip_address: '96.231.240.210/24' 
 
     - name: TMP NAT Policy - Authentication
@@ -66,7 +66,7 @@
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
-        source_translation_interface: 'vlan.9999'
+        source_translation_interface: 'vlan.9000'
         source_translation_ip_address: '96.231.240.210/24' 
 
     - name: TMP NAT Policy - Security
@@ -85,7 +85,7 @@
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
-        source_translation_interface: 'vlan.9999'
+        source_translation_interface: 'vlan.9000'
         source_translation_ip_address: '96.231.240.210/24'
 
     - name: TMP NAT Policy - Servers
@@ -104,7 +104,7 @@
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
-        source_translation_interface: 'vlan.9999'
+        source_translation_interface: 'vlan.9000'
         source_translation_ip_address: '96.231.240.210/24'
 
     - name: TMP NAT Policy - Endpoints
@@ -123,5 +123,5 @@
         destination_addresses: ['any']
         source_translation_type: 'dynamic-ip-and-port'
         source_translation_address_type: 'interface-address'
-        source_translation_interface: 'vlan.9999'
+        source_translation_interface: 'vlan.9000'
         source_translation_ip_address: '96.231.240.210/24'

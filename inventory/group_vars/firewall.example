@@ -4,6 +4,17 @@ ip_address: '10.0.0.1'
 api_key: 'place_your_api_key_here'
 
 
-zones_all: 'L3-Management','L3-Virtualization','L3-Authentication'
+zone_mgt: L3-Management
+zone_virt: L3-Virtualization
+zone_auth: L3-Authentication
+zone_sec: L3-Security
+zone_srv: L3-Servers
+zone_dmz: L3-DMZ
+zone_end: L3-Endpoints
+zone_gst: L3-Guests
+zone_prjr: L3-Project-R
+zone_prjy: L3-Project-Y
+
+zones_all: ['{{ zone_mgt }}','{{ zone_virt }}','{{ zone_auth }}','{{ zone_sec }}','L3-Servers','L3-DMZ','L3-Endpoints','L3-Guests']
 
 wan_interface: 'vlan.9000'

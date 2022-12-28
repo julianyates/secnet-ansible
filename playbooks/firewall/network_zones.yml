@@ -24,47 +24,47 @@
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "L3-Management"
+      - zone_name: "{{ zone_mgt }}"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-Virtualization"
+      - zone_name: "{{ zone_virt }}"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-Authentication"
+      - zone_name: "{{ zone_auth }}"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-Security"
+      - zone_name: "{{ zone_sec }}"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-DMZ"
+      - zone_name: "{{ zone_srv }}"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-Endpoints"
+      - zone_name: "{{ zone_dmz }}"
         zone_mode: layer3
         zone_userid: yes
 
-      - zone_name: "L3-Guests"
+      - zone_name: "{{ zone_end }}"
+        zone_mode: layer3
+        zone_userid: yes
+
+      - zone_name: "{{ zone_gst }}"
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "L3-Project-R"
+      - zone_name: "{{ zone_prjr }}"
         zone_mode: layer3
         zone_userid: no
 
-      - zone_name: "L3-Project-Y"
+      - zone_name: "{{ zone_prjy }}"
         zone_mode: layer3
         zone_userid: no
 
   tasks:
-#    - name: Import Credentials from File
-#      include_vars: '/root/secnet-ansible/fw'
-#      no_log: 'yes'
-
     - name: Create Zones
       panos_zone:
         provider: '{{ provider }}'

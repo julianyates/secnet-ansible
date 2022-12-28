@@ -57,7 +57,7 @@
         enable_dhcp: "false"
         management_profile: 'Management'
         ip: ["10.0.11.1/24"]
-        zone_name: "L3-Management"
+        zone_name: "{{ zone_mgt }}"
         comment: "Management"
 
       - name: '{{ aggregate_group_name }}.15'
@@ -65,7 +65,7 @@
         enable_dhcp: "false"
         management_profile: 'Management'
         ip: ["10.0.15.1/24"]
-        zone_name: "L3-Management"
+        zone_name: "{{ zone_mgt }}"
         comment: "Admins"
 
       - name: '{{ aggregate_group_name }}.21'
@@ -73,7 +73,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.21.1/24"]
-        zone_name: "L3-Virtualization"
+        zone_name: "{{ zone_virt }}"
         comment: "vManagement"
 
       - name: '{{ aggregate_group_name }}.31'
@@ -81,7 +81,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.31.1/24"]
-        zone_name: "L3-Authentication"
+        zone_name: "{{ zone_auth }}"
         comment: "PDC"
 
       - name: '{{ aggregate_group_name }}.32'
@@ -89,7 +89,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.32.1/24"]
-        zone_name: "L3-Authentication"
+        zone_name: "{{ zone_auth }}"
         comment: "PKI"
 
       - name: '{{ aggregate_group_name }}.33'
@@ -97,7 +97,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.33.1/24"]
-        zone_name: "L3-Authentication"
+        zone_name: "{{ zone_auth }}"
         comment: "NAC"
 
       - name: '{{ aggregate_group_name }}.34'
@@ -105,7 +105,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.34.1/24"]
-        zone_name: "L3-Authentication"
+        zone_name: "{{ zone_auth }}"
         comment: "SSO"
 
       - name: '{{ aggregate_group_name }}.41'
@@ -113,7 +113,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.41.1/24"]
-        zone_name: "L3-Security"
+        zone_name: "{{ zone_sec }}"
         comment: "LOG"
 
       - name: '{{ aggregate_group_name }}.42'
@@ -121,7 +121,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.42.1/24"]
-        zone_name: "L3-Security"
+        zone_name: "{{ zone_sec }}"
         comment: "VAS"
 
       - name: '{{ aggregate_group_name }}.43'
@@ -129,7 +129,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.43.1/24"]
-        zone_name: "L3-Security"
+        zone_name: "{{ zone_sec }}"
         comment: "MON"
 
       - name: '{{ aggregate_group_name }}.44'
@@ -137,7 +137,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.44.1/24"]
-        zone_name: "L3-Security"
+        zone_name: "{{ zone_sec }}"
         comment: "NVR"
 
       - name: '{{ aggregate_group_name }}.51'
@@ -145,7 +145,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.51.1/24"]
-        zone_name: "L3-Servers"
+        zone_name: "{{ zone_srv }}"
         comment: "Servers"
 
       - name: '{{ aggregate_group_name }}.91'
@@ -153,7 +153,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.91.1/24"]
-        zone_name: "L3-DMZ"
+        zone_name: "{{ zone_dmz }}"
         comment: "Frontend"
 
       - name: '{{ aggregate_group_name }}.95'
@@ -161,7 +161,7 @@
         enable_dhcp: "false"
         management_profile: 'Default'
         ip: ["10.0.95.1/24"]
-        zone_name: "L3-DMZ"
+        zone_name: "{{ zone_dmz }}"
         comment: "Backend"
 
       - name: '{{ aggregate_group_name }}.111'
@@ -169,7 +169,7 @@
         enable_dhcp: "false"
         management_profile: 'Users'
         ip: ["10.0.111.1/24"]
-        zone_name: "L3-Endpoints"
+        zone_name: "{{ zone_end }}"
         comment: "Users"
 
       - name: '{{ aggregate_group_name }}.121'
@@ -177,7 +177,7 @@
         enable_dhcp: "false"
         management_profile: 'Users'
         ip: ["10.0.121.1/24"]
-        zone_name: "L3-Endpoints"
+        zone_name: "{{ zone_end }}"
         comment: "Printers"
 
       - name: '{{ aggregate_group_name }}.131'
@@ -185,7 +185,7 @@
         enable_dhcp: "false"
         management_profile: 'Users'
         ip: ["10.0.131.1/24"]
-        zone_name: "L3-Endpoints"
+        zone_name: "{{ zone_end }}"
         comment: "Phones"
 
       - name: '{{ aggregate_group_name }}.141'
@@ -193,7 +193,7 @@
         enable_dhcp: "false"
         management_profile: 'Users'
         ip: ["10.0.141.1/24"]
-        zone_name: "L3-Endpoints"
+        zone_name: "{{ zone_end }}"
         comment: "IOT"
 
       - name: '{{ aggregate_group_name }}.666'
@@ -201,7 +201,7 @@
         enable_dhcp: "false"
         management_profile: 'Users'
         ip: ["192.168.1.1/24"]
-        zone_name: "L3-Guests"
+        zone_name: "{{ zone_gst }}"
         comment: "Guests"
 
   tasks:
@@ -252,7 +252,7 @@
         name: '{{ aggregate_group_name }}.1311'
         tag: "1311"
         ip: ["10.13.11.1/24"]
-        zone_name: "Project-R"
+        zone_name: "{{ zone_prjr }}"
         enable_dhcp: "false"
         management_profile: 'Users'
         vr_name: "Project-R"

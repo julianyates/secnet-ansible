@@ -18,14 +18,14 @@
         rule_name: 'JY VAULT'
         rule_type: interzone
         description: 'Managed by Ansible'
-        tag_name: ['OUTBOUND']
-        group_tag: 'Public'
-        source_zone: ['L3-WAN']
-        source_ip: ['HQFW1 NAT IP']
+        tag_name: ['INBOUND']
+        group_tag: 'PUBLIC'
+        source_zone: ['L2-WAN']
+        source_ip: ['US']
         source_user: ['any']
-        destination_zone: ['L3-WAN']
-        destination_ip: ['{{ initial_ntp_server_1 }}','{{ initial_ntp_server_2 }}']
-        application: ['ntp']
+        destination_zone: ['L2-LAN']
+        destination_ip: ['96.231.240.214']
+        application: ['acme-protocol','ssl','web-browsing']
         service: ['application-default']
         category: ['any']
         action: 'allow'
@@ -33,3 +33,47 @@
         log_end: 'yes'
         location: 'after'
         existing_rule: 'PANOS FW to NTP Servers'
+
+    - name: NS MOJAVE
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'NS MOJAVE'
+        rule_type: interzone
+        description: 'Managed by Ansible'
+        tag_name: ['INBOUND']
+        group_tag: 'PUBLIC'
+        source_zone: ['L2-WAN']
+        source_ip: ['US']
+        source_user: ['any']
+        destination_zone: ['L2-LAN']
+        destination_ip: ['96.231.240.220','96.231.240.221']
+        application: ['dns','icmp','ping','pop3',smtp,'ssl','web-browsing']
+        service: ['any']
+        category: ['any']
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'after'
+        existing_rule: 'JY VAULT'
+
+    - name: L2-WAN Internet
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'L2-WAN Internet'
+        rule_type: interzone
+        description: 'Managed by Ansible'
+        tag_name: ['OUTBOUND']
+        group_tag: 'PUBLIC'
+        source_zone: ['L2-LAN']
+        source_ip: ['96.231.240.214','96.231.240.220','96.231.240.221']
+        source_user: ['any']
+        destination_zone: ['L2-WAN']
+        destination_ip: ['US']
+        application: ['any']
+        service: ['any']
+        category: ['any']
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'after'
+        existing_rule: 'NS MOJAVE'

@@ -3,6 +3,14 @@
 ip_address: '10.0.0.1'
 api_key: 'place_your_api_key_here'
 
+firewall_hostname: hqcrfw1
+firewall_domain: secnetwork.org
+
+initial_dns_server_1: 1.1.1.1
+initial_dns_server_2: 1.1.1.2
+
+initial_ntp_server_1: 129.6.15.28
+initial_ntp_server_2: 132.163.96.1
 
 zone_mgt: L3-Management
 zone_virt: L3-Virtualization

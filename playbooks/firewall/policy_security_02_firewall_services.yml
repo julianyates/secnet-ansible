@@ -78,7 +78,7 @@
         source_ip: ['HQFW1 NAT IP']
         source_user: ['any']
         destination_zone: ['L3-WAN']
-        destination_ip: ['1.1.1.1','8.8.8.8']
+        destination_ip: ['{{ initial_dns_server_1 }}','{{ initial_dns_server_2 }}']
         application: ['dns']
         service: ['application-default']
         category: ['any']

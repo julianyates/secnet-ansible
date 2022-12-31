@@ -1,0 +1,23 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: Prevent RFC1918 to WAN
+      panos_mgtconfig:
+        provider: '{{ provider }}'
+        hostname: "{{ firewall_hostname }}"
+        domain: "{{ firewall_domain }}"
+        dns_server_primary: "{{ initial_dns_server_1 }}"
+        dns_server_secondary: "{{ initial_dns_server_2 }}"
+        ntp_server_primary: "{{ initial_ntp_server_1 }}"
+        ntp_server_secondary: "{{ initial_ntp_server_2 }}"

@@ -1,0 +1,35 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: TMP - Allow Internet Access
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'TMP - Allow Internet Access'
+        rule_type: interzone
+        description: 'Managed by Ansible'
+        tag_name: ['OUTBOUND']
+        group_tag: 'OUTBOUND'
+        source_zone: ['{{ all_zones }}']
+        source_ip: ['SECNET HQ Network','{{ ZONE_L3-Guests }}']
+        source_user: ['any']
+        destination_zone: ['L3-WAN']
+        destination_ip: ['US']
+        application: ['acme-protocol','ssl','web-browsing']
+        service: ['application-default']
+        category: ['any']
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'before'
+        existing_rule: 'Deny All Traffic'

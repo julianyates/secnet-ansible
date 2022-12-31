@@ -64,9 +64,9 @@
         tag_color: "blue"
         tag_comments: "INTERNAL"
 
-      - tag_name: "PUBLIC"
+      - tag_name: "Public Services"
         tag_color: "green"
-        tag_comments: "PUBLIC"
+        tag_comments: "Public Services"
 
       - tag_name: "WAN"
         tag_color: "red"

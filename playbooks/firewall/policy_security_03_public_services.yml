@@ -19,7 +19,7 @@
         rule_type: interzone
         description: 'Managed by Ansible'
         tag_name: ['INBOUND']
-        group_tag: 'PUBLIC'
+        group_tag: 'Public Services'
         source_zone: ['L2-WAN']
         source_ip: ['US']
         source_user: ['any']
@@ -41,7 +41,7 @@
         rule_type: interzone
         description: 'Managed by Ansible'
         tag_name: ['INBOUND']
-        group_tag: 'PUBLIC'
+        group_tag: 'Public Services'
         source_zone: ['L2-WAN']
         source_ip: ['any']
         source_user: ['any']
@@ -63,7 +63,7 @@
         rule_type: interzone
         description: 'Managed by Ansible'
         tag_name: ['INBOUND']
-        group_tag: 'PUBLIC'
+        group_tag: 'Public Services'
         source_zone: ['L2-WAN']
         source_ip: ['US']
         source_user: ['any']
@@ -85,7 +85,7 @@
         rule_type: interzone
         description: 'Managed by Ansible'
         tag_name: ['OUTBOUND']
-        group_tag: 'PUBLIC'
+        group_tag: 'Public Services'
         source_zone: ['L2-LAN']
         source_ip: ['96.231.240.212','96.231.240.213','96.231.240.214','96.231.240.215','96.231.240.220','96.231.240.221']
         source_user: ['any']

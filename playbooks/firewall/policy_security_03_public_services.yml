@@ -1,0 +1,35 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: JY VAULT
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'JY VAULT'
+        rule_type: interzone
+        description: 'Managed by Ansible'
+        tag_name: ['OUTBOUND']
+        group_tag: 'Public'
+        source_zone: ['L3-WAN']
+        source_ip: ['HQFW1 NAT IP']
+        source_user: ['any']
+        destination_zone: ['L3-WAN']
+        destination_ip: ['{{ initial_ntp_server_1 }}','{{ initial_ntp_server_2 }}']
+        application: ['ntp']
+        service: ['application-default']
+        category: ['any']
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'after'
+        existing_rule: 'PANOS FW to NTP Servers'

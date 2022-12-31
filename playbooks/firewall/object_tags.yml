@@ -64,6 +64,10 @@
         tag_color: "blue"
         tag_comments: "INTERNAL"
 
+      - tag_name: "PUBLIC"
+        tag_color: "green"
+        tag_comments: "PUBLIC"
+
       - tag_name: "WAN"
         tag_color: "red"
         tag_comments: "WAN"

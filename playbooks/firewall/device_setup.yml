@@ -12,7 +12,7 @@
       api_key: '{{ api_key }}'
 
   tasks:
-    - name: Prevent RFC1918 to WAN
+    - name: Configuring Firewall
       panos_mgtconfig:
         provider: '{{ provider }}'
         hostname: "{{ firewall_hostname }}"

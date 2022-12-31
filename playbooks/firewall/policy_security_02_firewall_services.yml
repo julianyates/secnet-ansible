@@ -100,7 +100,7 @@
         source_ip: ['HQFW1 NAT IP']
         source_user: ['any']
         destination_zone: ['L3-WAN']
-        destination_ip: ['216.40.34.37','66.228.59.187']
+        destination_ip: ['{{ initial_ntp_server_1 }}','{{ initial_ntp_server_2 }}']
         application: ['ntp']
         service: ['application-default']
         category: ['any']

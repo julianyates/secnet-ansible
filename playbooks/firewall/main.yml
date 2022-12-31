@@ -1,8 +1,14 @@
 ---
 
+- import_playbook: device_setup.yml
 - import_playbook: object_tags.yml
 - import_playbook: object_address.yml
 - import_playbook: network_zones.yml
 - import_playbook: network_interfaces.yml
 - import_playbook: network_vr.yml
 - import_playbook: policy_nat.yml
+- import_playbook: policy_99_deny_all_traffic.yml
+- import_playbook: policy_01_unauthorized_traffic.yml
+- import_playbook: policy_02_firewall_services.yml
+- import_playbook: policy_03_public_services.yml
+- import_playbook: policy_90_tmp_internet_access.yml

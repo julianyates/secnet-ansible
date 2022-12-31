@@ -24,7 +24,7 @@
         source_ip: ['SECNET HQ Network','ZONE_{{ zone_gst }}']
         source_user: ['any']
         destination_zone: ['L3-WAN']
-        destination_ip: ['US']
+        destination_ip: ['any']
         application: ['any']
         service: ['application-default']
         category: ['any']

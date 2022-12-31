@@ -1,0 +1,34 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+  tasks:
+    - name: Deny All Traffic
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'Deny All Traffic'
+        rule_type: universal
+        description: 'Managed by Ansible'
+        tag_name: ['Unauthorized Traffic']
+        group_tag: 'Unauthorized Traffic'
+        source_zone: ['any']
+        source_ip: ['any']
+        source_user: ['any']
+        destination_zone: ['any']
+        destination_ip: ['any']
+        application: ['any']
+        service: ['any']
+        category: ['any']
+        action: 'deny'
+        log_start: 'yes'
+        log_end: 'no'
+        location: 'bottom'

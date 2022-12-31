@@ -21,11 +21,11 @@
         tag_name: ['OUTBOUND']
         group_tag: 'OUTBOUND'
         source_zone: ['{{ zones_all }}']
-        source_ip: ['SECNET HQ Network','{{ ZONE_L3-Guests }}']
+        source_ip: ['SECNET HQ Network','ZONE_{{ zone_gst }}']
         source_user: ['any']
         destination_zone: ['L3-WAN']
         destination_ip: ['US']
-        application: ['acme-protocol','ssl','web-browsing']
+        application: ['any']
         service: ['application-default']
         category: ['any']
         action: 'allow'

@@ -20,7 +20,7 @@
         description: 'Managed by Ansible'
         tag_name: ['OUTBOUND']
         group_tag: 'OUTBOUND'
-        source_zone: ['{{ all_zones }}']
+        source_zone: ['{{ zones_all }}']
         source_ip: ['SECNET HQ Network','{{ ZONE_L3-Guests }}']
         source_user: ['any']
         destination_zone: ['L3-WAN']

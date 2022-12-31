@@ -32,6 +32,11 @@
         address_object_description: "SECNET HQ Network"
         address_object_tag: 'INTERNAL'
 
+      - address_object_name: "HQFW1 NAT IP"
+        address_object_value: '96.231.240.210'
+        address_object_description: "HQFW1 NAT IP"
+        address_object_tag: 'OUTBOUND'
+
       - address_object_name: "VLAN-11_MGT"
         address_object_value: '10.0.11.0/24'
         address_object_description: "SECNET HQ Network"

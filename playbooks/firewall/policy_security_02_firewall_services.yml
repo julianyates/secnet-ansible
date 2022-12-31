@@ -20,10 +20,10 @@
         description: 'Managed by Ansible'
         tag_name: ['OUTBOUND']
         group_tag: 'Firewall Services'
-        source_zone: ['WAN']
+        source_zone: ['L3-WAN']
         source_ip: ['HQFW1 NAT IP']
         source_user: ['any']
-        destination_zone: ['WAN']
+        destination_zone: ['L3-WAN']
         destination_ip: ['US']
         application: ['web-browsing','ssl']
         service: ['application-default']
@@ -47,10 +47,10 @@
         description: 'Managed by Ansible'
         tag_name: ['OUTBOUND']
         group_tag: 'Firewall Services'
-        source_zone: ['WAN']
+        source_zone: ['L3-WAN']
         source_ip: ['HQFW1 NAT IP']
         source_user: ['any']
-        destination_zone: ['WAN']
+        destination_zone: ['L3-WAN']
         destination_ip: ['US']
         application: ['paloalto-dns-security','paloalto-updates','paloalto-wildfire-cloud','pan-db-cloud']
         service: ['application-default']
@@ -74,10 +74,10 @@
         description: 'Managed by Ansible'
         tag_name: ['OUTBOUND']
         group_tag: 'Firewall Services'
-        source_zone: ['WAN']
+        source_zone: ['L3-WAN']
         source_ip: ['HQFW1 NAT IP']
         source_user: ['any']
-        destination_zone: ['WAN']
+        destination_zone: ['L3-WAN']
         destination_ip: ['1.1.1.1','8.8.8.8']
         application: ['dns']
         service: ['application-default']
@@ -96,10 +96,10 @@
         description: 'Managed by Ansible'
         tag_name: ['OUTBOUND']
         group_tag: 'Firewall Services'
-        source_zone: ['WAN']
+        source_zone: ['L3-WAN']
         source_ip: ['HQFW1 NAT IP']
         source_user: ['any']
-        destination_zone: ['WAN']
+        destination_zone: ['L3-WAN']
         destination_ip: ['216.40.34.37','66.228.59.187']
         application: ['ntp']
         service: ['application-default']

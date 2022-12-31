@@ -17,6 +17,7 @@
         provider: '{{ provider }}'
         hostname: "{{ firewall_hostname }}"
         domain: "{{ firewall_domain }}"
+        timezone: '{{ firewall_timezone }}'
         dns_server_primary: "{{ initial_dns_server_1 }}"
         dns_server_secondary: "{{ initial_dns_server_2 }}"
         ntp_server_primary: "{{ initial_ntp_server_1 }}"

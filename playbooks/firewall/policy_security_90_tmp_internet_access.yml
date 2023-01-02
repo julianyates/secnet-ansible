@@ -31,5 +31,6 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
         location: 'before'
         existing_rule: 'Deny All Traffic'

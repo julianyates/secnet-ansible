@@ -27,3 +27,13 @@ zone_prjy: L3-Project-Y
 zones_all: ['{{ zone_mgt }}','{{ zone_virt }}','{{ zone_auth }}','{{ zone_sec }}','L3-Servers','L3-DMZ','L3-Endpoints','L3-Guests']
 
 wan_interface: 'vlan.9000'
+
+
+Default_WAN_AV_Profile
+Default_WAN_Spyware_Profile
+Default_WAN_IPS_Profile
+Default_LAN_File_Profile
+Admin_LAN_File_Profile
+
+
+Default_WAN_Sec_Profile

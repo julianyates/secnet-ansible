@@ -31,6 +31,7 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
+        group_profile: 'Default_WAN_Sec_Profile'
         location: 'after'
         existing_rule: 'PANOS FW to NTP Servers'
 
@@ -53,6 +54,7 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
+        group_profile: 'Default_WAN_Sec_Profile'
         location: 'after'
         existing_rule: 'JY VAULT'
 
@@ -75,6 +77,7 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
+        group_profile: 'Default_WAN_Sec_Profile'
         location: 'after'
         existing_rule: 'NS MOJAVE'
 
@@ -97,5 +100,6 @@
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
         location: 'after'
         existing_rule: 'HOME NETWORK'

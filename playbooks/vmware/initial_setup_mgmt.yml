@@ -58,3 +58,27 @@
         portgroup: "Admins"
         vlan_id: "15"
       delegate_to: localhost
+
+    - name: Add Management Network VM Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "vManagement"
+        vlan_id: "21"
+      delegate_to: localhost
+
+    - name: Add Management Network VM Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "PDC"
+        vlan_id: "31"
+      delegate_to: localhost

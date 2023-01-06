@@ -29,8 +29,20 @@
         username: '{{ esxi_username }}'
         password: '{{ esxi_password }}'
         validate_certs: no
-        cluster_name: [hqvh5.secnetwork.org]
+        hosts: [hqvh5.secnetwork.org]
         switch: "{{ esxi_vswitch }}"
         portgroup: "VM Network"
         state: absent
+      delegate_to: localhost
+
+    - name: Add Management Network VM Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "Management"
+        vlan_id: "11"
       delegate_to: localhost

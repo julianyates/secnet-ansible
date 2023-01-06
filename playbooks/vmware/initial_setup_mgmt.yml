@@ -22,3 +22,13 @@
         search_domains:
           - secnetwork.org
       delegate_to: localhost
+
+    - name: Remove Portgroup
+      vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "VM Network"
+        state: absent
+      delegate_to: localhost

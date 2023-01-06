@@ -10,3 +10,5 @@ esxi_host_2: 10.0.21.202
 esxi_host_3: 10.0.21.203
 esxi_host_4: 10.0.21.204
 esxi_host_5: 10.0.21.205
+
+esxi_vswitch: 'vSwitch0'

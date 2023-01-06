@@ -28,6 +28,7 @@
         hostname: '{{ esxi_host_5 }}'
         username: '{{ esxi_username }}'
         password: '{{ esxi_password }}'
+        host_name: 'hqvh5'
         switch: "{{ esxi_vswitch }}"
         portgroup: "VM Network"
         state: absent

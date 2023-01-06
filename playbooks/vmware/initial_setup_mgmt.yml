@@ -1,0 +1,24 @@
+---
+
+- hosts: esxi
+  gather_facts: no
+
+  collections:
+    - community.vmware
+
+  tasks:
+    - name: Configure DNS for an ESXi host
+      vmware_host_dns:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        type: static
+        host_name: 'hqvh5'
+        domain: secnetwork.org
+        dns_servers:
+          - 1.1.1.1
+          - 8.8.8.8
+        search_domains:
+          - secnetwork.org
+      delegate_to: localhost

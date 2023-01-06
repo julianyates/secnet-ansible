@@ -6,8 +6,8 @@ localhost ansible_python_interpreter=/usr/bin/python3.8
 10.0.11.251 ansible_python_interpreter=/usr/bin/python3.9
 
 [vmware]
-10.0.11.201
-10.0.11.202
-10.0.11.203
-10.0.11.204
-10.0.11.205
+10.0.21.201
+10.0.21.202
+10.0.21.203
+10.0.21.204
+10.0.21.205

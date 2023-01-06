@@ -1,6 +1,6 @@
 ---
 
-- hosts: esxi
+- hosts: 10.0.21.205
   gather_facts: no
 
   collections:

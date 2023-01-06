@@ -1,12 +1,12 @@
-# rename this file to 'netbox' or whichever group is specified within inventory hosts file
+# rename this file to 'vmware' or whichever group is specified within inventory hosts file
 
-ansible_python_interpreter: /usr/bin/python3
+ansible_python_interpreter=/usr/bin/python3.9
 
 esxi_username: 'root'
 esxi_password: '<replace_with_password>'
 
-esxi_host_1: 10.0.11.201
-esxi_host_2: 10.0.11.202
-esxi_host_3: 10.0.11.203
-esxi_host_4: 10.0.11.204
-esxi_host_5: 10.0.11.205
+esxi_host_1: 10.0.21.201
+esxi_host_2: 10.0.21.202
+esxi_host_3: 10.0.21.203
+esxi_host_4: 10.0.21.204
+esxi_host_5: 10.0.21.205

@@ -28,6 +28,7 @@
         hostname: '{{ esxi_host_5 }}'
         username: '{{ esxi_username }}'
         password: '{{ esxi_password }}'
+        validate_certs: no
         cluster_name: [hqvh5.secnetwork.org]
         switch: "{{ esxi_vswitch }}"
         portgroup: "VM Network"

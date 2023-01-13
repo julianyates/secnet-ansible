@@ -199,11 +199,11 @@
         validate_certs: no
         hosts: [hqvh5.secnetwork.org]
         switch: "{{ esxi_vswitch }}"
-        portgroup: "Frontend-DMZ"
+        portgroup: "DMZ-Frontend"
         vlan_id: "91"
       delegate_to: localhost
 
-    - name: Add Backend-DMZ Portgroup
+    - name: Add Backend DMZ Portgroup
       community.vmware.vmware_portgroup:
         hostname: '{{ esxi_host_5 }}'
         username: '{{ esxi_username }}'
@@ -211,6 +211,6 @@
         validate_certs: no
         hosts: [hqvh5.secnetwork.org]
         switch: "{{ esxi_vswitch }}"
-        portgroup: "Backend-DMZ"
+        portgroup: "DMZ-Backend"
         vlan_id: "95"
       delegate_to: localhost

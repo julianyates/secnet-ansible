@@ -5,10 +5,10 @@ ansible_python_interpreter=/usr/bin/python3.9
 esxi_username: 'root'
 esxi_password: '<replace_with_password>'
 
-esxi_host_1: 10.0.21.201
-esxi_host_2: 10.0.21.202
-esxi_host_3: 10.0.21.203
-esxi_host_4: 10.0.21.204
-esxi_host_5: 10.0.21.205
+esxi_host_1: 10.0.21.101
+esxi_host_11: 10.0.21.111
+esxi_host_12: 10.0.21.112
+esxi_host_13: 10.0.21.113
+esxi_host_14: 10.0.21.114
 
 esxi_vswitch: 'vSwitch0'

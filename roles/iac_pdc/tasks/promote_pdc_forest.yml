@@ -6,7 +6,7 @@ Install-WindowsFeature -name AD-Domain-Services -IncludeManagementTools
 Import-Module ADDSDeployment
 
 
-Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "C:\Windows\NTDS" -DomainMode "WinThreshold" -DomainName "secnetwork.org" -DomainNetbiosName "SECNET" -ForestMode "WinThreshold" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SysvolPath "C:\Windows\SYSVOL" -Force:$true
+Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "E:\NTDS" -DomainMode "WinThreshold" -DomainName "secnetwork.org" -DomainNetbiosName "SECNET" -ForestMode "WinThreshold" -InstallDns:$true -LogPath "E:\NTDS" -NoRebootOnCompletion:$false -SysvolPath "E:\SYSVOL" -Force:$true
 
 
 

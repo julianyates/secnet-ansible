@@ -1,6 +1,6 @@
 ---
 
-- hosts: windows
+- hosts: pdc
   gather_facts: no
 
   collections:

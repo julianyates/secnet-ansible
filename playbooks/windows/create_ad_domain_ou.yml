@@ -45,8 +45,8 @@
   tasks:
     - name: "Create Domain OU"
       win_domain_ou:
-        name: '{{ item.create_domain_ou_name }}'
-        path: '{{ item.create_domain_ou_path }}'
+        name: '{{ item.name }}'
+        path: '{{ item.path }}'
         protected: yes
         state: present
         recursive: yes

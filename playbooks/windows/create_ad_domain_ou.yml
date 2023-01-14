@@ -1,0 +1,53 @@
+---
+
+- hosts: pdc
+  gather_facts: no
+
+  collections:
+    - community.windows
+
+  vars:
+    ORG_NAME: SECNET
+    ROOT_AD_DN: DC=secnetwork,DC=org
+
+    create_domain_ou:
+      - name: _DISABLED
+        path: '{{ ROOT_AD_DN }}' 
+      - name: '{{ ORG_NAME }}'
+        path: '{{ ROOT_AD_DN }}' 
+      - name: Groups
+        path: "OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Accounts
+        path: "OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Systems
+        path: "OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Users
+        path: "OU=Accounts,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}"
+      - name: Admins
+        path: "OU=Accounts,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Services
+        path: "OU=Accounts,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Endpoints
+        path: "OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Servers
+        path: "OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Admin
+        path: "OU=Servers,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Linux
+        path: "OU=Servers,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Virtual
+        path: "OU=Endpoints,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Desktops
+        path: "OU=Endpoints,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+      - name: Laptops
+        path: "OU=Endpoints,OU=Systems,OU={{ ORG_NAME }},{{ ROOT_AD_DN }}" 
+
+  tasks:
+    - name: "Create Domain OU"
+      win_domain_ou:
+        name: '{{ item.create_domain_ou_name }}'
+        path: '{{ item.create_domain_ou_path }}'
+        protected: yes
+        state: present
+        recursive: yes
+      with_items: '{{ create_domain_ou }}'

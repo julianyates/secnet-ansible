@@ -7,6 +7,9 @@
     - paloaltonetworks.panos
 
   vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
 
     create_service_object:
       - create_service_object_name: 'service-ldap'

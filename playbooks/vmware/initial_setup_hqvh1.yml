@@ -17,8 +17,8 @@
         host_name: 'hqvh1'
         domain: secnetwork.org
         dns_servers:
-          - 1.1.1.1
-          - 8.8.8.8
+          - 10.0.31.11
+          - 10.0.31.12
         search_domains:
           - secnetwork.org
       delegate_to: localhost

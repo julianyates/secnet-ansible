@@ -16,12 +16,12 @@
         create_service_object_protocol: 'tcp'
         create_service_object_dest_port: '389'
         create_service_object_source_port: '1-65535'
-        create_service_object_tag: ['Active Directory']
+        create_service_object_tag: ['Authentication']
       - create_service_object_name: 'service-ldaps'
         create_service_object_protocol: 'tcp'
         create_service_object_dest_port: '636'
         create_service_object_source_port: '1-65535'
-        create_service_object_tag: ['Active Directory']
+        create_service_object_tag: ['Authentication']
 
   tasks:
     - name: Creating Service Object

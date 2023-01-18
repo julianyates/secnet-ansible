@@ -1,0 +1,318 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+
+    create_service_object:
+      - create_service_object_name: 'service-ldap'
+        create_service_object_protocol: 'tcp'
+        create_service_object_dest_port: '389'
+        create_service_object_source_port: '1-65535'
+        create_service_object_tag: ['Active Directory']
+      - create_service_object_name: 'service-ldaps'
+        create_service_object_protocol: 'tcp'
+        create_service_object_dest_port: '636'
+        create_service_object_source_port: '1-65535'
+        create_service_object_tag: ['Active Directory']
+
+  tasks:
+    - name: Creating Service Object
+      panos_service_object:
+        provider: '{{ provider }}'
+        name: '{{ item.create_service_object_name }}'
+        description: 'Managed by Ansible'
+        protocol: '{{ item.create_service_object_protocol }}'
+        destination_port: '{{ item.create_service_object_dest_port }}'
+        source_port: '{{ item.create_service_object_source_port }}'
+        tag: '{{ item.create_service_object_tag }}'        
+      with_items: '{{ create_service_object }}'
+
+    - name: SECNET Active Directory - PING
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - PING'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['ping']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'above'
+        existing_rule: 'Deny All Traffic'
+
+    - name: SECNET Active Directory - DNS
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - DNS'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['dns','ms-win-dns']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - PING'
+
+    - name: SECNET Active Directory - NTP
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - NTP'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['ntp','ntp-base']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - DNS'
+
+    - name: SECNET Active Directory - AD
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - AD'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['active-directory']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - NTP'
+
+    - name: SECNET Active Directory - Kerberos
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - Kerberos'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['kerberos']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - AD'
+
+    - name: SECNET Active Directory - LDAP
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - LDAP'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['ldap']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - Kerberos'
+
+    - name: SECNET Active Directory - NETLOGON
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - NETLOGON'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['ms-netlogon']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - LDAP'
+
+    - name: SECNET Active Directory - SMB
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - SMB'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['ms-ds-smb-base','ms-ds-smbv2','ms-ds-smbv3']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - NETLOGON'
+
+    - name: SECNET Active Directory - NETBIOS
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - NETBIOS'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['netbios-dg','netbios-ns','netbios-ss']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - SMB'
+
+    - name: SECNET Active Directory - MSRPC
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - MSRPC'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['msrpc-base','ms-local-user-management','ms-local-security-management']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - NETBIOS'
+
+    - name: SECNET Active Directory - WEB-SSL
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Active Directory - WEB-SSL'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['ssl']
+        service: ['service-ldap','service-ldaps']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - MSRPC'
+
+    - name: PANOS FW to PDC - MS-WMI
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'PANOS FW to PDC - MS-WMI'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: ['L3-Authentication']
+        source_ip: ['hqcrfw1.secnetwork.org']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['VLAN-31_PDC']
+        application: ['ms-wmi']
+        service: ['application-default']
+        category: ['any']
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'after'
+        existing_rule: 'SECNET Active Directory - WEB-SSL'

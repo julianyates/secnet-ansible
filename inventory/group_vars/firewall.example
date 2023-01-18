@@ -25,6 +25,7 @@ zone_prjr: L3-Project-R
 zone_prjy: L3-Project-Y
 
 zones_all: ['{{ zone_mgt }}','{{ zone_virt }}','{{ zone_auth }}','{{ zone_sec }}','L3-Servers','L3-DMZ','L3-Endpoints','L3-Guests']
+zones_secnet: ['{{ zone_mgt }}','{{ zone_virt }}','{{ zone_auth }}','{{ zone_sec }}','L3-Servers','L3-DMZ','L3-Endpoints']
 
 wan_interface: 'vlan.9000'
 

@@ -11,4 +11,14 @@ esxi_host_12: 10.0.21.112
 esxi_host_13: 10.0.21.113
 esxi_host_14: 10.0.21.114
 
+vca_username: 'administrator@vsphere.local'
+vca_password: '<replace_with_password>'
+
+vca_host: 10.0.21.11
+
 esxi_vswitch: 'vSwitch0'
+
+datacenter_name: 'SECNET'
+
+2023_lic_vcenter_8: 
+2023_lic_esxi_6:

@@ -12,7 +12,7 @@
         hostname: '{{ vca_host }}'
         username: '{{ vca_username }}'
         password: '{{ vca_password }}'
-        license: '{{ 2023_lic_vcenter_8 }}'
+        license: '{{ lic_vcenter_8 }}'
         state: present
       delegate_to: localhost
 

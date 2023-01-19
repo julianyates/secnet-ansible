@@ -1,0 +1,67 @@
+---
+
+- hosts: hqvca.secnetwork.org
+  gather_facts: no
+
+  collections:
+    - community.vmware
+
+  tasks:
+    - name: Add vCenter license
+      community.vmware.vcenter_license:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        license: '{{ 2023_lic_vcenter_8 }}'
+        state: present
+      delegate_to: localhost
+
+    - name: Create Datacenter
+      community.vmware.vmware_datacenter:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter_name: '{{ datacenter_name }}'
+        state: present
+      delegate_to: localhost
+
+    - name: Create Management Cluster
+      community.vmware.vmware_cluster:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter_name: '{{ datacenter_name }}'
+        cluster_name: Management
+      delegate_to: localhost
+
+    - name: Create Infrastructure Cluster
+      community.vmware.vmware_cluster:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter_name: '{{ datacenter_name }}'
+        cluster_name: Infrastructure
+      delegate_to: localhost
+
+    - name: Add HQVH1 ESXi Host to vCenter
+      community.vmware.vmware_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter: '{{ datacenter_name }}'
+        cluster: Management
+        esxi_hostname: '{{ esxi_host_1 }}'
+        esxi_username: '{{ esxi_username }}'
+        esxi_password: '{{ esxi_password }}'
+        state: present
+      delegate_to: localhost
+
+    - name: Add HQVH1 ESXi license and assign to the ESXi host
+      community.vmware.vcenter_license:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_1 }}'
+        license: '{{ 2023_lic_esxi_6 }}'
+        state: present
+      delegate_to: localhost

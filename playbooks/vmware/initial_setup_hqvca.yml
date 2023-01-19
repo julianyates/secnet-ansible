@@ -347,3 +347,270 @@
         state: present
         validate_certs: false
       delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW1
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_1 }}'
+        switch_name: hqdvsw1
+        vmnics:
+            - vmnic0
+            - vmnic1
+            - vmnic2
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW1
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_11 }}'
+        switch_name: hqdvsw1
+        vmnics:
+            - vmnic0
+            - vmnic1
+            - vmnic2
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW1
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_12 }}'
+        switch_name: hqdvsw1
+        vmnics:
+            - vmnic0
+            - vmnic1
+            - vmnic2
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW1
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_13 }}'
+        switch_name: hqdvsw1
+        vmnics:
+            - vmnic0
+            - vmnic1
+            - vmnic2
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW1
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_14 }}'
+        switch_name: hqdvsw1
+        vmnics:
+            - vmnic0
+            - vmnic1
+            - vmnic2
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW2
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_11 }}'
+        switch_name: hqdvsw2
+        vmnics:
+            - vmnic4
+            - vmnic5
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW2
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_12 }}'
+        switch_name: hqdvsw2
+        vmnics:
+            - vmnic4
+            - vmnic5
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW2
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_13 }}'
+        switch_name: hqdvsw2
+        vmnics:
+            - vmnic4
+            - vmnic5
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add ESXi Host to HQDVSW2
+      community.vmware.vmware_dvs_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_14 }}'
+        switch_name: hqdvsw2
+        vmnics:
+            - vmnic4
+            - vmnic5
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vMotion VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_11 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_022-vMotion
+        network:
+          type: 'static'
+          ip_address: 10.0.22.111
+          subnet_mask: 255.255.255.0
+          tcpip_stack: vmotion
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vMotion VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_12 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_022-vMotion
+        network:
+          type: 'static'
+          ip_address: 10.0.22.112
+          subnet_mask: 255.255.255.0
+          tcpip_stack: vmotion
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vMotion VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_13 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_022-vMotion
+        network:
+          type: 'static'
+          ip_address: 10.0.22.113
+          subnet_mask: 255.255.255.0
+          tcpip_stack: vmotion
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vMotion VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_14 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_022-vMotion
+        network:
+          type: 'static'
+          ip_address: 10.0.22.114
+          subnet_mask: 255.255.255.0
+          tcpip_stack: vmotion
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vSAN VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_11 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_023-vSAN
+        network:
+          type: 'static'
+          ip_address: 10.0.23.111
+          subnet_mask: 255.255.255.0
+        state: present
+        enable_vsan: true
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vSAN VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_12 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_023-vSAN
+        network:
+          type: 'static'
+          ip_address: 10.0.23.112
+          subnet_mask: 255.255.255.0
+        state: present
+        enable_vsan: true
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vSAN VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_13 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_023-vSAN
+        network:
+          type: 'static'
+          ip_address: 10.0.23.113
+          subnet_mask: 255.255.255.0
+        state: present
+        enable_vsan: true
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vSAN VMK Interface
+      community.vmware.vmware_vmkernel:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_14 }}'
+        dvswitch_name: hqdvsw2
+        portgroup_name: VLAN_023-vSAN
+        network:
+          type: 'static'
+          ip_address: 10.0.23.114
+          subnet_mask: 255.255.255.0
+        state: present
+        enable_vsan: true
+        validate_certs: false
+      delegate_to: localhost

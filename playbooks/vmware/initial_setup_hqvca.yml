@@ -6,6 +6,60 @@
   collections:
     - community.vmware
 
+  vars:
+  create_dvs_portgroup:
+    - portgroup_name: VLAN_011-Management
+      switch_name: hqdvsw1
+      vlan_id: 11
+    - portgroup_name: VLAN_015-Admins
+      switch_name: hqdvsw1
+      vlan_id: 15
+    - portgroup_name: VLAN_021-vManagement
+      switch_name: hqdvsw1
+      vlan_id: 21
+    - portgroup_name: VLAN_022-vMotion
+      switch_name: hqdvsw2
+      vlan_id: 22
+    - portgroup_name: VLAN_023-vSAN
+      switch_name: hqdvsw2
+      vlan_id: 23
+    - portgroup_name: VLAN_031-PDC
+      switch_name: hqdvsw1
+      vlan_id: 31
+    - portgroup_name: VLAN_032-PKI
+      switch_name: hqdvsw1
+      vlan_id: 32
+    - portgroup_name: VLAN_033-NAC
+      switch_name: hqdvsw1
+      vlan_id: 33
+    - portgroup_name: VLAN_034-SSO
+      switch_name: hqdvsw1
+      vlan_id: 34
+    - portgroup_name: VLAN_041-LOG
+      switch_name: hqdvsw1
+      vlan_id: 41
+    - portgroup_name: VLAN_042-VAS
+      switch_name: hqdvsw1
+      vlan_id: 42
+    - portgroup_name: VLAN_043-MON
+      switch_name: hqdvsw1
+      vlan_id: 43
+    - portgroup_name: VLAN_044-NVR
+      switch_name: hqdvsw1
+      vlan_id: 44
+    - portgroup_name: VLAN_051-SRV
+      switch_name: hqdvsw1
+      vlan_id: 51
+    - portgroup_name: VLAN_091-DMZ_Frontend
+      switch_name: hqdvsw1
+      vlan_id: 91
+    - portgroup_name: VLAN_095-DMZ_Backend
+      switch_name: hqdvsw1
+      vlan_id: 95
+    - portgroup_name: VLAN_141-IOT
+      switch_name: hqdvsw1
+      vlan_id: 141
+
   tasks:
     - name: Add vCenter license
       community.vmware.vcenter_license:
@@ -262,4 +316,32 @@
         discovery_operation: both
         state: present
         validate_certs: false
+      delegate_to: localhost
+
+    - name: Create VLAN Portgroup
+      community.vmware.vmware_dvs_portgroup:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        portgroup_name: '{{ item.portgroup_name }}'
+        switch_name: '{{ item.switch_name }}'
+        vlan_id: '{{ item.vlan_id }}'
+        num_ports: 24
+        port_binding: static
+        state: present
+      delegate_to: localhost
+      with_items: '{{ create_dvs_portgroup }}'
+
+    - name: Create VLAN Trunk Portgroup
+      community.vmware.vmware_dvs_portgroup:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        portgroup_name: TRUNK_DOCKER
+        switch_name: hqdvsw1
+        vlan_id: 31-34, 41-44, 51, 91, 95, 141
+        vlan_trunk: True
+        num_ports: 24
+        port_binding: static
+        state: present
       delegate_to: localhost

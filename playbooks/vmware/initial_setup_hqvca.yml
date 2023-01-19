@@ -348,82 +348,7 @@
         validate_certs: false
       delegate_to: localhost
 
-    - name: Add ESXi Host to HQDVSW1
-      community.vmware.vmware_dvs_host:
-        hostname: '{{ vca_host }}'
-        username: '{{ vca_username }}'
-        password: '{{ vca_password }}'
-        esxi_hostname: '{{ esxi_host_1 }}'
-        switch_name: hqdvsw1
-        vmnics:
-            - vmnic0
-            - vmnic1
-            - vmnic2
-        state: present
-        validate_certs: false
-      delegate_to: localhost
-
-    - name: Add ESXi Host to HQDVSW1
-      community.vmware.vmware_dvs_host:
-        hostname: '{{ vca_host }}'
-        username: '{{ vca_username }}'
-        password: '{{ vca_password }}'
-        esxi_hostname: '{{ esxi_host_11 }}'
-        switch_name: hqdvsw1
-        vmnics:
-            - vmnic0
-            - vmnic1
-            - vmnic2
-        state: present
-        validate_certs: false
-      delegate_to: localhost
-
-    - name: Add ESXi Host to HQDVSW1
-      community.vmware.vmware_dvs_host:
-        hostname: '{{ vca_host }}'
-        username: '{{ vca_username }}'
-        password: '{{ vca_password }}'
-        esxi_hostname: '{{ esxi_host_12 }}'
-        switch_name: hqdvsw1
-        vmnics:
-            - vmnic0
-            - vmnic1
-            - vmnic2
-        state: present
-        validate_certs: false
-      delegate_to: localhost
-
-    - name: Add ESXi Host to HQDVSW1
-      community.vmware.vmware_dvs_host:
-        hostname: '{{ vca_host }}'
-        username: '{{ vca_username }}'
-        password: '{{ vca_password }}'
-        esxi_hostname: '{{ esxi_host_13 }}'
-        switch_name: hqdvsw1
-        vmnics:
-            - vmnic0
-            - vmnic1
-            - vmnic2
-        state: present
-        validate_certs: false
-      delegate_to: localhost
-
-    - name: Add ESXi Host to HQDVSW1
-      community.vmware.vmware_dvs_host:
-        hostname: '{{ vca_host }}'
-        username: '{{ vca_username }}'
-        password: '{{ vca_password }}'
-        esxi_hostname: '{{ esxi_host_14 }}'
-        switch_name: hqdvsw1
-        vmnics:
-            - vmnic0
-            - vmnic1
-            - vmnic2
-        state: present
-        validate_certs: false
-      delegate_to: localhost
-
-    - name: Add ESXi Host to HQDVSW2
+    - name: Add ESXi Host to HQDVSW2 '{{ esxi_host_11 }}'
       community.vmware.vmware_dvs_host:
         hostname: '{{ vca_host }}'
         username: '{{ vca_username }}'
@@ -437,7 +362,7 @@
         validate_certs: false
       delegate_to: localhost
 
-    - name: Add ESXi Host to HQDVSW2
+    - name: Add ESXi Host to HQDVSW2 '{{ esxi_host_12 }}'
       community.vmware.vmware_dvs_host:
         hostname: '{{ vca_host }}'
         username: '{{ vca_username }}'
@@ -451,7 +376,7 @@
         validate_certs: false
       delegate_to: localhost
 
-    - name: Add ESXi Host to HQDVSW2
+    - name: Add ESXi Host to HQDVSW2 '{{ esxi_host_13 }}'
       community.vmware.vmware_dvs_host:
         hostname: '{{ vca_host }}'
         username: '{{ vca_username }}'
@@ -465,7 +390,7 @@
         validate_certs: false
       delegate_to: localhost
 
-    - name: Add ESXi Host to HQDVSW2
+    - name: Add ESXi Host to HQDVSW2 '{{ esxi_host_14 }}'
       community.vmware.vmware_dvs_host:
         hostname: '{{ vca_host }}'
         username: '{{ vca_username }}'

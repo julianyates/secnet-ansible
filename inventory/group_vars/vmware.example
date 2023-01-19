@@ -20,5 +20,5 @@ esxi_vswitch: 'vSwitch0'
 
 datacenter_name: 'SECNET'
 
-2023_lic_vcenter_8: 
-2023_lic_esxi_6:
+lic_vcenter_8: 
+lic_esxi_6:

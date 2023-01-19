@@ -71,3 +71,195 @@
         state: present
         validate_certs: false
       delegate_to: localhost
+
+    - name: Add HQVH11 ESXi Host to vCenter
+      community.vmware.vmware_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter: '{{ datacenter_name }}'
+        cluster: Infrastructure
+        esxi_hostname: '{{ esxi_host_11 }}'
+        esxi_username: '{{ esxi_username }}'
+        esxi_password: '{{ esxi_password }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add HQVH12 ESXi Host to vCenter
+      community.vmware.vmware_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter: '{{ datacenter_name }}'
+        cluster: Infrastructure
+        esxi_hostname: '{{ esxi_host_12 }}'
+        esxi_username: '{{ esxi_username }}'
+        esxi_password: '{{ esxi_password }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add HQVH13 ESXi Host to vCenter
+      community.vmware.vmware_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter: '{{ datacenter_name }}'
+        cluster: Infrastructure
+        esxi_hostname: '{{ esxi_host_13 }}'
+        esxi_username: '{{ esxi_username }}'
+        esxi_password: '{{ esxi_password }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add HQVH14 ESXi Host to vCenter
+      community.vmware.vmware_host:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter: '{{ datacenter_name }}'
+        cluster: Infrastructure
+        esxi_hostname: '{{ esxi_host_14 }}'
+        esxi_username: '{{ esxi_username }}'
+        esxi_password: '{{ esxi_password }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add HQVH11 ESXi license
+      community.vmware.vcenter_license:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_11 }}'
+        license: '{{ lic_esxi_8 }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add HQVH12 ESXi license
+      community.vmware.vcenter_license:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_12 }}'
+        license: '{{ lic_esxi_8 }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add HQVH13 ESXi license
+      community.vmware.vcenter_license:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_13 }}'
+        license: '{{ lic_esxi_8 }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add HQVH14 ESXi license
+      community.vmware.vcenter_license:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        esxi_hostname: '{{ esxi_host_14 }}'
+        license: '{{ lic_esxi_8 }}'
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Set NTP servers Management Cluster
+      community.vmware.vmware_host_ntp:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        cluster_name: Management
+        state: present
+        validate_certs: false
+        ntp_servers:
+            - 0.pool.ntp.org
+            - 1.pool.ntp.org
+      delegate_to: localhost
+
+    - name: Set NTP servers Infrastructure Cluster
+      community.vmware.vmware_host_ntp:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        cluster_name: Infrastructure
+        state: present
+        validate_certs: false
+        ntp_servers:
+            - 0.pool.ntp.org
+            - 1.pool.ntp.org
+      delegate_to: localhost
+
+    - name: Configure DNS servers Management cluster
+      community.vmware.vmware_host_dns:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        cluster_name: Management
+        type: static
+        domain: secnetwork.org
+        dns_servers:
+          - 10.0.31.11
+          - 10.0.31.12
+        search_domains:
+          - secnetwork.org
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Configure DNS servers Infrastructure cluster
+      community.vmware.vmware_host_dns:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        cluster_name: Infrastructure
+        type: static
+        domain: secnetwork.org
+        dns_servers:
+          - 10.0.31.11
+          - 10.0.31.12
+        search_domains:
+          - secnetwork.org
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Create Primary dvSwitch
+      community.vmware.vmware_dvswitch:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter: '{{ datacenter_name }}'
+        switch: hqdvsw1
+        version: 6.6.0
+        mtu: 9000
+        uplink_quantity: 4
+        uplink_prefix: 'UPLINK_'
+        discovery_protocol: lldp
+        discovery_operation: both
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Create Storage dvSwitch
+      community.vmware.vmware_dvswitch:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        datacenter: '{{ datacenter_name }}'
+        switch: hqdvsw2
+        version: 8.0.0
+        mtu: 9000
+        uplink_quantity: 2
+        uplink_prefix: 'UPLINK_'
+        discovery_protocol: lldp
+        discovery_operation: both
+        state: present
+        validate_certs: false
+      delegate_to: localhost

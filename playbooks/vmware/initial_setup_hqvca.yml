@@ -14,6 +14,7 @@
         password: '{{ vca_password }}'
         license: '{{ lic_vcenter_8 }}'
         state: present
+        validate_certs: false
       delegate_to: localhost
 
     - name: Create Datacenter
@@ -23,6 +24,7 @@
         password: '{{ vca_password }}'
         datacenter_name: '{{ datacenter_name }}'
         state: present
+        validate_certs: false
       delegate_to: localhost
 
     - name: Create Management Cluster
@@ -32,6 +34,7 @@
         password: '{{ vca_password }}'
         datacenter_name: '{{ datacenter_name }}'
         cluster_name: Management
+        validate_certs: false
       delegate_to: localhost
 
     - name: Create Infrastructure Cluster
@@ -41,6 +44,7 @@
         password: '{{ vca_password }}'
         datacenter_name: '{{ datacenter_name }}'
         cluster_name: Infrastructure
+        validate_certs: false
       delegate_to: localhost
 
     - name: Add HQVH1 ESXi Host to vCenter
@@ -54,6 +58,7 @@
         esxi_username: '{{ esxi_username }}'
         esxi_password: '{{ esxi_password }}'
         state: present
+        validate_certs: false
       delegate_to: localhost
 
     - name: Add HQVH1 ESXi license and assign to the ESXi host
@@ -64,4 +69,5 @@
         esxi_hostname: '{{ esxi_host_1 }}'
         license: '{{ 2023_lic_esxi_6 }}'
         state: present
+        validate_certs: false
       delegate_to: localhost

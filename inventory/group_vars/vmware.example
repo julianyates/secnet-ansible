@@ -5,11 +5,13 @@ ansible_python_interpreter=/usr/bin/python3.9
 esxi_username: 'root'
 esxi_password: '<replace_with_password>'
 
-esxi_host_1: 10.0.21.101
-esxi_host_11: 10.0.21.111
-esxi_host_12: 10.0.21.112
-esxi_host_13: 10.0.21.113
-esxi_host_14: 10.0.21.114
+tmp_esxi_host_1: 10.0.21.101
+
+esxi_host_1: hqvh1.secnetwork.org
+esxi_host_11: hqvh11.secnetwork.org
+esxi_host_12: hqvh12.secnetwork.org
+esxi_host_13: hqvh13.secnetwork.org
+esxi_host_14: hqvh14.secnetwork.org
 
 vca_username: 'administrator@vsphere.local'
 vca_password: '<replace_with_password>'

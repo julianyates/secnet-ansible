@@ -329,6 +329,7 @@
         num_ports: 24
         port_binding: static
         state: present
+        validate_certs: false
       delegate_to: localhost
       with_items: '{{ create_dvs_portgroup }}'
 
@@ -344,4 +345,5 @@
         num_ports: 24
         port_binding: static
         state: present
+        validate_certs: false
       delegate_to: localhost

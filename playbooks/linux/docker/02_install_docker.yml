@@ -1,0 +1,25 @@
+---
+
+- name: Updating NTP Client Configuration
+  hosts: 'linux'
+  become: true
+
+  tasks:
+    - name: Install Docker CE Repository
+      shell: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      args:
+        creates: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker CE
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: latest
+
+    - name: Enable and Start Docker
+      ansible.builtin.systemd:
+        name: docker
+        enabled: yes
+        state: started

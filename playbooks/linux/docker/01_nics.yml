@@ -16,9 +16,11 @@
 
     - name: Creating VLAN_141-IOT Interface
       nmcli:
-        conn_name: ens35.141
+        conn_name: VLAN_141-IOT
         ifname: ens35.141
         type: vlan
+        vlanid: 141
+        vlandev: ens35
         method4: disabled
         method6: disabled
         state: present

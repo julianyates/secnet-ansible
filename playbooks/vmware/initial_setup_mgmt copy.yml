@@ -1,0 +1,216 @@
+---
+
+- hosts: 10.0.21.105
+  gather_facts: no
+
+  collections:
+    - community.vmware
+
+  tasks:
+    - name: Configure DNS for an ESXi host
+      vmware_host_dns:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        type: static
+        host_name: 'hqvh5'
+        domain: secnetwork.org
+        dns_servers:
+          - 1.1.1.1
+          - 8.8.8.8
+        search_domains:
+          - secnetwork.org
+      delegate_to: localhost
+
+    - name: Remove VM Network Portgroup
+      vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "VM Network"
+        state: absent
+      delegate_to: localhost
+
+    - name: Add Management Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "Management"
+        vlan_id: "11"
+      delegate_to: localhost
+
+    - name: Add Admins Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "Admins"
+        vlan_id: "15"
+      delegate_to: localhost
+
+    - name: Add vManagement Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "vManagement"
+        vlan_id: "21"
+      delegate_to: localhost
+
+    - name: Add PDC Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "PDC"
+        vlan_id: "31"
+      delegate_to: localhost
+
+    - name: Add PKI Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "PKI"
+        vlan_id: "32"
+      delegate_to: localhost
+
+    - name: Add NAC Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "NAC"
+        vlan_id: "33"
+      delegate_to: localhost
+
+    - name: Add SSO Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "SSO"
+        vlan_id: "34"
+      delegate_to: localhost
+
+    - name: Add SSO Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "SSO"
+        vlan_id: "34"
+      delegate_to: localhost
+
+    - name: Add LOG Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "LOG"
+        vlan_id: "41"
+      delegate_to: localhost
+
+    - name: Add VAS Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "VAS"
+        vlan_id: "42"
+      delegate_to: localhost
+
+    - name: Add MON Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "MON"
+        vlan_id: "43"
+      delegate_to: localhost
+
+    - name: Add NVR Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "NVR"
+        vlan_id: "44"
+      delegate_to: localhost
+
+    - name: Add Servers Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "Servers"
+        vlan_id: "51"
+      delegate_to: localhost
+
+    - name: Add Frontend DMZ Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "Frontend-DMZ"
+        vlan_id: "91"
+      delegate_to: localhost
+
+    - name: Add Backend-DMZ Portgroup
+      community.vmware.vmware_portgroup:
+        hostname: '{{ esxi_host_5 }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        hosts: [hqvh5.secnetwork.org]
+        switch: "{{ esxi_vswitch }}"
+        portgroup: "Backend-DMZ"
+        vlan_id: "95"
+      delegate_to: localhost

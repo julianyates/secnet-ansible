@@ -23,5 +23,6 @@ esxi_vswitch: 'vSwitch0'
 datacenter_name: 'SECNET'
 
 lic_vcenter_8: "add-your-license"
+lic_vsan_8: "add-your-license"
 lic_esxi_6: "add-your-license"
 lic_esxi_8: "add-your-license"

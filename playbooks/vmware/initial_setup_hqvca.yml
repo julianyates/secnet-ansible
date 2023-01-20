@@ -60,7 +60,36 @@
         switch_name: hqdvsw1
         vlan_id: 141
 
+    configure_esxi_dns:
+      - esxi_host: '{{ esxi_host_1 }}'
+        esxi_host_name: hqvh1
+      - esxi_host: '{{ esxi_host_11 }}'
+        esxi_host_name: hqvh11
+      - esxi_host: '{{ esxi_host_12 }}'
+        esxi_host_name: hqvh12
+      - esxi_host: '{{ esxi_host_13 }}'
+        esxi_host_name: hqvh13
+      - esxi_host: '{{ esxi_host_14 }}'
+        esxi_host_name: hqvh14
+
   tasks:
+    - name: Configure DNS for an ESXi host
+      vmware_host_dns:
+        hostname: '{{ item.esxi_host }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        validate_certs: no
+        type: static
+        host_name: '{{ item.esxi_host_name }}'
+        domain: secnetwork.org
+        dns_servers:
+          - 10.0.31.11
+          - 10.0.31.12
+        search_domains:
+          - secnetwork.org
+      with_items: '{{ configure_esxi_dns }}'
+      delegate_to: localhost
+
     - name: Add vCenter license
       community.vmware.vcenter_license:
         hostname: '{{ vca_host }}'
@@ -537,5 +566,16 @@
           subnet_mask: 255.255.255.0
         state: present
         enable_vsan: true
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Add vCenter license
+      community.vmware.vcenter_license:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        license: '{{ lic_vsan_8 }}'
+        cluster_name: Infrastructure
+        state: present
         validate_certs: false
       delegate_to: localhost

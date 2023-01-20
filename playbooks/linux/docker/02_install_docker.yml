@@ -23,3 +23,25 @@
         name: docker
         enabled: yes
         state: started
+
+    - name: Create ipvlan network LOG
+      docker_network:
+        name: "log"
+        state: present
+        driver: ipvlan
+        driver_options:
+          parent: "ens35.41"
+        ipam_config:
+          - subnet: '10.0.41.0/24'
+            gateway: '10.0.41.1'
+
+    - name: Create ipvlan network VAS
+      docker_network:
+        name: "vas"
+        state: present
+        driver: ipvlan
+        driver_options:
+          parent: "ens35.42"
+        ipam_config:
+          - subnet: '10.0.42.0/24'
+            gateway: '10.0.42.1'

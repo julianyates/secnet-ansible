@@ -7,18 +7,18 @@
   tasks:
     - name: Configuring Trunk Interface
       nmcli:
-      conn_name: ens35
-      ifname: ens35
-      type: ethernet
-      method4: disabled
-      method6: disabled 
-      state: present
+        conn_name: ens35
+        ifname: ens35
+        type: ethernet
+        method4: disabled
+        method6: disabled 
+        state: present
 
     - name: Creating VLAN_141-IOT Interface
       nmcli:
-      conn_name: ens35.141
-      ifname: ens35.141
-      type: vlan
-      method4: disabled
-      method6: disabled
-      state: present
+        conn_name: ens35.141
+        ifname: ens35.141
+        type: vlan
+        method4: disabled
+        method6: disabled
+        state: present

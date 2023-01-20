@@ -367,9 +367,24 @@
         hostname: '{{ vca_host }}'
         username: '{{ vca_username }}'
         password: '{{ vca_password }}'
-        portgroup_name: TRUNK_DOCKER
+        portgroup_name: TRUNK_DOCKER_LAN
         switch_name: hqdvsw1
-        vlan_id: 31-34, 41-44, 51, 91, 95, 141
+        vlan_id: 31-34, 41-44, 51, 141
+        vlan_trunk: True
+        num_ports: 24
+        port_binding: static
+        state: present
+        validate_certs: false
+      delegate_to: localhost
+
+    - name: Create VLAN Trunk Portgroup
+      community.vmware.vmware_dvs_portgroup:
+        hostname: '{{ vca_host }}'
+        username: '{{ vca_username }}'
+        password: '{{ vca_password }}'
+        portgroup_name: TRUNK_DOCKER_DMZ
+        switch_name: hqdvsw1
+        vlan_id: 91, 95
         vlan_trunk: True
         num_ports: 24
         port_binding: static

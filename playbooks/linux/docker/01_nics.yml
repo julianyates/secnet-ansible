@@ -1,7 +1,7 @@
 ---
 
 - name: Updating NTP Client Configuration
-  hosts: 'docker'
+  hosts: 'linux'
   become: true
 
   tasks:

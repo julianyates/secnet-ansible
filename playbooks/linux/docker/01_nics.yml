@@ -14,6 +14,94 @@
         method6: disabled 
         state: present
 
+    - name: Creating VLAN_031-PDC Interface
+      nmcli:
+        conn_name: VLAN_031-PDC
+        ifname: ens35.31
+        type: vlan
+        vlanid: 31
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_032-PKI Interface
+      nmcli:
+        conn_name: VLAN_032-PKI
+        ifname: ens35.32
+        type: vlan
+        vlanid: 32
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_033-NAC Interface
+      nmcli:
+        conn_name: VLAN_033-NAC
+        ifname: ens35.33
+        type: vlan
+        vlanid: 33
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_034-SSO Interface
+      nmcli:
+        conn_name: VLAN_034-SSO
+        ifname: ens35.34
+        type: vlan
+        vlanid: 34
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_041-LOG Interface
+      nmcli:
+        conn_name: VLAN_041-LOG
+        ifname: ens35.41
+        type: vlan
+        vlanid: 41
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_042-VAS Interface
+      nmcli:
+        conn_name: VLAN_042-VAS
+        ifname: ens35.42
+        type: vlan
+        vlanid: 42
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_043-MON Interface
+      nmcli:
+        conn_name: VLAN_043-MON
+        ifname: ens35.43
+        type: vlan
+        vlanid: 43
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_044-NVR Interface
+      nmcli:
+        conn_name: VLAN_044-VR
+        ifname: ens35.44
+        type: vlan
+        vlanid: 44
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
     - name: Creating VLAN_141-IOT Interface
       nmcli:
         conn_name: VLAN_141-IOT

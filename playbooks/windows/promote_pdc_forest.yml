@@ -1,0 +1,58 @@
+---
+
+- hosts: hqpdc99
+  gather_facts: no
+
+  collections:
+    - community.windows
+
+  vars:
+    safe_mode_password: "76492d1116743f0423413b16050a5345MgB8AFkAMAB2AG4AUABXAG4AUABZAHEAdQBNAGcAWgA1AHYAawBnAFgAOQA3AGcAPQA9AHwAYwA2AGQANgA2ADIAOQA5ADIAYQBkAGIAYgA4ADIANQA4ADIANgA0ADIANwAwADAAMQAyAGUAYgA2ADIAYgAyAGMAZgBhADEANAAyADkAOQAxADAAYwA1ADEAZAA5ADgAZQA4ADYAZgBmAGEAOABmADgANwAwAGIANwA3ADEAMgA="
+
+  tasks:
+    - name: Change Computer Name
+      set_fact:
+          new_computer_name: 'hqpdc99'
+
+    - name: Set Computer Name
+      ansible.windows.win_powershell:
+        script: |
+          Rename-Computer -NewName {{ new_computer_name }}
+        register: new_computer_name_result
+
+    - name: Collect computer name result
+      debug:
+        msg: "{{ new_computer_name_result }}"
+      when: new_computer_name_result is changed
+
+    - name: Reboot (name changed DC01)
+      win_reboot:
+        connect_timeout: 15
+        post_reboot_delay: 15
+      when: new_computer_name_result is changed
+
+    - name: Wait for system to become reachable over WinRM
+      wait_for_connection:
+      timeout: 900
+
+    - name: Run basic PowerShell script
+      ansible.windows.win_powershell:
+        script: |
+          Install-WindowsFeature -name AD-Domain-Services -IncludeManagementTools
+
+    - name: Run basic PowerShell script
+      ansible.windows.win_powershell:
+        script: |
+          Import-Module ADDSDeployment
+          Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "E:\NTDS" -DomainMode "WinThreshold" -DomainName "secnetwork.org" -DomainNetbiosName "SECNET" -ForestMode "WinThreshold" -InstallDns:$true -LogPath "E:\NTDS" -NoRebootOnCompletion:$false -SysvolPath "E:\SYSVOL" -SafeModeAdministratorPassword '{{ safe_mode_password }}' -Force:$true
+
+    - name: Reboot after forest creation
+      win_reboot:
+        connect_timeout: 15
+        post_reboot_delay: 15
+        reboot_timeout: 200
+      when: create_forest_result.reboot_required
+
+    - name: Wait for system to become reachable over WinRM
+      wait_for_connection:
+        timeout: 900

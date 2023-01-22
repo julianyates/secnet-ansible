@@ -9,20 +9,14 @@
   vars:
 
   tasks:
-    - name: Change Computer Name
-      set_fact:
-          new_computer_name: 'hqpdc2'
-
     - name: Set Computer Name
-      ansible.windows.win_powershell:
-        script: |
-          Rename-Computer -NewName {{ new_computer_name }}
-        register: new_computer_name_result
+      ansible.windows.win_hostname:
+        name: hqpdc2
+      register: res
 
-    - name: Collect computer name result
-      debug:
-        msg: "{{ new_computer_name_result }}"
-      when: new_computer_name_result is changed
+    - name: Rebooting Server
+      ansible.windows.win_reboot:
+      when: res.reboot_required
 
     - name: Rebooting Server
       win_reboot:

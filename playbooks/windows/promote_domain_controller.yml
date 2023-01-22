@@ -1,6 +1,6 @@
 ---
 
-- hosts: hqpdc2
+- hosts: hqpdc2.secnetwork.org
   gather_facts: no
 
   collections:

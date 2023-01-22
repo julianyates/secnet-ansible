@@ -106,6 +106,26 @@
       - name: hqpdc1.secnetwork.org
         ip_address: 10.0.31.11
         folder: "/servers/windows"
+      - name: hqpdc2.secnetwork.org
+        ip_address: 10.0.31.12
+        folder: "/servers/windows"
+
+      - name: hqhsm1.secnetwork.org
+        ip_address: 10.0.32.11
+        folder: "/servers/linux"
+      - name: hqhsm2.secnetwork.org
+        ip_address: 10.0.32.12
+        folder: "/servers/linux"
+
+      - name: hqpkirca.secnetwork.org
+        ip_address: 10.0.32.21
+        folder: "/servers/windows"
+      - name: hqpkieca.secnetwork.org
+        ip_address: 10.0.32.31
+        folder: "/servers/windows"
+      - name: hqpkiweb1.secnetwork.org
+        ip_address: 10.0.32.41
+        folder: "/servers/windows"
 
   tasks:
     - name: "Add Initial Folders"

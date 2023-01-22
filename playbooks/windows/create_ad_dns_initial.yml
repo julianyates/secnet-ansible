@@ -184,6 +184,15 @@
         win_dns_record_value: "hqups6.secnetwork.org."
         win_dns_record_zone: "0.10.in-addr.arpa"
 
+      - win_dns_record_name: "hqhsm1.secnetwork.org."
+        win_dns_record_type: "A"
+        win_dns_record_value: "10.0.32.11"
+        win_dns_record_zone: "secnetwork.org"
+      - win_dns_record_name: "11.32"
+        win_dns_record_type: "PTR"
+        win_dns_record_value: "hqhsm1.secnetwork.org."
+        win_dns_record_zone: "0.10.in-addr.arpa"
+
   tasks:
     - name: Creating DNS Record
       win_dns_record:

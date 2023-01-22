@@ -1,0 +1,144 @@
+---
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    server_url: "http://10.0.43.2/"
+    site: "monitoring"
+    automation_user: "automation"
+    automation_secret: "MNAOKCDLRAYPFIX@LXIM"
+
+    add_folder:
+      - path: "/servers"
+        name: "Servers"
+      - path: "/servers/idrac"
+        name: "iDRAC" 
+      - path: "/servers/windows"
+        name: "Windows"
+      - path: "/servers/linux"
+        name: "Linux"
+      - path: "/servers/vmware"
+        name: "vmware"
+      - path: "/servers/VSCA"
+        name: "VSCA"
+      - path: "/network"
+        name: "Network"
+      - path: "/network/switches"
+        name: "Switches"
+      - path: "/network/firewalls"
+        name: "Firewalls"
+      - path: "/network/ups"
+        name: "UPS"
+
+    add_host:
+      - name: hqups.secnetwork.org
+        ip_address: 10.0.11.81
+        folder: "/servers/linux"
+      - name: hqups1.secnetwork.org
+        ip_address: 10.0.11.91
+        folder: "/network/ups"
+      - name: hqups2.secnetwork.org
+        ip_address: 10.0.11.92
+        folder: "/network/ups"
+      - name: hqups3.secnetwork.org
+        ip_address: 10.0.11.93
+        folder: "/network/ups"
+      - name: hqups4.secnetwork.org
+        ip_address: 10.0.11.94
+        folder: "/network/ups"
+      - name: hqups5.secnetwork.org
+        ip_address: 10.0.11.95
+        folder: "/network/ups"
+      - name: hqups6.secnetwork.org
+        ip_address: 10.0.11.96
+        folder: "/network/ups"
+
+      - name: hqvh11-idrac.secnetwork.org
+        ip_address: 10.0.11.111
+        folder: "/servers/idrac"
+      - name: hqvh12-idrac.secnetwork.org
+        ip_address: 10.0.11.112
+        folder: "/servers/idrac"
+      - name: hqvh13-idrac.secnetwork.org
+        ip_address: 10.0.11.113
+        folder: "/servers/idrac"
+      - name: hqvh14-idrac.secnetwork.org
+        ip_address: 10.0.11.114
+        folder: "/servers/idrac"
+
+      - name: hqvh1.secnetwork.org
+        ip_address: 10.0.21.101
+        folder: "/servers/vmware"
+      - name: hqvh11.secnetwork.org
+        ip_address: 10.0.21.111
+        folder: "/servers/vmware"
+      - name: hqvh12.secnetwork.org
+        ip_address: 10.0.21.112
+        folder: "/servers/vmware"
+      - name: hqvh13.secnetwork.org
+        ip_address: 10.0.21.113
+        folder: "/servers/vmware"
+      - name: hqvh14.secnetwork.org
+        ip_address: 10.0.21.114
+        folder: "/servers/vmware"
+
+      - name: hqcrfw1.secnetwork.org
+        ip_address: 10.0.11.251
+        folder: "/network/firewalls"
+
+      - name: hqswac1.secnetwork.org
+        ip_address: 10.0.11.231
+        folder: "/network/switches"
+      - name: hqswag1.secnetwork.org
+        ip_address: 10.0.11.232
+        folder: "/network/switches"
+      - name: hqacsw2.secnetwork.org
+        ip_address: 10.0.11.233
+        folder: "/network/switches"
+      - name: hqswac3.secnetwork.org
+        ip_address: 10.0.11.234
+        folder: "/network/switches"
+      - name: hqswac4.secnetwork.org
+        ip_address: 10.0.11.235
+        folder: "/network/switches"
+
+      - name: hqpdc1.secnetwork.org
+        ip_address: 10.0.31.11
+        folder: "/servers/windows"
+
+  tasks:
+    - name: "Add Initial Folders"
+      tribe29.checkmk.folder:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        path: '{{ item.path }}'
+        name: '{{ item.name }}'
+        state: "present"
+      delegate_to: localhost
+      with_items: '{{ add_folder }}'
+
+    - name: "Add Initial Systems"
+      tribe29.checkmk.host:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        name: '{{ item.name }}'
+        attributes:
+          ipaddress: '{{ item.ip_address }}'
+        folder: '{{ item.folder }}'
+        state: "present"
+      with_items: '{{ add_host }}'
+
+    - name: "Initial Services Discovery"
+      tribe29.checkmk.discovery:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        host_name: '{{ item.name }}'
+        state: "new"
+      with_items: '{{ add_host }}'

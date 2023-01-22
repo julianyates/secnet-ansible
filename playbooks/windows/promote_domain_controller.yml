@@ -1,0 +1,56 @@
+---
+
+- hosts: hqpdc2
+  gather_facts: no
+
+  collections:
+    - community.windows
+
+  vars:
+
+  tasks:
+    - name: Change Computer Name
+      set_fact:
+          new_computer_name: 'hqpdc2'
+
+    - name: Set Computer Name
+      ansible.windows.win_powershell:
+        script: |
+          Rename-Computer -NewName {{ new_computer_name }}
+        register: new_computer_name_result
+
+    - name: Collect computer name result
+      debug:
+        msg: "{{ new_computer_name_result }}"
+      when: new_computer_name_result is changed
+
+    - name: Rebooting Server
+      win_reboot:
+        connect_timeout: 15
+        post_reboot_delay: 15
+      when: new_computer_name_result is changed
+
+    - name: Wait for system to become reachable over WinRM
+      wait_for_connection:
+      timeout: 900
+
+    - name: Run basic PowerShell script
+      ansible.windows.win_powershell:
+        script: |
+          Install-WindowsFeature -name AD-Domain-Services -IncludeManagementTools
+
+    - name: Promote Domain Controller
+      ansible.windows.win_domain_controller:
+        dns_domain_name: secnetwork.org
+        domain_admin_user: ladmin@secnetwork.org
+        domain_admin_password: "1q2w3e4r!Q@W#E$R"
+        safe_mode_password: "1q2w3e4r!Q@W#E$R"
+        state: domain_controller
+        sysvol_path: E:\SYSVOL
+        database_path: E:\NTDS
+        domain_log_path: E:\NTDS
+      register: dc_promotion
+
+    - name: Reboot after promotion
+      ansible.windows.win_reboot:
+      when: dc_promotion.reboot_required

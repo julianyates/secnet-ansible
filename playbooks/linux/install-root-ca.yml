@@ -1,0 +1,19 @@
+---
+- hosts: linux 
+  become: true
+
+  tasks:
+  - name: Copying SECNET Root CA
+    copy:
+      src: ../../files/rootca/secnet-root-ca.crt
+      dest: /etc/pki/ca-trust/source/anchors/secnet-root-ca.crt
+      force: no
+
+  - name: Copying SECNET Enterprise CA
+    copy:
+      src: ../../files/rootca/secnet-enterprise-ca.crt
+      dest: /etc/pki/ca-trust/source/anchors/secnet-enterprise-ca.crt
+      force: yes
+
+  - name: Installing RADAUSA Root CAs
+    command: /usr/bin/update-ca-trust

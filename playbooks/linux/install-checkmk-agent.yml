@@ -13,6 +13,14 @@
       dnf:
         name: /root/check-mk-agent-2.1.0p19-1.noarch.rpm
         state: installed
+        disable_gpg_check: true
+
+    - firewalld:
+        port: 6556/tcp
+        permanent: yes
+        offline: no
+        immediate: yes
+        state: enabled
 
     - name: Registering Agent
       command: "cmk-agent-ctl register -H '{{ ansible_hostname }}'.secnetwork.org -s hqmon1.secnetwork.org -i secnet -U automation -P 'DAANKAXXMWQSIYTDNLAV' --trust-cert"

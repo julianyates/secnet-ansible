@@ -1,0 +1,61 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+    
+  tasks:
+    - name: SECNET HQMON1 Monitoring
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET HQMON1 Monitoring'
+        rule_type: universal
+        description: 'Managed by Ansible'
+        tag_name: ['Security']
+        group_tag: 'Security'
+        source_zone: ['L3-Security']
+        source_ip: ['VLAN-43_MON']
+        source_user: ['any']
+        destination_zone: '{{ zones_secnet }}'
+        destination_ip: ['SECNET HQ Network']
+        application: ['any']
+        service: ['any']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        #group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET DMZ Backend Reverse Proxy'
+
+    - name: SECNET HQMON1 CheckMK
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET HQMON1 CheckMK'
+        rule_type: universal
+        description: 'Managed by Ansible'
+        tag_name: ['Security']
+        group_tag: 'Security'
+        source_zone: '{{ zones_secnet }}' 
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Security']
+        destination_ip: ['10.0.43.11']
+        application: ['web-browsing','ssl','nagios','syslog','snmp']
+        service: ['any']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET HQMON1 Monitoring'

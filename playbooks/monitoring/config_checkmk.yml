@@ -144,6 +144,10 @@
       delegate_to: localhost
       with_items: '{{ add_folder }}'
 
+    - name: Pausing - Config Folders
+      pause:
+        prompt: Press return to continue. Press Ctrl+c and then "a" to abort
+
     - name: "Add Initial Systems"
       tribe29.checkmk.host:
         server_url: '{{ server_url }}'
@@ -156,6 +160,10 @@
         folder: '{{ item.folder }}'
         state: "present"
       with_items: '{{ add_host }}'
+
+    - name: Pausing - Finished Creating Systems
+      pause:
+        prompt: Press return to continue. Press Ctrl+c and then "a" to abort
 
     - name: "Initial Services Discovery"
       tribe29.checkmk.discovery:

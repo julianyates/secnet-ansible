@@ -13,3 +13,6 @@
       dnf:
         name: /root/check-mk-agent-2.1.0p19-1.noarch.rpm
         state: installed
+
+    - name: Registering Agent
+      command: "cmk-agent-ctl register --hostname '{{ ansible_hostname }}' --server hqmon1.secnetwork.org --site secnet--user automation --password 'DAANKAXXMWQSIYTDNLAV'"

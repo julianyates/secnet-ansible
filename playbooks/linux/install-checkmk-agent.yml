@@ -4,4 +4,4 @@
 
   tasks:
     - name: Download Agent
-      command: curl -OJG "https://hqmon1.secnetwork.org/secnet/check_mk/api/1.0/domain-types/agent/actions/download/invoke" --header 'Accept: application/octet-stream' --header 'Authorization: Bearer automation DAANKAXXMWQSIYTDNLAV' --data-urlencode 'os_type=linux_rpm'
+      command: "curl -OJG "https://hqmon1.secnetwork.org/secnet/check_mk/api/1.0/domain-types/agent/actions/download/invoke" --header 'Accept: application/octet-stream' --header 'Authorization: Bearer automation DAANKAXXMWQSIYTDNLAV' --data-urlencode 'os_type=linux_rpm'"

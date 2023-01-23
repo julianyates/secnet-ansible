@@ -3,5 +3,13 @@
   become: true
 
   tasks:
-    - name: Download Agent
-      command: "curl -OJG "https://hqmon1.secnetwork.org/secnet/check_mk/api/1.0/domain-types/agent/actions/download/invoke" --header 'Accept: application/octet-stream' --header 'Authorization: Bearer automation DAANKAXXMWQSIYTDNLAV' --data-urlencode 'os_type=linux_rpm'"
+    - name: Copying CheckMK Agent
+      copy:
+        src: ../../files/agents/check-mk-agent-2.1.0p19-1.noarch.rpm
+        dest: /root/check-mk-agent-2.1.0p19-1.noarch.rpm
+        force: no    
+
+    - name: Install CheckMK Agent
+      dnf:
+        name: /root/check-mk-agent-2.1.0p19-1.noarch.rpm
+        state: installed

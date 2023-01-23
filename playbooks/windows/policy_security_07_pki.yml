@@ -1,0 +1,61 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+    
+  tasks:
+    - name: SECNET PKI OCSP-CRL
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET PKI OCSP-CRL'
+        rule_type: interzone
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['10.0.32.41']
+        application: ['web-browsing']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'PANOS FW to PDC - MS-WMI'
+    
+    - name: SECNET Enterprise CA Auto Enrollment
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET Enterprise CA Auto Enrollment'
+        rule_type: 'universal'
+        description: 'Managed by Ansible'
+        tag_name: ['Authentication']
+        group_tag: 'Authentication'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-Authentication']
+        destination_ip: ['10.0.32.31']
+        application: ['ms-ds-smb-base','netbios-ss','msrpc-base']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET PKI OCSP-CRL'

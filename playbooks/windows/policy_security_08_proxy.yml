@@ -1,0 +1,37 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+    
+  tasks:
+    - name: SECNET DMZ Backend Reverse Proxy
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'SECNET DMZ Backend Reverse Proxy'
+        rule_type: interzone
+        description: 'Managed by Ansible'
+        tag_name: ['DMZ']
+        group_tag: 'DMZ'
+        source_zone: '{{ zones_secnet }}'
+        source_ip: ['SECNET HQ Network']
+        source_user: ['any']
+        destination_zone: ['L3-DMZ']
+        destination_ip: ['10.0.95.11']
+        application: ['web-browsing','ssl']
+        service: ['application-default']
+        category: ['any']
+        #log_setting: 'Default Log'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        group_profile: 'Default_LAN_Sec_Profile'
+        location: 'after'
+        existing_rule: 'SECNET Enterprise CA Auto Enrollment'

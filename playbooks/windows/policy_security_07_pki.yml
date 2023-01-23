@@ -20,8 +20,8 @@
         description: 'Managed by Ansible'
         tag_name: ['Authentication']
         group_tag: 'Authentication'
-        source_zone: '{{ zones_secnet }}'
-        source_ip: ['SECNET HQ Network']
+        source_zone: 'L3-DMZ'
+        source_ip: ['VLAN-95_Backend']
         source_user: ['any']
         destination_zone: ['L3-Authentication']
         destination_ip: ['10.0.32.41']

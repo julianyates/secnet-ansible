@@ -25,7 +25,7 @@
         source_user: ['any']
         destination_zone: ['L3-Authentication']
         destination_ip: ['10.0.32.41']
-        application: ['web-browsing']
+        application: ['web-browsing','oscp']
         service: ['application-default']
         category: ['any']
         #log_setting: 'Default Log'

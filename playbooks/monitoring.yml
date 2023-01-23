@@ -127,6 +127,10 @@
         ip_address: 10.0.32.41
         folder: "/servers/windows"
 
+      - name: hqproxy1.secnetwork.org
+        ip_address: 10.0.95.11
+        folder: "/servers/linux"
+
   tasks:
     - name: "Add Initial Folders"
       tribe29.checkmk.folder:

@@ -15,4 +15,4 @@
         state: installed
 
     - name: Registering Agent
-      command: "cmk-agent-ctl register --hostname '{{ ansible_hostname }}'.secnetwork.org --server hqmon1.secnetwork.org --site secnet --user automation --password 'DAANKAXXMWQSIYTDNLAV'"
+      command: "cmk-agent-ctl register --hostname '{{ ansible_hostname }}'.secnetwork.org --server hqmon1.secnetwork.org --site secnet --user automation --password 'DAANKAXXMWQSIYTDNLAV' --trust-cert"

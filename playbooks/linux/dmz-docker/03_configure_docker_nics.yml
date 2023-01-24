@@ -8,6 +8,11 @@
     - community.general
 
   tasks:
+    - name: Installing Python Request Module
+      dnf:
+        name: python3-requests.noarch
+        state: installed
+
     - name: Create ipvlan network DMZ-Frontend
       docker_network:
         name: "dmz-frontend"

@@ -18,7 +18,7 @@
 
     - name: let the register begin
       expect:
-        command: cmk-update-agent -v
+        command: cmk-update-agent 
 
 #    - name: let the register begin
 #      expect:

@@ -26,8 +26,7 @@
       ansible.windows.win_command:
         argv:
         - C:\Program Files (x86)\checkmk\service\cmk-agent-ctl.exe
-        - register
-        - --hostname {{ ansible_hostname }}.secnetwork.org
+        - register -H "{{ ansible_hostname }}.secnetwork.org"
         - --server hqmon1.secnetwork.org --site secnet
         - --user automation --password DAANKAXXMWQSIYTDNLAV
         - --trust-cert

@@ -10,10 +10,18 @@
     private: yes
 
   tasks:
+
+    - name: Installing Python Request Module
+      dnf:
+        name: python3-pexpect.noarch
+        state: installed  
+
     - name: let the register begin
       expect:
         command: cmk-update-agent register -v -H '{{ ansible_hostname }}'.secnetwork.org  -U yatesj-admin
         responses:
           Password for *: "{{ bind_password }}"
+
+
 
 

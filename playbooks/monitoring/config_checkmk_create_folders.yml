@@ -83,6 +83,10 @@
         ip_address: 10.0.21.114
         folder: "/servers/vmware"
 
+      - name: hqvca.secnetwork.org
+        ip_address: 10.0.21.11
+        folder: "/servers/vcsa"
+
       - name: hqcrfw1.secnetwork.org
         ip_address: 10.0.11.251
         folder: "/network/firewalls"
@@ -186,6 +190,28 @@
         automation_secret: '{{ automation_secret }}'
         host_name: '{{ item.name }}'
         state: "new"
+      with_items: '{{ add_host }}'
+
+    - name: "Activation"
+      tribe29.checkmk.activation:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        force_foreign_changes: 'true'
+        sites:
+          - "{{ site }}"
+      delegate_to: localhost
+      run_once: 'true'
+
+    - name: "Initial Services Discovery"
+      tribe29.checkmk.discovery:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        host_name: '{{ item.name }}'
+        state: "fix_all"
       with_items: '{{ add_host }}'
 
     - name: "Activation"

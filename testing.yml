@@ -1,6 +1,6 @@
 ---
 - name: Registering Hosts
-  hosts: docker
+  hosts: linux
   gather_facts: yes
   become: true
 

@@ -1,16 +1,14 @@
 ---
+vars:
+servers:
+  - name: hqdm.secnetwork.org
+  - name: hqdnfdmz.secnetwork.org
+  - name: hqdnbdmz.secnetwork.org
 
-- name: Testing Registration
-  vars:
-    servers:
-      - name: hqdm.secnetwork.org
-      - name: hqdnfdmz.secnetwork.org
-      - name: hqdnbdmz.secnetwork.org
-
-  vars_prompt:
-    - name: "bind_password"
-      prompt: "Password for yatesj-admin"
-      private: yes
+vars_prompt:
+- name: "bind_password"
+  prompt: "Password for yatesj-admin"
+  private: yes
 
   tasks:
     - name: Registering

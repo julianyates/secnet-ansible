@@ -1,10 +1,8 @@
 ---
-
-  vars:
-  servers:
-    - name: hqdm.secnetwork.org
-    - name: hqdnfdmz.secnetwork.org
-    - name: hqdnbdmz.secnetwork.org
+- name: Registering Hosts
+  hosts: docker
+  gather_facts: yes
+  become: true
 
   vars_prompt:
   - name: "bind_password"
@@ -12,12 +10,9 @@
     private: yes
 
   tasks:
-    - name: Registering
-      hosts: '{{ item.name }}'
-      gather_facts: yes
-      become: true
+    - name: let the register begin
       expect:
-        command: cmk-update-agent register -v -H '{{ item.name }}' -U yatesj-admin
+        command: cmk-update-agent register -v -H '{{ ansible_hostname }}'.secnetwork.org  -U yatesj-admin
         responses:
           Password for *: "{{ bind_password }}"
       with_items: '{{ servers }}'

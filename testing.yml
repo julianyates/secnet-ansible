@@ -5,9 +5,9 @@
   become: true
 
   vars_prompt:
-  - name: "bind_password"
-    prompt: "Password for yatesj-admin"
-    private: yes
+#  - name: "bind_password"
+#    prompt: "Password for yatesj-admin"
+#    private: yes
 
   tasks:
 
@@ -18,9 +18,13 @@
 
     - name: let the register begin
       expect:
-        command: cmk-update-agent register -v -H '{{ ansible_hostname }}'.secnetwork.org  -U yatesj-admin
-        responses:
-          Password for *: "{{ bind_password }}"
+        command: cmk-update-agent -v
+
+#    - name: let the register begin
+#      expect:
+#        command: cmk-update-agent register -v -H '{{ ansible_hostname }}'.secnetwork.org  -U yatesj-admin
+#        responses:
+#          Password for *: "{{ bind_password }}"
 
 
 

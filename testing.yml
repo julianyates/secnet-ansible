@@ -1,10 +1,6 @@
 ---
 
 - name: Testing Registration
-  hosts: docker
-  gather_facts: yes
-  become: true
-  
   vars:
     servers:
       - name: hqdm.secnetwork.org
@@ -17,8 +13,10 @@
       private: yes
 
   tasks:
-
     - name: Registering '{{ item.name }}'
+      hosts: '{{ item.name }}'
+      gather_facts: yes
+      become: true
       expect:
         command: cmk-update-agent register -v -H '{{ item.name }}' -U yatesj-admin
         responses:

@@ -18,8 +18,8 @@
         name: "Windows"
       - path: "/servers/linux"
         name: "Linux"
-      - path: "/servers/vmware"
-        name: "vmware"
+      - path: "/servers/esxi"
+        name: "ESXi"
       - path: "/servers/VSCA"
         name: "VSCA"
       - path: "/network"
@@ -174,19 +174,19 @@
         state: "present"
       with_items: '{{ add_host }}'
 
-#    - name: Pausing - Finished Creating Systems
-#      pause:
-#        prompt: Press return to continue. Press Ctrl+c and then "a" to abort
+    - name: Pausing - Finished Creating Systems
+      pause:
+        prompt: Press return to continue. Press Ctrl+c and then "a" to abort
 
-#    - name: "Initial Services Discovery"
-#      tribe29.checkmk.discovery:
-#        server_url: '{{ server_url }}'
-#        site: '{{ site }}'
-#        automation_user: '{{ automation_user }}'
-#        automation_secret: '{{ automation_secret }}'
-#        host_name: '{{ item.name }}'
-#        state: "new"
-#      with_items: '{{ add_host }}'
+    - name: "Initial Services Discovery"
+      tribe29.checkmk.discovery:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        host_name: '{{ item.name }}'
+        state: "new"
+      with_items: '{{ add_host }}'
 
     - name: "Activation"
       tribe29.checkmk.activation:

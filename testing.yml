@@ -10,16 +10,16 @@ vars_prompt:
   prompt: "Password for yatesj-admin"
   private: yes
 
-  tasks:
-    - name: Registering
-      hosts: '{{ item.name }}'
-      gather_facts: yes
-      become: true
-      expect:
-        command: cmk-update-agent register -v -H '{{ item.name }}' -U yatesj-admin
-        responses:
-          Password for *: "{{ bind_password }}"
-      with_items: '{{ servers }}'
-      when: result.stdout == "" 
+tasks:
+  - name: Registering
+    hosts: '{{ item.name }}'
+    gather_facts: yes
+    become: true
+    expect:
+      command: cmk-update-agent register -v -H '{{ item.name }}' -U yatesj-admin
+      responses:
+        Password for *: "{{ bind_password }}"
+    with_items: '{{ servers }}'
+    when: result.stdout == "" 
 
 

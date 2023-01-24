@@ -1,0 +1,35 @@
+---
+
+- hosts: pdc
+  gather_facts: yes
+
+  collections:
+    - community.windows
+    - ansible.windows
+
+  vars:
+
+  tasks:
+    - name: Copy CheckMK Agent
+      ansible.windows.win_copy:
+        src: ../../files/agents/check_mk_agent.msi
+        dest: C:\Temp\check_mk_agent.msi
+
+    - name: Install CheckMK Agent
+      ansible.windows.win_package:
+        path: C:\temp\check_mk_agent.msi
+        state: present
+        arguments:
+        - 'WIXUI_CLEANINSTALL='
+
+    - name: Registering Agent
+      ansible.windows.win_command:
+        argv:
+        - C:\Program Files (x86)\checkmk\service\cmk-agent-ctl.exe
+        - register
+        - --hostname '{{ ansible_hostname }}'.secnetwork.org
+        - --server hqmon1.secnetwork.org --site secnet
+        - --user automation --password DAANKAXXMWQSIYTDNLAV
+        - --trust-cert
+
+

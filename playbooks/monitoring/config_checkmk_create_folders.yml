@@ -134,7 +134,7 @@
   tasks:
 
     - name: "Activate changes on site - Showcase no changes."
-      activation:
+      tribe29.checkmk.activation:
         server_url: "{{ server_url }}"
         site: "{{ site }}"
         automation_user: "{{ automation_user }}"
@@ -189,7 +189,7 @@
 #      with_items: '{{ add_host }}'
 
     - name: "Activation"
-      activation:
+      tribe29.checkmk.activation:
         server_url: '{{ server_url }}'
         site: '{{ site }}'
         automation_user: '{{ automation_user }}'

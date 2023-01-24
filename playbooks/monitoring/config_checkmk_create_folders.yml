@@ -4,10 +4,10 @@
   gather_facts: no
 
   vars:
-    server_url: "http://10.0.43.2/"
-    site: "monitoring"
+    server_url: "https://hqmon1.secnetwork.org/"
+    site: "secnet"
     automation_user: "automation"
-    automation_secret: "MNAOKCDLRAYPFIX@LXIM"
+    automation_secret: "DAANKAXXMWQSIYTDNLAV"
 
     add_folder:
       - path: "/servers"

@@ -85,7 +85,7 @@
 
       - name: hqvca.secnetwork.org
         ip_address: 10.0.21.11
-        folder: "/servers/vcsa"
+        folder: "/servers/vsca"
 
       - name: hqcrfw1.secnetwork.org
         ip_address: 10.0.11.251

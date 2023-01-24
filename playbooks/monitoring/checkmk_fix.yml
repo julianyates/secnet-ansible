@@ -1,0 +1,137 @@
+---
+
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+    server_url: "https://hqmon1.secnetwork.org/"
+    site: "secnet"
+    automation_user: "automation"
+    automation_secret: "DAANKAXXMWQSIYTDNLAV"
+
+    add_host:
+      - name: hqups.secnetwork.org
+        ip_address: 10.0.11.81
+        folder: "/servers/linux"
+      - name: hqups1.secnetwork.org
+        ip_address: 10.0.11.91
+        folder: "/network/ups"
+      - name: hqups2.secnetwork.org
+        ip_address: 10.0.11.92
+        folder: "/network/ups"
+      - name: hqups3.secnetwork.org
+        ip_address: 10.0.11.93
+        folder: "/network/ups"
+      - name: hqups4.secnetwork.org
+        ip_address: 10.0.11.94
+        folder: "/network/ups"
+      - name: hqups5.secnetwork.org
+        ip_address: 10.0.11.95
+        folder: "/network/ups"
+      - name: hqups6.secnetwork.org
+        ip_address: 10.0.11.96
+        folder: "/network/ups"
+
+      - name: hqvh11-idrac.secnetwork.org
+        ip_address: 10.0.11.111
+        folder: "/servers/idrac"
+      - name: hqvh12-idrac.secnetwork.org
+        ip_address: 10.0.11.112
+        folder: "/servers/idrac"
+      - name: hqvh13-idrac.secnetwork.org
+        ip_address: 10.0.11.113
+        folder: "/servers/idrac"
+      - name: hqvh14-idrac.secnetwork.org
+        ip_address: 10.0.11.114
+        folder: "/servers/idrac"
+
+      - name: hqvh1.secnetwork.org
+        ip_address: 10.0.21.101
+        folder: "/servers/vmware"
+      - name: hqvh11.secnetwork.org
+        ip_address: 10.0.21.111
+        folder: "/servers/vmware"
+      - name: hqvh12.secnetwork.org
+        ip_address: 10.0.21.112
+        folder: "/servers/vmware"
+      - name: hqvh13.secnetwork.org
+        ip_address: 10.0.21.113
+        folder: "/servers/vmware"
+      - name: hqvh14.secnetwork.org
+        ip_address: 10.0.21.114
+        folder: "/servers/vmware"
+
+      - name: hqvca.secnetwork.org
+        ip_address: 10.0.21.11
+        folder: "/servers/vsca"
+
+      - name: hqcrfw1.secnetwork.org
+        ip_address: 10.0.11.251
+        folder: "/network/firewalls"
+
+      - name: hqswac1.secnetwork.org
+        ip_address: 10.0.11.231
+        folder: "/network/switches"
+      - name: hqswag1.secnetwork.org
+        ip_address: 10.0.11.232
+        folder: "/network/switches"
+      - name: hqacsw2.secnetwork.org
+        ip_address: 10.0.11.233
+        folder: "/network/switches"
+      - name: hqswac3.secnetwork.org
+        ip_address: 10.0.11.234
+        folder: "/network/switches"
+      - name: hqswac4.secnetwork.org
+        ip_address: 10.0.11.235
+        folder: "/network/switches"
+
+      - name: hqpdc1.secnetwork.org
+        ip_address: 10.0.31.11
+        folder: "/servers/windows"
+      - name: hqpdc2.secnetwork.org
+        ip_address: 10.0.31.12
+        folder: "/servers/windows"
+
+      - name: hqhsm1.secnetwork.org
+        ip_address: 10.0.32.11
+        folder: "/servers/linux"
+      - name: hqhsm2.secnetwork.org
+        ip_address: 10.0.32.12
+        folder: "/servers/linux"
+
+      - name: hqpkirca.secnetwork.org
+        ip_address: 10.0.32.21
+        folder: "/servers/windows"
+      - name: hqpkieca.secnetwork.org
+        ip_address: 10.0.32.31
+        folder: "/servers/windows"
+      - name: hqpkiweb1.secnetwork.org
+        ip_address: 10.0.32.41
+        folder: "/servers/windows"
+
+      - name: hqproxy1.secnetwork.org
+        ip_address: 10.0.95.11
+        folder: "/servers/linux"
+
+  tasks:
+    - name: "Discovery & Fix All Services"
+      tribe29.checkmk.discovery:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        host_name: '{{ item.name }}'
+        state: "fix_all"
+      with_items: '{{ add_host }}'
+      delegate_to: localhost
+
+    - name: "Activation"
+      tribe29.checkmk.activation:
+        server_url: '{{ server_url }}'
+        site: '{{ site }}'
+        automation_user: '{{ automation_user }}'
+        automation_secret: '{{ automation_secret }}'
+        force_foreign_changes: 'true'
+        sites:
+          - "{{ site }}"
+      delegate_to: localhost

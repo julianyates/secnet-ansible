@@ -13,11 +13,11 @@
     - name: Copy CheckMK Agent
       ansible.windows.win_copy:
         src: ../../files/agents/check_mk_agent.msi
-        dest: C:\Temp\check_mk_agent.msi
+        dest: C:\check_mk_agent.msi
 
     - name: Install CheckMK Agent
       ansible.windows.win_package:
-        path: C:\temp\check_mk_agent.msi
+        path: C:\check_mk_agent.msi
         state: present
         arguments:
         - 'WIXUI_CLEANINSTALL='

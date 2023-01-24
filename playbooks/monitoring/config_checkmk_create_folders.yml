@@ -20,7 +20,7 @@
         name: "Linux"
       - path: "/servers/esxi"
         name: "ESXi"
-      - path: "/servers/VSCA"
+      - path: "/servers/vsca"
         name: "VSCA"
       - path: "/network"
         name: "Network"

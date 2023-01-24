@@ -1,0 +1,31 @@
+---
+
+- name: Configuring Docker Networks
+  hosts: 'docker:!hqdm.secnetwork.org'
+  become: true
+
+  collections:
+    - community.general
+
+  tasks:
+    - name: Create ipvlan network DMZ-Frontend
+      docker_network:
+        name: "dmz-frontend"
+        state: present
+        driver: ipvlan
+        driver_options:
+          parent: "ens35.91"
+        ipam_config:
+          - subnet: '10.0.91.0/24'
+            gateway: '10.0.91.1'
+
+    - name: Create ipvlan network DMZ-Backend
+      docker_network:
+        name: "dmz-backend"
+        state: present
+        driver: ipvlan
+        driver_options:
+          parent: "ens35.95"
+        ipam_config:
+          - subnet: '10.0.95.0/24'
+            gateway: '10.0.95.1'

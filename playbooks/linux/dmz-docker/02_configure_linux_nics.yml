@@ -1,0 +1,38 @@
+---
+
+- name: Initial Docker Config
+  hosts: 'docker:!hqdm.secnetwork.org'
+  become: true
+
+  tasks:
+    - name: Configuring Trunk Interface
+      nmcli:
+        conn_name: ens35
+        ifname: ens35
+        type: ethernet
+        method4: disabled
+        method6: disabled 
+        state: present
+
+    - name: Creating VLAN_091-DMZ-Frontend Interface
+      nmcli:
+        conn_name: VLAN_091-DMZ-Frontend
+        ifname: ens35.91
+        type: vlan
+        vlanid: 91
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+
+    - name: Creating VLAN_095-DMZ-Backend Interface
+      nmcli:
+        conn_name: VLAN_095-DMZ-Backend
+        ifname: ens35.95
+        type: vlan
+        vlanid: 95
+        vlandev: ens35
+        method4: disabled
+        method6: disabled
+        state: present
+

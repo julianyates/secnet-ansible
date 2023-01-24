@@ -1,7 +1,7 @@
 ---
 
 - name: Testing Registration
-  hosts: all
+  hosts: docker
   gather_facts: yes
   become: true
   

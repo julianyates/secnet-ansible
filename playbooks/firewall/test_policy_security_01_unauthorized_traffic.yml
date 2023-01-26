@@ -1,0 +1,52 @@
+---
+
+- hosts: firewall
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: '{{ ip_address }}'
+      api_key: '{{ api_key }}'
+
+    create_policy_security:
+
+    - name: TMP - Prevent RFC1918 to WAN
+      rule_name: '{{ name }}'
+      tag_name: ['Unauthorized Traffic']
+      group_tag: 'Unauthorized Traffic'
+      source_zone: '{{ zones_all }}'
+      source_ip: ['any']
+      source_user: ['any']
+      destination_zone: ['L3-WAN']
+      destination_ip: ['']
+      application: ['any']
+      service: ['any']
+      category: ['any']
+      action: 'deny'
+      log_start: 'yes'
+      log_end: 'no'
+      location: 'top'
+
+  tasks:
+    - name: Creating Security Policies
+      panos_security_rule:
+        provider: '{{ provider }}'
+        rule_name: 'Prevent RFC1918 to WAN'
+        description: 'Managed by Ansible'
+        tag_name: '{{ item.tag_name }}'
+        group_tag: '{{ item.group_tag }}'
+        source_zone: '{{ item.source_zone }}'
+        source_ip: '{{ item.source_ip }}'
+        source_user: '{{ item.source_user }}'
+        destination_zone: '{{ item.destination_zone }}'
+        destination_ip: '{{ item.destination_ip | default([]) }}'
+        application: '{{ item.application }}'
+        service: '{{ item.service }}'
+        category: '{{ item.category }}'
+        action: '{{ item.action }}'
+        log_start: '{{ item.log_start }}'
+        log_end: '{{ item.log_end }}'
+        location: '{{ item.location }}'

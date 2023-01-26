@@ -37,7 +37,7 @@
         description: 'Managed by Ansible'
         tag_name: '{{ item.tag_name }}'
         group_tag: '{{ item.group_tag }}'
-        source_zone: '{{ item.source_zone }}'
+        source_zone: '{{ zones_all }}'
         source_ip: '{{ item.source_ip }}'
         source_user: '{{ item.source_user }}'
         destination_zone: '{{ item.destination_zone }}'

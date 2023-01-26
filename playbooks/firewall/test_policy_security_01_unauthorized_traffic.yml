@@ -48,5 +48,5 @@
         action: '{{ item.action }}'
         log_start: '{{ item.log_start }}'
         log_end: '{{ item.log_end }}'
-        location: '{{ item.location }}'
+        #location: '{{ item.location }}'
       with_items: '{{ create_policy_security }}'

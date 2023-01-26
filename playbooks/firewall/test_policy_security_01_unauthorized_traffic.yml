@@ -41,7 +41,7 @@
         source_ip: '{{ item.source_ip }}'
         source_user: '{{ item.source_user }}'
         destination_zone: '{{ item.destination_zone }}'
-        destination_ip: '{{ item.destination_ip | default([]) }}'
+        destination_ip: '{{ item.destination_ip }}'
         application: '{{ item.application }}'
         service: '{{ item.service }}'
         category: '{{ item.category }}'

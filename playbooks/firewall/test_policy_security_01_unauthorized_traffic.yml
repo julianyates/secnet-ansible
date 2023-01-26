@@ -27,7 +27,7 @@
       action: 'deny'
       log_start: 'yes'
       log_end: 'no'
-      location: 'top'
+      #location: 'top'
 
   tasks:
     - name: Creating Security Policies

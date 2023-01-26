@@ -13,8 +13,7 @@
 
     create_policy_security:
 
-    - name: TMP - Prevent RFC1918 to WAN
-      rule_name: '{{ name }}'
+    - rule_name: TMP - Prevent RFC1918 to WAN
       tag_name: ['Unauthorized Traffic']
       group_tag: 'Unauthorized Traffic'
       source_zone: '{{ zones_all }}'
@@ -34,7 +33,7 @@
     - name: Creating Security Policies
       panos_security_rule:
         provider: '{{ provider }}'
-        rule_name: '{{ item.name }}'
+        rule_name: '{{ item.rule_name }}'
         description: 'Managed by Ansible'
         tag_name: '{{ item.tag_name }}'
         group_tag: '{{ item.group_tag }}'

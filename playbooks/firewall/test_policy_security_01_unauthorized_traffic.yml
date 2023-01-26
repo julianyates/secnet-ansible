@@ -20,7 +20,7 @@
       source_ip: ['any']
       source_user: ['any']
       destination_zone: ['L3-WAN']
-      destination_ip: ['']
+      destination_ip:
       application: ['any']
       service: ['any']
       category: ['any']
